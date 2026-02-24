@@ -1120,7 +1120,39 @@ body {
         <strong>稅費結構</strong>（今日餐廳）<br>
         服務費 <strong>10%</strong>，再加稅金 <strong>3%</strong>（以含服務費後總額計算）<br>
         <span style="color:var(--text-light)">公式：小計 × 1.10 × 1.03 = 實收，總加成 +<strong>13.3%</strong></span><br>
-        <span id="dinner224-note" style="color:var(--accent)">收據未記帳，請分享金額</span>
+        <span id="dinner224-note" style="color:#4CAF50">✓ 已記帳（Warung Bambu，見下方明細）</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-food">🍽 晚餐實付</span>
+        <span class="card-time">Warung Bambu</span>
+      </div>
+      <div class="card-title">Warung Bambu 晚餐
+        <span style="font-size:0.7rem;color:var(--text-light);margin-left:8px">稅前 Rp 1,805,000 → 含稅 Rp 2,045,000</span>
+      </div>
+      <div class="card-photos" style="margin-top:10px">
+        <img class="card-photo" src="images/2026-02-24/IMG_9362.jpeg" onclick="downloadPhoto(this)" alt="收據①飲料" style="height:140px;width:auto;object-fit:cover;border-radius:8px">
+        <img class="card-photo" src="images/2026-02-24/IMG_9363.jpeg" onclick="downloadPhoto(this)" alt="收據②食物" style="height:140px;width:auto;object-fit:cover;border-radius:8px">
+        <img class="card-photo" src="images/2026-02-24/IMG_9364.jpeg" onclick="downloadPhoto(this)" alt="收據③結帳" style="height:140px;width:auto;object-fit:cover;border-radius:8px">
+      </div>
+      <div style="margin-top:12px;font-size:0.73rem;color:var(--text-mid)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 10px">
+          <div style="font-weight:600;border-bottom:1px solid var(--border);padding-bottom:3px">姓名</div>
+          <div style="font-weight:600;border-bottom:1px solid var(--border);padding-bottom:3px;text-align:right">含稅金額（IDR）</div>
+          <div>薏萱</div><div style="text-align:right">365k → <strong>413,545</strong></div>
+          <div>韵馨</div><div style="text-align:right">130k → <strong>147,290</strong></div>
+          <div>曹曹</div><div style="text-align:right">190k → <strong>215,270</strong></div>
+          <div>小咖</div><div style="text-align:right">170k → <strong>192,610</strong></div>
+          <div>Yoyo</div><div style="text-align:right">120k → <strong>135,960</strong></div>
+          <div>天澤 / Millie</div><div style="text-align:right">140k 各 → <strong>158,620</strong></div>
+          <div>小夫</div><div style="text-align:right">155k → <strong>175,615</strong></div>
+          <div>Ting</div><div style="text-align:right">395k → <strong>447,535</strong></div>
+        </div>
+        <div style="margin-top:8px;font-size:0.68rem;color:var(--text-light)">
+          稅費：服務費 10% + 稅金 3%（×1.133），Ting 項目由收據推算（C.Caly/Wings/Sp.Rool/MixSatay/NasiGoreng/MangoJ/FriedBanana×2/Cola）
+        </div>
       </div>
     </div>
   </div>
@@ -1820,6 +1852,16 @@ const expenses = [
   { person: '薏萱',  desc: 'Pondok Baruna 晚餐', amount: 668693, currency: 'IDR', cat: 'food', date: '2/23' },
   { person: '韵馨',  desc: 'Pondok Baruna 晚餐', amount: 668693, currency: 'IDR', cat: 'food', date: '2/23' },
   { person: 'Ting',  desc: 'Pondok Baruna 晚餐', amount: 668692, currency: 'IDR', cat: 'food', date: '2/23' },
+  // 2/24 晚餐 Warung Bambu（含稅，×1.10×1.03）
+  { person: '薏萱',  desc: 'Warung Bambu 晚餐', amount: 413545, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '韵馨',  desc: 'Warung Bambu 晚餐', amount: 147290, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '曹曹',  desc: 'Warung Bambu 晚餐', amount: 215270, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '小咖',  desc: 'Warung Bambu 晚餐', amount: 192610, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: 'Yoyo',  desc: 'Warung Bambu 晚餐', amount: 135960, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: 'Millie', desc: 'Warung Bambu 晚餐', amount: 158620, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '天澤',  desc: 'Warung Bambu 晚餐', amount: 158620, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '小夫',  desc: 'Warung Bambu 晚餐', amount: 175615, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: 'Ting',  desc: 'Warung Bambu 晚餐', amount: 447535, currency: 'IDR', cat: 'food', date: '2/24' },
 ];
 
 function toTWD(amount, currency) {
