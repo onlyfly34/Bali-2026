@@ -723,6 +723,29 @@ body {
   border-color: var(--accent); background: var(--accent); color: #fff;
 }
 
+/* ─── Dive Stats Grid ─── */
+.dive-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; margin-top: 12px;
+}
+.dive-stat-box {
+  background: rgba(0,0,0,0.03); border-radius: 10px;
+  padding: 8px 12px; text-align: center;
+}
+.dive-stat-val {
+  font-size: 1.1rem; font-weight: 700; color: var(--accent);
+  font-variant-numeric: tabular-nums; line-height: 1.2;
+}
+.dive-stat-lbl {
+  font-size: 0.65rem; color: var(--text-light); margin-top: 2px;
+}
+.dive-stat-row {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px;
+}
+.dive-badge {
+  font-size: 0.68rem; padding: 3px 9px; border-radius: 20px;
+  background: var(--accent-light); color: var(--accent); white-space: nowrap;
+}
 /* ─── Photo Lightbox ─── */
 .lightbox {
   display: none; position: fixed; inset: 0; z-index: 999;
@@ -1022,17 +1045,64 @@ body {
 
     <div class="card">
       <div class="card-header">
-        <span class="card-tag tag-dive">🤿 潛水</span>
-        <span class="card-time">09:45 出發・3支</span>
+        <span class="card-tag tag-dive">🤿 潛水 第1支</span>
+        <span class="card-time">10:44</span>
       </div>
-      <div class="card-title">全日潛水 × 3</div>
-      <div class="card-desc">
-        早上下大雨風浪大，改 09:45 出發，約 16:00 返回住宿。今日 3 支：<br>
-        <strong>Manta Bay</strong> — 有高機率見到 Manta Ray！沿懸崖下潛，浮游生物豐富<br>
-        <strong>Toyapakeh</strong> — 珊瑚花園，浪較小適合慢慢巡禮<br>
-        <strong>SD Point / Blue Corner</strong> — 洋流帶來大型魚群<br>
-        <span class="hl-warn">注意</span> 潛3支間隔休息，注意補水和水面休息時間<br>
-        <span class="hl-tip">攻略</span> Manta 出沒點能見度可能較低（浮游生物多），但遇見率幾乎100%
+      <div class="card-title" style="display:flex;justify-content:space-between;align-items:center">
+        <span>潛水 #39<span style="font-size:0.7rem;color:var(--text-light);margin-left:6px">潛點待補</span></span>
+      </div>
+      <div class="dive-stats">
+        <div class="dive-stat-box"><div class="dive-stat-val">18.0<span style="font-size:0.7rem">m</span></div><div class="dive-stat-lbl">最大深度</div></div>
+        <div class="dive-stat-box"><div class="dive-stat-val">13.3<span style="font-size:0.7rem">m</span></div><div class="dive-stat-lbl">平均深度</div></div>
+        <div class="dive-stat-box"><div class="dive-stat-val">43<span style="font-size:0.7rem">min</span></div><div class="dive-stat-lbl">底部時間</div></div>
+        <div class="dive-stat-box"><div class="dive-stat-val">28<span style="font-size:0.7rem">°C</span></div><div class="dive-stat-lbl">水溫</div></div>
+      </div>
+      <div class="dive-stat-row">
+        <span class="dive-badge">N₂ 4%→55%</span>
+        <span class="dive-badge">O₂毒性 25%</span>
+        <span class="dive-badge">Garmin Descent Mk3i</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-dive">🤿 潛水 第2支</span>
+        <span class="card-time">12:39</span>
+      </div>
+      <div class="card-title">
+        潛水 #40<span style="font-size:0.7rem;color:var(--text-light);margin-left:6px">潛點待補</span>
+      </div>
+      <div class="dive-stats">
+        <div class="dive-stat-box"><div class="dive-stat-val">16.9<span style="font-size:0.7rem">m</span></div><div class="dive-stat-lbl">最大深度</div></div>
+        <div class="dive-stat-box"><div class="dive-stat-val">10.1<span style="font-size:0.7rem">m</span></div><div class="dive-stat-lbl">平均深度</div></div>
+        <div class="dive-stat-box"><div class="dive-stat-val">44<span style="font-size:0.7rem">min</span></div><div class="dive-stat-lbl">底部時間</div></div>
+        <div class="dive-stat-box"><div class="dive-stat-val">27<span style="font-size:0.7rem">°C</span></div><div class="dive-stat-lbl">水溫</div></div>
+      </div>
+      <div class="dive-stat-row">
+        <span class="dive-badge">N₂ 21%→46%</span>
+        <span class="dive-badge">O₂毒性 17%</span>
+        <span class="dive-badge">水面休息 72min</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-dive">🤿 潛水 第3支</span>
+        <span class="card-time">14:30</span>
+      </div>
+      <div class="card-title">
+        潛水 #41<span style="font-size:0.7rem;color:var(--text-light);margin-left:6px">潛點待補</span>
+      </div>
+      <div class="dive-stats">
+        <div class="dive-stat-box"><div class="dive-stat-val">23.5<span style="font-size:0.7rem">m</span></div><div class="dive-stat-lbl">最大深度</div></div>
+        <div class="dive-stat-box"><div class="dive-stat-val">13.5<span style="font-size:0.7rem">m</span></div><div class="dive-stat-lbl">平均深度</div></div>
+        <div class="dive-stat-box"><div class="dive-stat-val">36<span style="font-size:0.7rem">min</span></div><div class="dive-stat-lbl">底部時間</div></div>
+        <div class="dive-stat-box"><div class="dive-stat-val">27<span style="font-size:0.7rem">°C</span></div><div class="dive-stat-lbl">水溫（min 26°C）</div></div>
+      </div>
+      <div class="dive-stat-row">
+        <span class="dive-badge">N₂ 26%→58%</span>
+        <span class="dive-badge">O₂毒性 21%</span>
+        <span class="dive-badge">水面休息 67min</span>
       </div>
     </div>
 
