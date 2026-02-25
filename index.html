@@ -1138,20 +1138,75 @@ body {
         <img class="card-photo" src="images/2026-02-24/IMG_9364.jpeg" onclick="downloadPhoto(this)" alt="收據③結帳" style="height:140px;width:auto;object-fit:cover;border-radius:8px">
       </div>
       <div style="margin-top:12px;font-size:0.73rem;color:var(--text-mid)">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 10px">
-          <div style="font-weight:600;border-bottom:1px solid var(--border);padding-bottom:3px">姓名</div>
-          <div style="font-weight:600;border-bottom:1px solid var(--border);padding-bottom:3px;text-align:right">含稅金額（IDR）</div>
-          <div>薏萱</div><div style="text-align:right">365k → <strong>413,545</strong></div>
-          <div>韵馨</div><div style="text-align:right">130k → <strong>147,290</strong></div>
-          <div>曹曹</div><div style="text-align:right">190k → <strong>215,270</strong></div>
-          <div>小咖</div><div style="text-align:right">170k → <strong>192,610</strong></div>
-          <div>Yoyo</div><div style="text-align:right">120k → <strong>135,960</strong></div>
-          <div>天澤 / Millie</div><div style="text-align:right">140k 各 → <strong>158,620</strong></div>
-          <div>小夫</div><div style="text-align:right">155k → <strong>175,615</strong></div>
-          <div>Ting</div><div style="text-align:right">395k → <strong>447,535</strong></div>
+        <div style="font-size:0.68rem;color:var(--text-light);margin-bottom:6px">稅費：服務費 10% + 稅金 3%（×1.133），以下為各人點餐明細</div>
+        <!-- 薏萱 -->
+        <div style="font-weight:600;border-bottom:1px solid var(--border);padding:3px 0;display:flex;justify-content:space-between"><span>薏萱</span><span>413,545 IDR</span></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:3px 0 6px;color:var(--text-light)">
+          <span>C.Onion&amp;Fries（共）</span><span style="text-align:right">22,660</span>
+          <span>Spaghetti Carbonara</span><span style="text-align:right">67,980</span>
+          <span>Crispy Prawn</span><span style="text-align:right">50,985</span>
+          <span>Long Island ×2</span><span style="text-align:right">271,920</span>
         </div>
-        <div style="margin-top:8px;font-size:0.68rem;color:var(--text-light)">
-          稅費：服務費 10% + 稅金 3%（×1.133），Ting 項目由收據推算（C.Caly/Wings/Sp.Rool/MixSatay/NasiGoreng/MangoJ/FriedBanana×2/Cola）
+        <!-- 韵馨 -->
+        <div style="font-weight:600;border-bottom:1px solid var(--border);padding:3px 0;display:flex;justify-content:space-between"><span>韵馨</span><span>147,290 IDR</span></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:3px 0 6px;color:var(--text-light)">
+          <span>C.Onion&amp;Fries（共）</span><span style="text-align:right">22,660</span>
+          <span>Chicken Satay</span><span style="text-align:right">79,310</span>
+          <span>Lychee Hurricane</span><span style="text-align:right">45,320</span>
+        </div>
+        <!-- 曹曹 -->
+        <div style="font-weight:600;border-bottom:1px solid var(--border);padding:3px 0;display:flex;justify-content:space-between"><span>曹曹</span><span>215,270 IDR</span></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:3px 0 6px;color:var(--text-light)">
+          <span>Vegetable Soup</span><span style="text-align:right">39,655</span>
+          <span>Grill Banana Leaf Fish</span><span style="text-align:right">79,310</span>
+          <span>Gado-Gado</span><span style="text-align:right">45,320</span>
+          <span>Mix Juice</span><span style="text-align:right">50,985</span>
+        </div>
+        <!-- 小咖 -->
+        <div style="font-weight:600;border-bottom:1px solid var(--border);padding:3px 0;display:flex;justify-content:space-between"><span>小咖</span><span>192,610 IDR</span></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:3px 0 6px;color:var(--text-light)">
+          <span>Gado-Gado</span><span style="text-align:right">45,320</span>
+          <span>Chocolate Shake</span><span style="text-align:right">56,650</span>
+          <span>Prawn BB</span><span style="text-align:right">90,640</span>
+        </div>
+        <!-- Yoyo -->
+        <div style="font-weight:600;border-bottom:1px solid var(--border);padding:3px 0;display:flex;justify-content:space-between"><span>Yoyo</span><span>135,960 IDR</span></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:3px 0 6px;color:var(--text-light)">
+          <span>Chocolate Shake</span><span style="text-align:right">56,650</span>
+          <span>Chicken Curry</span><span style="text-align:right">79,310</span>
+        </div>
+        <!-- Millie -->
+        <div style="font-weight:600;border-bottom:1px solid var(--border);padding:3px 0;display:flex;justify-content:space-between"><span>Millie</span><span>152,955 IDR</span></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:3px 0 6px;color:var(--text-light)">
+          <span>Green Tea</span><span style="text-align:right">39,655</span>
+          <span>Mie Goreng Seafood</span><span style="text-align:right">79,310</span>
+          <span>Lemon Tea Hot</span><span style="text-align:right">33,990</span>
+        </div>
+        <!-- 天澤 -->
+        <div style="font-weight:600;border-bottom:1px solid var(--border);padding:3px 0;display:flex;justify-content:space-between"><span>天澤</span><span>164,285 IDR</span></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:3px 0 6px;color:var(--text-light)">
+          <span>Green Tea</span><span style="text-align:right">39,655</span>
+          <span>Mie Goreng Sp.Chicken</span><span style="text-align:right">79,310</span>
+          <span>Gado-Gado</span><span style="text-align:right">45,320</span>
+        </div>
+        <!-- 小夫 -->
+        <div style="font-weight:600;border-bottom:1px solid var(--border);padding:3px 0;display:flex;justify-content:space-between"><span>小夫</span><span>175,615 IDR</span></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:3px 0 6px;color:var(--text-light)">
+          <span>Mie Goreng Sp.Chicken</span><span style="text-align:right">79,310</span>
+          <span>Gado-Gado</span><span style="text-align:right">45,320</span>
+          <span>Mango J</span><span style="text-align:right">50,985</span>
+        </div>
+        <!-- Ting -->
+        <div style="font-weight:600;border-bottom:1px solid var(--border);padding:3px 0;display:flex;justify-content:space-between"><span>Ting</span><span>447,535 IDR</span></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:3px 0 6px;color:var(--text-light)">
+          <span>Mango J</span><span style="text-align:right">50,985</span>
+          <span>Fried Banana Coklat ×2</span><span style="text-align:right">79,310</span>
+          <span>Cola</span><span style="text-align:right">28,325</span>
+          <span>C.Caly</span><span style="text-align:right">50,985</span>
+          <span>C.Wings</span><span style="text-align:right">67,980</span>
+          <span>Spring Roll</span><span style="text-align:right">39,655</span>
+          <span>Mix Satay</span><span style="text-align:right">50,985</span>
+          <span>Nasi Goreng Sp.Chicken</span><span style="text-align:right">79,310</span>
         </div>
       </div>
     </div>
@@ -1852,40 +1907,16 @@ const expenses = [
   { person: '薏萱',  desc: 'Pondok Baruna 晚餐', amount: 668693, currency: 'IDR', cat: 'food', date: '2/23' },
   { person: '韵馨',  desc: 'Pondok Baruna 晚餐', amount: 668693, currency: 'IDR', cat: 'food', date: '2/23' },
   { person: 'Ting',  desc: 'Pondok Baruna 晚餐', amount: 668692, currency: 'IDR', cat: 'food', date: '2/23' },
-  // 2/24 晚餐 Warung Bambu（含稅 ×1.10×1.03，各人逐項）
-  { person: '薏萱',  desc: 'Warung Bambu · C.Onion&Fries（共）',     amount:  22660, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '薏萱',  desc: 'Warung Bambu · Spaghetti Carbonara',       amount:  67980, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '薏萱',  desc: 'Warung Bambu · Crispy Prawn',              amount:  50985, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '薏萱',  desc: 'Warung Bambu · Long Island ×2',            amount: 271920, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '韵馨',  desc: 'Warung Bambu · C.Onion&Fries（共）',     amount:  22660, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '韵馨',  desc: 'Warung Bambu · Chicken Satay',             amount:  79310, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '韵馨',  desc: 'Warung Bambu · Lychee Hurricane',          amount:  45320, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '曹曹',  desc: 'Warung Bambu · Vegetable Soup',            amount:  39655, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '曹曹',  desc: 'Warung Bambu · Grill Banana Leaf Fish',    amount:  79310, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '曹曹',  desc: 'Warung Bambu · Gado-Gado',                 amount:  45320, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '曹曹',  desc: 'Warung Bambu · Mix Juice',                 amount:  50985, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '小咖',  desc: 'Warung Bambu · Gado-Gado',                 amount:  45320, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '小咖',  desc: 'Warung Bambu · Chocolate Shake',           amount:  56650, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '小咖',  desc: 'Warung Bambu · Prawn BB',                  amount:  90640, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Yoyo',  desc: 'Warung Bambu · Chocolate Shake',           amount:  56650, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Yoyo',  desc: 'Warung Bambu · Chicken Curry',             amount:  79310, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Millie', desc: 'Warung Bambu · Green Tea',                amount:  39655, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Millie', desc: 'Warung Bambu · Mie Goreng Seafood',       amount:  79310, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Millie', desc: 'Warung Bambu · Lemon Tea Hot',            amount:  33990, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '天澤',  desc: 'Warung Bambu · Green Tea',                 amount:  39655, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '天澤',  desc: 'Warung Bambu · Mie Goreng Sp.Chicken',     amount:  79310, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '天澤',  desc: 'Warung Bambu · Gado-Gado',                 amount:  45320, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '小夫',  desc: 'Warung Bambu · Mie Goreng Sp.Chicken',     amount:  79310, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '小夫',  desc: 'Warung Bambu · Gado-Gado',                 amount:  45320, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: '小夫',  desc: 'Warung Bambu · Mango J',                   amount:  50985, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Ting',  desc: 'Warung Bambu · Mango J',                   amount:  50985, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Ting',  desc: 'Warung Bambu · Fried Banana Coklat ×2',   amount:  79310, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Ting',  desc: 'Warung Bambu · Cola',                      amount:  28325, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Ting',  desc: 'Warung Bambu · C.Caly',                    amount:  50985, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Ting',  desc: 'Warung Bambu · C.Wings',                   amount:  67980, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Ting',  desc: 'Warung Bambu · Spring Roll',               amount:  39655, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Ting',  desc: 'Warung Bambu · Mix Satay',                 amount:  50985, currency: 'IDR', cat: 'food', date: '2/24' },
-  { person: 'Ting',  desc: 'Warung Bambu · Nasi Goreng Sp.Chicken',    amount:  79310, currency: 'IDR', cat: 'food', date: '2/24' },
+  // 2/24 晚餐 Warung Bambu（含稅 ×1.10×1.03，各人總計；逐項明細見行程餐卡）
+  { person: '薏萱',  desc: 'Warung Bambu 晚餐', amount: 413545, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '韵馨',  desc: 'Warung Bambu 晚餐', amount: 147290, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '曹曹',  desc: 'Warung Bambu 晚餐', amount: 215270, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '小咖',  desc: 'Warung Bambu 晚餐', amount: 192610, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: 'Yoyo',  desc: 'Warung Bambu 晚餐', amount: 135960, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: 'Millie', desc: 'Warung Bambu 晚餐', amount: 152955, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '天澤',  desc: 'Warung Bambu 晚餐', amount: 164285, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: '小夫',  desc: 'Warung Bambu 晚餐', amount: 175615, currency: 'IDR', cat: 'food', date: '2/24' },
+  { person: 'Ting',  desc: 'Warung Bambu 晚餐', amount: 447535, currency: 'IDR', cat: 'food', date: '2/24' },
 ];
 
 function toTWD(amount, currency) {
