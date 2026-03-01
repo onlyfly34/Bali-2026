@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 行程卡片覆蓋 — 任何人可讀（頁面載入時 onSnapshot）
+    // 寫入由前端密碼 (@@omg2026@@) 保護，無需 Firebase Auth
+    match /cardOverrides/{cardId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // 其他 collection 一律拒絕
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
