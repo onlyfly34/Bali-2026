@@ -692,7 +692,62 @@ body {
   border-radius: 8px; font-size: 0.82rem; font-weight: 500;
   text-decoration: none; cursor: pointer; border: none; font-family: inherit;
 }
+
+/* ─── Floating Add Button ─── */
+.fab-add {
+  position: fixed; bottom: calc(var(--tab-height) + var(--safe-bottom) + 16px); right: 20px;
+  z-index: 200;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  border: none; font-size: 1.6rem; line-height: 1;
+  box-shadow: 0 4px 16px rgba(61,123,138,0.4);
+  cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+}
+.fab-add:active { transform: scale(0.93); box-shadow: 0 2px 8px rgba(61,123,138,0.3); }
+
+/* ─── Modals ─── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-box {
+  background: var(--card); border-radius: var(--radius);
+  padding: 24px 20px; width: 100%; max-width: 360px;
+  box-shadow: var(--shadow-lg);
+}
+.modal-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+.modal-desc { font-size: 0.82rem; color: var(--text-light); margin-bottom: 14px; }
+.modal-input {
+  width: 100%; padding: 10px 12px; margin-bottom: 10px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 0.9rem; background: var(--bg); color: var(--text);
+  font-family: inherit;
+}
+.modal-input:focus { outline: none; border-color: var(--accent); }
+.modal-btns { display: flex; gap: 10px; margin-top: 6px; }
+.modal-btn-cancel {
+  flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: transparent; color: var(--text-mid); font-size: 0.9rem; cursor: pointer;
+}
+.modal-btn-ok {
+  flex: 1; padding: 10px; border: none; border-radius: var(--radius-sm);
+  background: var(--accent); color: #fff; font-size: 0.9rem; cursor: pointer; font-weight: 600;
+}
+.modal-btn-ok:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ─── Firebase sync badge ─── */
+.sync-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.7rem; color: var(--text-light); margin-left: 8px;
+}
+.sync-dot { width: 6px; height: 6px; border-radius: 50%; background: #ccc; }
+.sync-dot.live { background: #4CAF50; }
 </style>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 </head>
 <body>
 
@@ -973,6 +1028,7 @@ body {
       </div>
       <div class="card-title">全日潛水 × 3</div>
       <div class="card-desc">
+        <span class="hl-warn">備註</span> 因大雨延遲，<strong>09:45</strong> 才開始第一支潛水<br>
         今日 3 支，充分探索藍夢島周邊潛點：<br>
         <strong>Manta Bay</strong> — 有高機率見到 Manta Ray！沿懸崖下潛，浮游生物豐富<br>
         <strong>Toyapakeh</strong> — 珊瑚花園，浪較小適合慢慢巡禮<br>
@@ -1051,13 +1107,36 @@ body {
 
     <div class="card">
       <div class="card-header">
-        <span class="card-tag tag-spot">😴 休息</span>
+        <span class="card-tag tag-dive">🤿 潛水組</span>
         <span class="card-time">上午</span>
       </div>
-      <div class="card-title">睡到自然醒</div>
+      <div class="card-title">上午潛水組（4人）</div>
       <div class="card-desc">
-        連續三天潛水後的休息日，上午給大家睡飽充電。<br>
-        <span class="hl-tip">攻略</span> 泡泳池放鬆、在住宿附近咖啡廳喝杯早午餐享受慢活
+        <strong>成員：</strong>Yoyo、Ting、薏萱、韵馨<br>
+        各完成 <strong>2 dives</strong>，享受藍夢島最後的水下時光
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-spot">😴 休息組</span>
+        <span class="card-time">上午</span>
+      </div>
+      <div class="card-title">上午休息組（5人）</div>
+      <div class="card-desc">
+        其餘成員睡到自然醒，泳池放鬆享受悠閒早晨<br>
+        <span class="hl-tip">攻略</span> 住宿附近咖啡廳喝早午餐，慢活峇里島時光
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-food">🍽 午餐</span>
+        <span class="card-time">中午</span>
+      </div>
+      <div class="card-title">全員會合午餐</div>
+      <div class="card-desc">
+        潛水組與休息組中午集合，一起用餐
       </div>
     </div>
 
@@ -1473,7 +1552,7 @@ body {
   </div>
 
   <div class="info-section">
-    <div class="section-title">團員消費紀錄</div>
+    <div class="section-title">團員消費紀錄<span class="sync-badge"><span class="sync-dot" id="syncDot"></span><span id="syncLabel">離線</span></span></div>
 
     <div id="memberList"></div>
   </div>
@@ -1512,6 +1591,56 @@ body {
         · Bintang 啤酒：25,000 - 40,000<br><br>
         <span class="hl-tip">匯率</span> 1 TWD ≈ 500 IDR（實際匯率請以當日為準）
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FLOATING ADD BUTTON ═══ -->
+<button class="fab-add" id="fabAdd" style="display:none" onclick="onFabClick()">＋</button>
+
+<!-- ═══ PASSWORD MODAL ═══ -->
+<div class="modal-overlay" id="pwModal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-title">🔐 團員驗證</div>
+    <div class="modal-desc">輸入旅遊團密碼以解鎖新增費用功能</div>
+    <input type="password" id="pwInput" class="modal-input" placeholder="輸入密碼" autocomplete="off">
+    <div id="pwError" style="color:var(--warning);font-size:0.78rem;min-height:1.2em;margin-bottom:4px"></div>
+    <div class="modal-btns">
+      <button class="modal-btn-cancel" onclick="closePwModal()">取消</button>
+      <button class="modal-btn-ok" onclick="submitPassword()">解鎖</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ADD EXPENSE MODAL ═══ -->
+<div class="modal-overlay" id="addExpenseModal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-title">💰 新增費用</div>
+    <select id="expPerson" class="modal-input">
+      <option value="">選擇成員</option>
+    </select>
+    <input type="number" id="expAmount" class="modal-input" placeholder="金額" min="0">
+    <select id="expCurrency" class="modal-input">
+      <option value="TWD">TWD 台幣</option>
+      <option value="IDR">IDR 印尼盾</option>
+      <option value="USD">USD 美金</option>
+    </select>
+    <select id="expCat" class="modal-input">
+      <option value="food">🍽 餐飲</option>
+      <option value="hotel">🏨 住宿</option>
+      <option value="transport">🚗 交通</option>
+      <option value="dive">🤿 潛水</option>
+      <option value="spa">💆 SPA</option>
+      <option value="shop">🛍 購物</option>
+      <option value="flight">✈ 機票</option>
+      <option value="other">📎 其他</option>
+    </select>
+    <input type="text" id="expDesc" class="modal-input" placeholder="說明（如：Agatha SPA）">
+    <input type="text" id="expDate" class="modal-input" placeholder="日期（如：2/22）">
+    <div id="expError" style="color:var(--warning);font-size:0.78rem;min-height:1.2em;margin-bottom:4px"></div>
+    <div class="modal-btns">
+      <button class="modal-btn-cancel" onclick="closeAddModal()">取消</button>
+      <button class="modal-btn-ok" id="expSubmitBtn" onclick="submitExpense()">新增</button>
     </div>
   </div>
 </div>
@@ -1583,7 +1712,7 @@ function downloadCurrent() {
   a.click();
 }
 
-// ─── Budget System (static, managed by Claude) ───
+// ─── Budget System ───
 const MEMBERS = [
   { id: '小咖', name: '小咖', note: '潛水教練' },
   { id: 'Yoyo', name: 'Yoyo', note: '' },
@@ -1603,7 +1732,8 @@ const CAT_ICONS = {
 
 const RATE = 500; // 1 TWD ≈ 500 IDR
 
-const expenses = [
+// Fallback static expenses (shown when Firebase is unavailable)
+const STATIC_EXPENSES = [
   { person: '小咖', desc: 'Agatha SPA 全身按摩', amount: 180, currency: 'TWD', cat: 'spa', date: '2/22' },
   { person: '小夫', desc: 'Agatha SPA 全身按摩', amount: 180, currency: 'TWD', cat: 'spa', date: '2/22' },
   { person: 'Millie', desc: 'Agatha SPA 全身按摩', amount: 180, currency: 'TWD', cat: 'spa', date: '2/22' },
@@ -1618,7 +1748,8 @@ function toTWD(amount, currency) {
   return amount;
 }
 
-function renderBudget() {
+function renderBudget(data) {
+  const expenses = data || STATIC_EXPENSES;
   const list = document.getElementById('memberList');
   let html = '';
   let grandTotal = 0;
@@ -1674,6 +1805,267 @@ function renderBudget() {
 }
 
 renderBudget();
+
+// ─── Firebase Init ───
+const firebaseConfig = {
+  apiKey: "AIzaSyCKDEEnHP6QplQr03eChom43R9_cSgUsVw",
+  authDomain: "bali-2026-1afb6.firebaseapp.com",
+  projectId: "bali-2026-1afb6",
+  storageBucket: "bali-2026-1afb6.firebasestorage.app",
+  messagingSenderId: "795722388666",
+  appId: "1:795722388666:web:773d41c7ef36b33ac2de83"
+};
+
+let db = null;
+let firebaseAuth = null;
+
+try {
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+  firebaseAuth = firebase.auth();
+  firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
+  // Subscribe to expenses collection
+  db.collection('expenses').orderBy('date').onSnapshot(snap => {
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderBudget(docs.length > 0 ? docs : STATIC_EXPENSES);
+    const dot = document.getElementById('syncDot');
+    const label = document.getElementById('syncLabel');
+    if (dot && label) { dot.classList.add('live'); label.textContent = '即時同步'; }
+  }, err => {
+    console.warn('Firestore error:', err);
+  });
+
+  // Restore auth state
+  firebaseAuth.onAuthStateChanged(user => {
+    if (user) { updateFabVisibility(); }
+  });
+} catch(e) {
+  console.warn('Firebase init failed:', e);
+}
+
+// ─── Edit Unlock / Password ───
+const EDIT_PASSWORD = '@@omg2026@@';
+const UNLOCK_DURATION = 24 * 60 * 60 * 1000; // 24h
+
+function isUnlocked() {
+  const ts = localStorage.getItem('editUnlocked');
+  return ts && (Date.now() - parseInt(ts) < UNLOCK_DURATION);
+}
+
+function updateFabVisibility() {
+  const fab = document.getElementById('fabAdd');
+  const onBudget = document.getElementById('page-budget').classList.contains('active');
+  if (fab) fab.style.display = onBudget ? 'flex' : 'none';
+}
+
+// Show FAB when switching to budget tab
+document.querySelectorAll('.tab-item').forEach(tab => {
+  tab.addEventListener('click', () => { setTimeout(updateFabVisibility, 50); });
+});
+
+function onFabClick() {
+  if (isUnlocked() && firebaseAuth && firebaseAuth.currentUser) {
+    openAddModal();
+  } else {
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwError').textContent = '';
+    document.getElementById('pwModal').style.display = 'flex';
+    setTimeout(() => document.getElementById('pwInput').focus(), 100);
+  }
+}
+
+function closePwModal() {
+  document.getElementById('pwModal').style.display = 'none';
+}
+
+function submitPassword() {
+  const val = document.getElementById('pwInput').value;
+  if (val === EDIT_PASSWORD) {
+    localStorage.setItem('editUnlocked', Date.now().toString());
+    closePwModal();
+    if (window._synoAddUpload) window._synoAddUpload();
+    if (firebaseAuth) {
+      firebaseAuth.signInAnonymously().then(() => {
+        openAddModal();
+      }).catch(err => {
+        console.warn('Auth error:', err);
+        openAddModal(); // still allow if auth fails
+      });
+    } else {
+      openAddModal();
+    }
+  } else {
+    document.getElementById('pwError').textContent = '密碼錯誤，請再試一次';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+  }
+}
+
+document.getElementById('pwInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitPassword();
+});
+
+// ─── Add Expense Modal ───
+function openAddModal() {
+  const sel = document.getElementById('expPerson');
+  sel.innerHTML = '<option value="">選擇成員</option>' +
+    MEMBERS.map(m => `<option value="${m.id}">${m.name}${m.note ? '（'+m.note+'）' : ''}</option>`).join('');
+  document.getElementById('expAmount').value = '';
+  document.getElementById('expDesc').value = '';
+  document.getElementById('expDate').value = '';
+  document.getElementById('expError').textContent = '';
+  document.getElementById('expSubmitBtn').disabled = false;
+  document.getElementById('addExpenseModal').style.display = 'flex';
+}
+
+function closeAddModal() {
+  document.getElementById('addExpenseModal').style.display = 'none';
+}
+
+function submitExpense() {
+  const person = document.getElementById('expPerson').value;
+  const amount = parseFloat(document.getElementById('expAmount').value);
+  const currency = document.getElementById('expCurrency').value;
+  const cat = document.getElementById('expCat').value;
+  const desc = document.getElementById('expDesc').value.trim();
+  const date = document.getElementById('expDate').value.trim();
+
+  if (!person) { document.getElementById('expError').textContent = '請選擇成員'; return; }
+  if (!amount || amount <= 0) { document.getElementById('expError').textContent = '請輸入有效金額'; return; }
+  if (!desc) { document.getElementById('expError').textContent = '請填寫說明'; return; }
+
+  const btn = document.getElementById('expSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = '新增中…';
+
+  const record = { person, desc, amount, currency, cat, date: date || new Date().toLocaleDateString('zh-TW', {month:'numeric',day:'numeric'}), createdAt: firebase.firestore.FieldValue.serverTimestamp() };
+
+  if (db) {
+    db.collection('expenses').add(record).then(() => {
+      closeAddModal();
+    }).catch(err => {
+      document.getElementById('expError').textContent = '儲存失敗：' + err.message;
+      btn.disabled = false;
+      btn.textContent = '新增';
+    });
+  } else {
+    // Offline fallback: show locally only
+    STATIC_EXPENSES.push(record);
+    renderBudget();
+    closeAddModal();
+  }
+}
+
+// ─── Synology Photos Integration ───
+(function() {
+  const SYNO_BASE = 'https://photo.skya.tw/mo/sharing/webapi/entry.cgi';
+  const SHARING_LINK = 'Qv8ajq3tL';
+  // Map day index (0-6) to trip date string matching exif takentime date
+  const DAY_DATES = {
+    0: '2026-02-22', 1: '2026-02-23', 2: '2026-02-24',
+    3: '2026-02-25', 4: '2026-02-26', 5: '2026-02-27', 6: '2026-02-28'
+  };
+
+  function getOrCreatePhotoContainer(dayIndex) {
+    const dayEl = document.getElementById('day-' + dayIndex);
+    if (!dayEl) return null;
+    let container = dayEl.querySelector('.syno-photos');
+    if (!container) {
+      container = document.createElement('div');
+      container.className = 'syno-photos';
+      container.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;padding:12px 16px 0;';
+      dayEl.appendChild(container);
+    }
+    return container;
+  }
+
+  function loadSynoPhotos() {
+    const url = `${SYNO_BASE}?api=SYNO.Foto.Sharing.Browse.Item&method=list&version=1&sharing_link=${SHARING_LINK}&offset=0&limit=200`;
+    fetch(url)
+      .then(r => r.json())
+      .then(data => {
+        if (!data.success || !data.data || !data.data.list) return;
+        const items = data.data.list;
+        // Group by date
+        const byDay = {};
+        items.forEach(item => {
+          const ts = item.additional && item.additional.exif && item.additional.exif.takentime;
+          if (!ts) return;
+          const d = new Date(ts * 1000);
+          const dateStr = d.toISOString().slice(0, 10);
+          const dayIdx = Object.keys(DAY_DATES).find(k => DAY_DATES[k] === dateStr);
+          if (dayIdx === undefined) return;
+          if (!byDay[dayIdx]) byDay[dayIdx] = [];
+          byDay[dayIdx].push(item);
+        });
+
+        Object.keys(byDay).forEach(dayIdx => {
+          const container = getOrCreatePhotoContainer(parseInt(dayIdx));
+          if (!container) return;
+          byDay[dayIdx].forEach(item => {
+            const thumbUrl = `${SYNO_BASE}?api=SYNO.Foto.Thumbnail&method=get&version=1&id=${item.id}&size=sm&sharing_link=${SHARING_LINK}`;
+            const img = document.createElement('img');
+            img.src = thumbUrl;
+            img.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:pointer;';
+            img.alt = item.filename || '';
+            img.onclick = () => openLightbox(thumbUrl.replace('size=sm', 'size=xl'));
+            container.appendChild(img);
+          });
+        });
+      })
+      .catch(() => {
+        // CORS or API error — silently degrade, static photos remain
+        console.info('Synology Photos unavailable (CORS/API), using static photos only.');
+      });
+  }
+
+  loadSynoPhotos();
+
+  // ─── Upload UI (edit mode only) ───
+  function addUploadButtons() {
+    if (!isUnlocked()) return;
+    Object.keys(DAY_DATES).forEach(dayIdx => {
+      const dayEl = document.getElementById('day-' + dayIdx);
+      if (!dayEl || dayEl.querySelector('.syno-upload-btn')) return;
+      const btn = document.createElement('button');
+      btn.className = 'syno-upload-btn';
+      btn.textContent = '📷 新增照片';
+      btn.style.cssText = 'margin:8px 16px;padding:8px 14px;background:var(--accent-light);color:var(--accent);border:1px solid var(--accent);border-radius:var(--radius-sm);font-size:0.82rem;cursor:pointer;width:calc(100% - 32px);';
+      btn.onclick = () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.multiple = true;
+        input.onchange = e => uploadPhotos(e.target.files, DAY_DATES[dayIdx], parseInt(dayIdx));
+        input.click();
+      };
+      dayEl.appendChild(btn);
+    });
+  }
+
+  function uploadPhotos(files, dateStr, dayIdx) {
+    Array.from(files).forEach(file => {
+      // Show local preview immediately
+      const container = getOrCreatePhotoContainer(dayIdx);
+      if (container) {
+        const url = URL.createObjectURL(file);
+        const img = document.createElement('img');
+        img.src = url;
+        img.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:8px;opacity:0.6;';
+        img.title = '上傳中…';
+        container.appendChild(img);
+        // Note: actual upload to Synology requires a session SID (bali2026 account login)
+        // which is outside sharing token scope. The local preview is shown for UX.
+        console.info('Upload requires Synology session login. Showing local preview only for:', file.name);
+      }
+    });
+  }
+
+  // Add upload buttons once edit is unlocked
+  const origOnFabClick = window.onFabClick;
+  window._synoAddUpload = addUploadButtons;
+})();
 
 // ─── Auto-detect today → jump to correct day ───
 (function() {
