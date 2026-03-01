@@ -766,7 +766,47 @@ body {
   border-radius: 8px; font-size: 0.82rem; font-weight: 500;
   text-decoration: none; cursor: pointer; border: none; font-family: inherit;
 }
+
+/* ─── Edit Mode ─── */
+.unlock-btn {
+  background: none; border: 1px solid var(--border); border-radius: 20px;
+  padding: 4px 10px; font-size: 0.72rem; color: var(--text-light); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 4px; font-family: inherit;
+  transition: all 0.2s;
+}
+.unlock-btn.active { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
+.card { position: relative; }
+.card-edit-icon {
+  display: none; position: absolute; top: 10px; right: 10px;
+  background: var(--accent-light); color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 6px;
+  padding: 2px 8px; font-size: 0.7rem; cursor: pointer;
+  z-index: 10; font-family: inherit; line-height: 1.6;
+}
+.edit-mode-on .card-edit-icon { display: inline-flex; }
+.card-title[contenteditable=true],
+.card-desc[contenteditable=true] {
+  outline: 2px solid var(--accent); border-radius: 4px;
+  padding: 2px 4px; background: var(--accent-light); min-height: 1.2em;
+}
+.card-edit-actions { display: none; gap: 8px; margin-top: 10px; }
+.card-edit-actions.show { display: flex; }
+.card-save-btn {
+  flex: 1; padding: 8px; background: var(--accent); color: #fff;
+  border: none; border-radius: 6px; font-size: 0.8rem; cursor: pointer; font-family: inherit;
+}
+.card-cancel-btn {
+  flex: 1; padding: 8px; background: var(--card); color: var(--text-mid);
+  border: 1px solid var(--border); border-radius: 6px; font-size: 0.8rem; cursor: pointer; font-family: inherit;
+}
+.card-override-badge {
+  display: inline-block; font-size: 0.62rem; color: var(--accent);
+  background: var(--accent-light); border-radius: 4px; padding: 0 5px;
+  margin-left: 6px; vertical-align: middle;
+}
 </style>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -777,9 +817,12 @@ body {
       <div class="header-title">峇里島 · 潛旅</div>
       <div class="header-subtitle">BALI DIVE TRIP 2026</div>
     </div>
-    <div style="text-align:right">
-      <div class="header-date">2/22 — 2/28</div>
-      <div class="header-subtitle">7 DAYS</div>
+    <div style="text-align:right;display:flex;align-items:center;gap:10px">
+      <button class="unlock-btn" id="unlockBtn">🔒 編輯</button>
+      <div>
+        <div class="header-date">2/22 — 2/28</div>
+        <div class="header-subtitle">7 DAYS</div>
+      </div>
     </div>
   </div>
 </header>
@@ -1773,6 +1816,21 @@ body {
   <button class="lightbox-dl" id="lightboxDl" onclick="downloadCurrent()">📥 下載照片</button>
 </div>
 
+
+<!-- ═══ EDIT PASSWORD MODAL ═══ -->
+<div id="editPwModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;padding:24px;width:min(340px,90vw);box-shadow:0 8px 32px rgba(0,0,0,0.18)">
+    <div style="font-size:1.05rem;font-weight:700;margin-bottom:6px">🔐 編輯模式</div>
+    <div style="font-size:0.82rem;color:var(--text-mid);margin-bottom:14px">輸入密碼解鎖行程卡片編輯</div>
+    <input type="password" id="editPwInput" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:inherit;margin-bottom:6px;box-sizing:border-box" placeholder="輸入密碼" autocomplete="off">
+    <div id="editPwError" style="color:#C44B4B;font-size:0.78rem;min-height:1.2em;margin-bottom:8px"></div>
+    <div style="display:flex;gap:8px">
+      <button onclick="closeEditPwModal()" style="flex:1;padding:9px;border:1px solid var(--border);border-radius:8px;background:#fff;font-family:inherit;cursor:pointer;font-size:0.85rem">取消</button>
+      <button onclick="submitEditPassword()" style="flex:1;padding:9px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-family:inherit;cursor:pointer;font-size:0.85rem;font-weight:600">解鎖</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ TAB BAR ═══ -->
 <nav class="tab-bar" id="tabBar">
   <div class="tab-item active" data-page="page-itinerary">
@@ -2035,6 +2093,174 @@ fetchBotRate();
       tc.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' }); }
   }
 })();
+
+// ─── Firebase Init (Card Overrides) ───
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCKDEEnHP6QplQr03eChom43R9_cSgUsVw",
+  authDomain: "bali-2026-1afb6.firebaseapp.com",
+  projectId: "bali-2026-1afb6",
+  storageBucket: "bali-2026-1afb6.firebasestorage.app",
+  messagingSenderId: "795722388666",
+  appId: "1:795722388666:web:773d41c7ef36b33ac2de83"
+};
+
+let db = null;
+try {
+  firebase.initializeApp(FIREBASE_CONFIG);
+  db = firebase.firestore();
+} catch(e) {
+  console.warn('Firebase init failed:', e);
+}
+
+// ─── Assign card IDs + inject edit icons ───
+document.querySelectorAll('.day-content').forEach(function(day) {
+  var dayId = day.id;
+  day.querySelectorAll('.card').forEach(function(card, idx) {
+    card.dataset.cardId = dayId + '-' + idx;
+    var icon = document.createElement('button');
+    icon.className = 'card-edit-icon';
+    icon.textContent = '\u270f\ufe0f 編輯';
+    icon.addEventListener('click', function(e) { e.stopPropagation(); startCardEdit(card); });
+    card.appendChild(icon);
+    var actions = document.createElement('div');
+    actions.className = 'card-edit-actions';
+    actions.innerHTML = '<button class="card-save-btn">\ud83d\udcbe 儲存</button><button class="card-cancel-btn">取消</button>';
+    actions.querySelector('.card-save-btn').addEventListener('click', function(e) { e.stopPropagation(); saveCardEdit(card); });
+    actions.querySelector('.card-cancel-btn').addEventListener('click', function(e) { e.stopPropagation(); cancelCardEdit(card); });
+    card.appendChild(actions);
+  });
+});
+
+// ─── Load card overrides from Firestore ───
+if (db) {
+  db.collection('cardOverrides').onSnapshot(function(snap) {
+    snap.forEach(function(doc) {
+      var data = doc.data();
+      var card = document.querySelector('.card[data-card-id="' + doc.id + '"]');
+      if (!card || card === _editingCard) return;
+      var titleEl = card.querySelector('.card-title');
+      var descEl = card.querySelector('.card-desc');
+      if (titleEl && data.title) titleEl.textContent = data.title;
+      if (descEl && data.desc) descEl.innerHTML = data.desc;
+    });
+  }, function(err) { console.warn('cardOverrides snapshot error:', err); });
+}
+
+// ─── Edit Mode: Unlock / Lock ───
+var EDIT_PASSWORD = '@@omg2026@@';
+var UNLOCK_DURATION = 24 * 60 * 60 * 1000;
+
+function isUnlocked() {
+  var ts = localStorage.getItem('editUnlocked');
+  return ts && (Date.now() - parseInt(ts) < UNLOCK_DURATION);
+}
+
+var _unlockBtn = document.getElementById('unlockBtn');
+
+function updateUnlockUI() {
+  var itinerary = document.getElementById('page-itinerary');
+  if (isUnlocked()) {
+    itinerary.classList.add('edit-mode-on');
+    _unlockBtn.classList.add('active');
+    _unlockBtn.textContent = '\ud83d\udd13 編輯中';
+  } else {
+    itinerary.classList.remove('edit-mode-on');
+    _unlockBtn.classList.remove('active');
+    _unlockBtn.textContent = '\ud83d\udd12 編輯';
+  }
+}
+
+_unlockBtn.addEventListener('click', function() {
+  if (isUnlocked()) {
+    localStorage.removeItem('editUnlocked');
+    updateUnlockUI();
+  } else {
+    document.getElementById('editPwModal').style.display = 'flex';
+    setTimeout(function() { document.getElementById('editPwInput').focus(); }, 100);
+  }
+});
+
+function closeEditPwModal() {
+  document.getElementById('editPwModal').style.display = 'none';
+  document.getElementById('editPwInput').value = '';
+  document.getElementById('editPwError').textContent = '';
+}
+
+function submitEditPassword() {
+  var val = document.getElementById('editPwInput').value;
+  if (val === EDIT_PASSWORD) {
+    localStorage.setItem('editUnlocked', Date.now().toString());
+    closeEditPwModal();
+    updateUnlockUI();
+  } else {
+    document.getElementById('editPwError').textContent = '密碼錯誤，請再試一次';
+  }
+}
+
+document.getElementById('editPwInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') submitEditPassword();
+});
+
+updateUnlockUI();
+
+// ─── Inline Editing ───
+var _editingCard = null;
+var _origTitle = '';
+var _origDesc = '';
+
+function startCardEdit(card) {
+  if (_editingCard) cancelCardEdit(_editingCard);
+  _editingCard = card;
+  var titleEl = card.querySelector('.card-title');
+  var descEl = card.querySelector('.card-desc');
+  _origTitle = titleEl.textContent;
+  _origDesc = descEl.innerHTML;
+  titleEl.contentEditable = 'true';
+  descEl.contentEditable = 'true';
+  titleEl.focus();
+  card.querySelector('.card-edit-actions').classList.add('show');
+  card.querySelector('.card-edit-icon').style.display = 'none';
+}
+
+function saveCardEdit(card) {
+  var cardId = card.dataset.cardId;
+  var titleEl = card.querySelector('.card-title');
+  var descEl = card.querySelector('.card-desc');
+  var title = titleEl.textContent.trim();
+  var desc = descEl.innerHTML.trim();
+  titleEl.contentEditable = 'false';
+  descEl.contentEditable = 'false';
+  card.querySelector('.card-edit-actions').classList.remove('show');
+  card.querySelector('.card-edit-icon').style.display = '';
+  _editingCard = null;
+  if (db) {
+    var m = cardId.match(/^(day-(\d+))-(\d+)$/);
+    db.collection('cardOverrides').doc(cardId).set({
+      dayId: m ? m[1] : cardId,
+      cardIndex: m ? parseInt(m[3]) : 0,
+      title: title,
+      desc: desc,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).catch(function(e) {
+      console.warn('Save failed:', e);
+      titleEl.textContent = _origTitle;
+      descEl.innerHTML = _origDesc;
+    });
+  }
+}
+
+function cancelCardEdit(card) {
+  var titleEl = card.querySelector('.card-title');
+  var descEl = card.querySelector('.card-desc');
+  titleEl.contentEditable = 'false';
+  descEl.contentEditable = 'false';
+  titleEl.textContent = _origTitle;
+  descEl.innerHTML = _origDesc;
+  card.querySelector('.card-edit-actions').classList.remove('show');
+  card.querySelector('.card-edit-icon').style.display = '';
+  _editingCard = null;
+}
+
 </script>
 </body>
 </html>
