@@ -2119,12 +2119,12 @@ document.querySelectorAll('.day-content').forEach(function(day) {
     card.dataset.cardId = dayId + '-' + idx;
     var icon = document.createElement('button');
     icon.className = 'card-edit-icon';
-    icon.textContent = '\u270f\ufe0f 編輯';
+    icon.textContent = '✏️ 編輯';
     icon.addEventListener('click', function(e) { e.stopPropagation(); startCardEdit(card); });
     card.appendChild(icon);
     var actions = document.createElement('div');
     actions.className = 'card-edit-actions';
-    actions.innerHTML = '<button class="card-save-btn">\ud83d\udcbe 儲存</button><button class="card-cancel-btn">取消</button>';
+    actions.innerHTML = '<button class="card-save-btn">💾 儲存</button><button class="card-cancel-btn">取消</button>';
     actions.querySelector('.card-save-btn').addEventListener('click', function(e) { e.stopPropagation(); saveCardEdit(card); });
     actions.querySelector('.card-cancel-btn').addEventListener('click', function(e) { e.stopPropagation(); cancelCardEdit(card); });
     card.appendChild(actions);
@@ -2162,11 +2162,11 @@ function updateUnlockUI() {
   if (isUnlocked()) {
     itinerary.classList.add('edit-mode-on');
     _unlockBtn.classList.add('active');
-    _unlockBtn.textContent = '\ud83d\udd13 編輯中';
+    _unlockBtn.textContent = '🔓 編輯中';
   } else {
     itinerary.classList.remove('edit-mode-on');
     _unlockBtn.classList.remove('active');
-    _unlockBtn.textContent = '\ud83d\udd12 編輯';
+    _unlockBtn.textContent = '🔒 編輯';
   }
 }
 
