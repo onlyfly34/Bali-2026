@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行程規畫</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: #F7F5F0;
+  color: #2C2C2C;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+.icon { font-size: 3rem; margin-bottom: 24px; }
+h1 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #3D7B8A;
+  margin-bottom: 12px;
+}
+p {
+  font-size: 0.95rem;
+  color: #8A8A8A;
+  line-height: 1.8;
+  max-width: 280px;
+}
+.dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: #3D7B8A;
+  border-radius: 50%;
+  margin: 32px auto 0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+</style>
+</head>
+<body>
+  <div class="icon">🌊</div>
+  <h1>行程規畫準備中</h1>
+  <p>您的專屬行程正在整理中，<br>敬請期待。</p>
+  <span class="dot"></span>
+</body>
+</html>
