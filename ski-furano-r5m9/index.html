@@ -855,6 +855,21 @@
         function collapseAll() {
             document.querySelectorAll('.day-section').forEach(s => s.classList.remove('open'));
         }
+
+        // 讓 HANASAKA House 圖片高度跟 Nozo Hotel 圖片一樣
+        function syncHotelImageHeights() {
+            const imgs = document.querySelectorAll('.hotel-image');
+            const nozo = imgs[1];
+            const hanasaka = imgs[0];
+            if (!nozo || !hanasaka) return;
+            const h = nozo.offsetHeight;
+            if (h > 0) {
+                hanasaka.style.height = h + 'px';
+                hanasaka.style.width = 'auto';
+                hanasaka.style.maxWidth = '100%';
+            }
+        }
+        window.addEventListener('load', syncHotelImageHeights);
     </script>
 </body>
 </html>
