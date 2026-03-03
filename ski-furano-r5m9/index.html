@@ -73,32 +73,10 @@
         .optional-activity {background: #f0f8ff; border-left: 4px solid #4a90e2; padding: 15px; margin: 10px 0; border-radius: 8px;}
         .optional-activity h4 {color: #4a90e2; margin-bottom: 8px;}
 
-        /* Instructor section */
-        .instructor-section {margin: 40px 0;}
-        .instructor-section-header {background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 30px; border-radius: 15px; text-align: center; margin-bottom: 30px;}
-        .instructor-section-header h2 {font-size: 2em; margin-bottom: 10px;}
-        .instructor-section-header p {opacity: .85; font-size: 1.05em;}
-        .instructor-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px;}
-        .instructor-card {background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 6px 25px rgba(0,0,0,.1); transition: transform .3s, box-shadow .3s; border: 1px solid #eee;}
-        .instructor-card:hover {transform: translateY(-6px); box-shadow: 0 14px 35px rgba(102,126,234,.25);}
-        .instructor-photo-wrap {position: relative; height: 220px; overflow: hidden;}
-        .instructor-photo-wrap img {width: 100%; height: 100%; object-fit: cover; transition: transform .4s;}
-        .instructor-card:hover .instructor-photo-wrap img {transform: scale(1.06);}
-        .instructor-level-badge {position: absolute; top: 12px; right: 12px; background: rgba(102,126,234,.9); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: .8em; font-weight: bold; backdrop-filter: blur(4px);}
-        .instructor-discipline {position: absolute; bottom: 12px; left: 12px; display: flex; gap: 6px;}
-        .disc-tag {background: rgba(0,0,0,.55); color: #fff; padding: 3px 10px; border-radius: 12px; font-size: .78em; backdrop-filter: blur(4px);}
-        .instructor-info {padding: 20px;}
-        .instructor-info h3 {font-size: 1.4em; color: #1e3c72; margin-bottom: 6px;}
-        .instructor-meta {display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;}
-        .instructor-rating {color: #f39c12; font-size: 1em;}
-        .instructor-price {color: #667eea; font-weight: bold; font-size: .9em;}
-        .instructor-certs {display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px;}
-        .cert-tag {background: #f0f4ff; color: #667eea; border: 1px solid #c5d0f5; padding: 3px 9px; border-radius: 10px; font-size: .78em;}
-        .instructor-desc {font-size: .88em; color: #555; line-height: 1.6; margin-bottom: 14px;}
-        .instructor-resorts {font-size: .82em; color: #888; margin-bottom: 14px;}
-        .instructor-resorts span {color: #667eea; font-weight: bold;}
-        .instructor-btn {display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; padding: 9px 20px; border-radius: 20px; text-decoration: none; font-size: .9em; transition: opacity .2s, transform .2s;}
-        .instructor-btn:hover {opacity: .88; transform: translateY(-1px);}
+        /* Collapse controls */
+        .collapse-controls {display: flex; gap: 10px; margin-bottom: 20px;}
+        .collapse-btn {background: #fff; color: #667eea; border: 2px solid #667eea; padding: 8px 20px; border-radius: 20px; font-size: .9em; cursor: pointer; transition: all .25s; font-family: 'Microsoft JhengHei', sans-serif;}
+        .collapse-btn:hover {background: #667eea; color: #fff;}
 
         @media (max-width: 768px) {
             .header h1 {font-size: 2em;}
@@ -108,7 +86,6 @@
             .hotel-card {border-right: none; border-bottom: 1px solid #e0e0e0;}
             .hotel-card:last-child {border-bottom: none;}
             .hero-image {height: 250px;}
-            .instructor-grid {grid-template-columns: 1fr;}
             .day-header-left h2 {font-size: 1.3em;}
         }
     </style>
@@ -243,8 +220,23 @@
                     </div>
                 </div>
 
+                <!-- 教練連結 -->
+                <div class="tips" style="margin-bottom:30px;">
+                    <h3>🎿 推薦中文滑雪教練</h3>
+                    <p style="margin-top:10px;">SnowFun 滑雪趣平台提供多位持有國際認證的台灣中文教練，可在富良野或北海道各雪場授課。</p>
+                    <p style="margin-top:12px;">
+                        <a href="https://www.snowfun.com.tw/instructors" class="map-link" target="_blank" style="font-size:1em;">查看所有教練 →</a>
+                    </p>
+                </div>
+
+                <!-- 全部展開／折疊 -->
+                <div class="collapse-controls">
+                    <button class="collapse-btn" onclick="expandAll()">全部展開</button>
+                    <button class="collapse-btn" onclick="collapseAll()">全部折疊</button>
+                </div>
+
                 <!-- ===== 可折疊 Day 1 ===== -->
-                <div class="day-section open" id="day1">
+                <div class="day-section" id="day1">
                     <div class="day-header" onclick="toggleDay('day1')">
                         <div class="day-header-left">
                             <h2>Day 1 — 抵達與入住</h2>
@@ -532,14 +524,8 @@
                     </div>
                 </div>
 
-                <!-- ===== 滑雪教練介紹 ===== -->
-                <div class="instructor-section">
-                    <div class="instructor-section-header">
-                        <h2>🎿 推薦中文滑雪教練</h2>
-                        <p>以下教練均來自 <strong>SnowFun 滑雪趣</strong> 平台，持有國際認證，可在富良野或北海道其他雪場授課</p>
-                        <p style="margin-top:6px;font-size:.9em;opacity:.75;">💡 點擊「前往預訂」查看即時檔期與價格</p>
-                    </div>
-                    <div class="instructor-grid">
+                <!-- ===== (instructor cards removed) ===== -->
+                <div style="display:none"><div>
 
                         <!-- 大翔 -->
                         <div class="instructor-card">
@@ -727,8 +713,8 @@
                             </div>
                         </div>
 
-                    </div><!-- end instructor-grid -->
-                </div><!-- end instructor-section -->
+                    </div>
+                </div>
 
                 <div class="highlight">
                     <h3>🌙 晚間觀光景點總整理</h3>
@@ -861,8 +847,13 @@
         }
 
         function toggleDay(id) {
-            const section = document.getElementById(id);
-            section.classList.toggle('open');
+            document.getElementById(id).classList.toggle('open');
+        }
+        function expandAll() {
+            document.querySelectorAll('.day-section').forEach(s => s.classList.add('open'));
+        }
+        function collapseAll() {
+            document.querySelectorAll('.day-section').forEach(s => s.classList.remove('open'));
         }
     </script>
 </body>
