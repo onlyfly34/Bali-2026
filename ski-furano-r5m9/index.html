@@ -1,853 +1,1353 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>富良野滑雪五天四夜 2026</title>
-    <style>
-        * {margin: 0; padding: 0; box-sizing: border-box;}
-        body {font-family: 'Microsoft JhengHei', sans-serif; line-height: 1.6; color: #2c3e50; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px;}
-        .container {max-width: 1200px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.3);}
-        .header {background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; padding: 60px 40px; text-align: center;}
-        .header h1 {font-size: 3em; margin-bottom: 15px;}
-        .header .subtitle {font-size: 1.3em; opacity: .9;}
-        .header .dates {font-size: 1.1em; background: rgba(255,255,255,.2); padding: 10px 20px; border-radius: 25px; display: inline-block; margin-top: 15px;}
-        .toggle-container {text-align: center; padding: 20px; background: #f8f9fa; border-bottom: 2px solid #e0e0e0;}
-        .toggle-btn {background: #667eea; color: #fff; border: none; padding: 12px 30px; margin: 0 10px; border-radius: 25px; font-size: 1em; cursor: pointer; transition: all .3s; font-family: 'Microsoft JhengHei', sans-serif;}
-        .toggle-btn:hover {background: #5568d3; transform: translateY(-2px);}
-        .toggle-btn.active {background: #764ba2; box-shadow: 0 4px 15px rgba(118,75,162,.4);}
-        .trip-info {background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: #fff; padding: 30px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;}
-        .info-item {text-align: center; padding: 15px; background: rgba(255,255,255,.1); border-radius: 10px;}
-        .info-item .icon {font-size: 2em; margin-bottom: 10px;}
-        .content {padding: 40px;}
-        .detail-only {display: none;}
-        .simple-view .detail-only {display: none;}
-        .detail-view .detail-only {display: block;}
-        .hero-image {width: 100%; height: 400px; object-fit: cover; border-radius: 15px; margin: 20px 0; box-shadow: 0 10px 30px rgba(0,0,0,.2);}
-        .image-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;}
-        .image-grid img {width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,.1); transition: transform .3s;}
-        .image-grid img:hover {transform: scale(1.05);}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>富良野滑雪五天四夜 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-navy:   #0a0f1a;
+      --snow-white:  #f0f4f8;
+      --ice-blue:    #a8d4e6;
+      --warm-orange: #e8621a;
+      --amber:       #f0a500;
+      --muted:       rgba(240,244,248,0.55);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--deep-navy);
+      color: var(--snow-white);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 300;
+      line-height: 1.85;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; }
 
-        /* Collapsible day section */
-        .day-section {margin-bottom: 20px; border-left: 5px solid #667eea; border-radius: 0 15px 15px 0; overflow: hidden;}
-        .day-header {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 20px 25px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; transition: opacity .2s;}
-        .day-header:hover {opacity: .92;}
-        .day-header-left h2 {font-size: 1.8em; margin-bottom: 4px;}
-        .day-header-left .date {font-size: .95em; opacity: .85;}
-        .day-chevron {font-size: 1.4em; transition: transform .35s; flex-shrink: 0;}
-        .day-section.open .day-chevron {transform: rotate(180deg);}
-        .day-body {max-height: 0; overflow: hidden; transition: max-height .45s ease;}
-        .day-section.open .day-body {max-height: 5000px;}
-        .day-body-inner {padding: 20px 25px 25px;}
+    /* ── Custom Cursor (desktop) ── */
+    @media (hover: hover) {
+      body { cursor: none; }
+      .cursor {
+        position: fixed; width:12px; height:12px;
+        background: var(--warm-orange); border-radius:50%;
+        pointer-events:none; z-index:9999;
+        transform: translate(-50%,-50%);
+      }
+      .cursor-ring {
+        position:fixed; width:36px; height:36px;
+        border:1.5px solid var(--warm-orange); border-radius:50%;
+        pointer-events:none; z-index:9998;
+        transform: translate(-50%,-50%);
+        opacity:.5;
+        transition: left .08s, top .08s;
+      }
+    }
 
-        .activity {background: #f8f9fa; padding: 20px; margin-bottom: 15px; border-radius: 12px; border-left: 4px solid #764ba2;}
-        .activity h3 {color: #667eea; margin-bottom: 12px; font-size: 1.3em;}
-        .activity .time {background: #667eea; color: #fff; padding: 4px 12px; border-radius: 15px; font-size: .85em; margin-left: 10px;}
-        .map-link {display: inline-block; background: #3498db; color: #fff; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: .9em; margin: 5px 5px 5px 0; transition: all .3s; box-shadow: 0 2px 8px rgba(52,152,219,.3);}
-        .map-link:hover {background: #2980b9; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(52,152,219,.4);}
-        .map-link::before {content: "📍 ";}
-        .route-link {background: #e74c3c;}
-        .route-link:hover {background: #c0392b;}
-        .route-link::before {content: "🚗 ";}
-        .restaurant-card {background: #fff; border: 2px solid #e0e0e0; padding: 15px; margin: 10px 0; border-radius: 10px; transition: all .3s;}
-        .restaurant-card:hover {border-color: #667eea; box-shadow: 0 4px 15px rgba(102,126,234,.2); transform: translateY(-2px);}
-        .restaurant-card h4 {color: #667eea; margin-bottom: 8px;}
-        .highlight {background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); padding: 25px; border-radius: 12px; margin: 30px 0; border-left: 5px solid #ff6b6b;}
-        .highlight h3 {color: #c0392b; margin-bottom: 15px;}
-        .tips {background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%); padding: 25px; border-radius: 12px; margin: 30px 0; border-left: 5px solid #00acc1;}
-        .tips h3 {color: #00796b; margin-bottom: 15px;}
-        .footer {background: #2c3e50; color: #fff; text-align: center; padding: 30px;}
-        .ski-badge {background: #ff6b6b; color: #fff; padding: 5px 15px; border-radius: 20px; font-size: .9em; display: inline-block; margin-left: 10px;}
-        .warning {background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 10px 0; border-radius: 8px; color: #856404;}
-        .accommodation-compare {background: #fff; border-radius: 15px; overflow: hidden; margin: 30px 0; box-shadow: 0 4px 15px rgba(0,0,0,.1);}
-        .compare-header {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 20px; text-align: center;}
-        .compare-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 0;}
-        .hotel-card {padding: 25px; border-right: 1px solid #e0e0e0;}
-        .hotel-card:last-child {border-right: none;}
-        .hotel-card h3 {color: #667eea; margin-bottom: 15px; font-size: 1.5em;}
-        .hotel-image {width: 100%; height: 300px; object-fit: cover; display: block; border-radius: 10px; margin: 10px 0; box-shadow: 0 4px 15px rgba(0,0,0,.1);}
-        .pros-cons {margin-top: 15px;}
-        .pros-cons h4 {color: #27ae60; margin: 10px 0 5px; font-size: 1.1em;}
-        .pros-cons.cons h4 {color: #e74c3c;}
-        .pros-cons ul {margin-left: 20px;}
-        .optional-activity {background: #f0f8ff; border-left: 4px solid #4a90e2; padding: 15px; margin: 10px 0; border-radius: 8px;}
-        .optional-activity h4 {color: #4a90e2; margin-bottom: 8px;}
+    /* ── Snow Canvas ── */
+    #snow-canvas {
+      position:fixed; inset:0;
+      pointer-events:none; z-index:0;
+    }
 
-        /* Collapse controls */
-        .collapse-controls {display: flex; gap: 10px; margin-bottom: 20px;}
-        .collapse-btn {background: #fff; color: #667eea; border: 2px solid #667eea; padding: 8px 20px; border-radius: 20px; font-size: .9em; cursor: pointer; transition: all .25s; font-family: 'Microsoft JhengHei', sans-serif;}
-        .collapse-btn:hover {background: #667eea; color: #fff;}
+    /* ── Navigation ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:50;
+      padding:20px 56px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .nav-logo {
+      font-family:'Bebas Neue'; font-size:22px; letter-spacing:.15em;
+      color:var(--snow-white);
+    }
+    .nav-logo span { color:var(--warm-orange); }
+    .nav-links { display:flex; gap:28px; list-style:none; }
+    .nav-links a {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:var(--muted); transition:color .2s;
+    }
+    .nav-links a:hover { color:var(--warm-orange); }
 
-        @media (max-width: 768px) {
-            .header h1 {font-size: 2em;}
-            .content {padding: 20px;}
-            .toggle-btn {padding: 10px 20px; margin: 5px; font-size: .9em;}
-            .compare-grid {grid-template-columns: 1fr;}
-            .hotel-card {border-right: none; border-bottom: 1px solid #e0e0e0;}
-            .hotel-card:last-child {border-bottom: none;}
-            .hero-image {height: 250px;}
-            .day-header-left h2 {font-size: 1.3em;}
-        }
-    </style>
+    /* ── Hero ── */
+    .hero {
+      position:relative; height:100vh;
+      display:flex; align-items:center; overflow:hidden;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background:url('trip-furano.png') center/cover no-repeat;
+      animation: parallax-drift 25s ease-in-out infinite alternate;
+      transform:scale(1.08);
+    }
+    @keyframes parallax-drift {
+      from { transform:scale(1.08) translateX(-2%); }
+      to   { transform:scale(1.08) translateX(2%); }
+    }
+    .hero-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(10,15,26,.85) 0%,rgba(10,15,26,.3) 60%,rgba(10,15,26,.7) 100%);
+    }
+    .hero-content {
+      position:relative; z-index:2;
+      padding:0 80px; max-width:920px;
+    }
+    .hero-eyebrow {
+      display:flex; align-items:center; gap:16px; margin-bottom:24px;
+    }
+    .hero-eyebrow-line { width:48px; height:2px; background:var(--warm-orange); }
+    .hero-eyebrow-text {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.4em; text-transform:uppercase; color:var(--warm-orange);
+    }
+    .hero-title { line-height:1; margin-bottom:28px; }
+    .hero-title .line1 {
+      display:block; font-family:'Bebas Neue';
+      font-size:clamp(72px,10vw,160px); letter-spacing:.05em;
+      color:var(--snow-white);
+    }
+    .hero-title .line2 {
+      display:block; font-family:'Bebas Neue';
+      font-size:clamp(52px,7vw,120px); letter-spacing:.08em;
+      -webkit-text-stroke:2px var(--ice-blue); color:transparent;
+    }
+    .hero-title .accent { color:var(--warm-orange); -webkit-text-stroke:0; }
+    .hero-subtitle {
+      font-family:'Oswald'; font-weight:300; font-size:14px;
+      letter-spacing:.2em; color:var(--muted); margin-bottom:36px;
+    }
+    .hero-stats { display:flex; gap:36px; margin-bottom:44px; flex-wrap:wrap; }
+    .hero-stat { border-left:2px solid var(--warm-orange); padding-left:14px; }
+    .hero-stat-num {
+      font-family:'Bebas Neue'; font-size:30px; letter-spacing:.05em;
+      color:var(--snow-white); display:block; line-height:1;
+    }
+    .hero-stat-label {
+      font-family:'Oswald'; font-weight:300; font-size:10px;
+      letter-spacing:.25em; color:var(--muted); text-transform:uppercase;
+    }
+    .hero-cta { display:flex; gap:14px; flex-wrap:wrap; }
+    .btn-glow {
+      font-family:'Oswald'; font-weight:500; font-size:12px;
+      letter-spacing:.2em; text-transform:uppercase;
+      background:var(--warm-orange); color:#fff; border:none;
+      padding:13px 30px; cursor:pointer;
+      transition:transform .2s, box-shadow .2s;
+    }
+    .btn-glow:hover { transform:scale(1.03); box-shadow:0 0 24px rgba(232,98,26,.5); }
+    .btn-outline {
+      font-family:'Oswald'; font-weight:400; font-size:12px;
+      letter-spacing:.2em; text-transform:uppercase;
+      background:transparent; color:var(--snow-white);
+      border:1px solid rgba(168,212,230,.4); padding:13px 30px; cursor:pointer;
+      transition:border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color:var(--ice-blue); color:var(--ice-blue); }
+    .hero-mountain { position:absolute; bottom:0; left:0; right:0; z-index:2; line-height:0; }
+    .scroll-indicator {
+      position:absolute; right:36px; top:50%; transform:translateY(-50%);
+      z-index:3; display:flex; flex-direction:column; align-items:center; gap:8px;
+    }
+    .scroll-indicator-text {
+      writing-mode:vertical-rl; font-family:'Oswald'; font-weight:300;
+      font-size:10px; letter-spacing:.3em; color:var(--muted);
+    }
+    .scroll-line {
+      width:1px; height:60px;
+      background:linear-gradient(to bottom, var(--warm-orange), transparent);
+      animation: scroll-drop 1.5s ease-in-out infinite;
+    }
+    @keyframes scroll-drop {
+      0%  { transform:scaleY(0); transform-origin:top; }
+      50% { transform:scaleY(1); transform-origin:top; }
+      51% { transform:scaleY(1); transform-origin:bottom; }
+      100%{ transform:scaleY(0); transform-origin:bottom; }
+    }
+
+    /* ── Toggle Slider ── */
+    .toggle-section {
+      position:relative; z-index:1;
+      background:rgba(168,212,230,.04);
+      border-top:1px solid rgba(168,212,230,.1);
+      border-bottom:1px solid rgba(168,212,230,.1);
+      padding:20px 24px;
+      display:flex; align-items:center; justify-content:center; gap:20px;
+    }
+    .toggle-label {
+      font-family:'Oswald'; font-weight:300; font-size:12px;
+      letter-spacing:.25em; text-transform:uppercase;
+      transition:color .3s;
+    }
+    .toggle-label.active-label { color:var(--warm-orange); }
+    .toggle-label.inactive-label { color:var(--muted); }
+    .toggle-switch {
+      position:relative; display:inline-block; width:56px; height:28px;
+      flex-shrink:0;
+    }
+    .toggle-switch input { opacity:0; width:0; height:0; }
+    .toggle-track {
+      position:absolute; inset:0; cursor:pointer;
+      background:rgba(168,212,230,.15);
+      border:1px solid rgba(168,212,230,.2);
+      transition:background .3s;
+    }
+    .toggle-track::before {
+      content:''; position:absolute;
+      height:20px; width:20px; left:3px; bottom:3px;
+      background:var(--warm-orange);
+      transition:transform .3s;
+    }
+    .toggle-switch input:checked + .toggle-track { background:rgba(232,98,26,.2); }
+    .toggle-switch input:checked + .toggle-track::before { transform:translateX(28px); }
+
+    /* ── Weather Bar ── */
+    .weather-bar {
+      position:relative; z-index:1;
+      background:rgba(168,212,230,.06);
+      border-bottom:1px solid rgba(168,212,230,.15);
+      padding:28px 48px;
+      display:flex; justify-content:space-around; align-items:center;
+    }
+    .weather-stat { text-align:center; }
+    .weather-num {
+      font-family:'Bebas Neue'; font-size:30px;
+      color:var(--snow-white); display:block; line-height:1;
+    }
+    .weather-label {
+      font-family:'Oswald'; font-weight:300; font-size:10px;
+      letter-spacing:.25em; color:var(--muted); text-transform:uppercase;
+    }
+    .weather-divider { width:1px; height:50px; background:rgba(168,212,230,.2); }
+
+    /* ── Main Content ── */
+    .main-content {
+      position:relative; z-index:1;
+      max-width:1100px; margin:0 auto; padding:72px 40px;
+    }
+
+    /* ── View Logic ── */
+    .detail-only { display:none; }
+    .simple-view .detail-only { display:none; }
+    .detail-view .detail-only { display:block; }
+
+    /* ── Overview Box (simple) ── */
+    .overview-box {
+      background:rgba(168,212,230,.06);
+      border:1px solid rgba(168,212,230,.15);
+      border-left:3px solid var(--warm-orange);
+      padding:36px 40px; margin-bottom:32px;
+    }
+    .overview-box h3 {
+      font-family:'Oswald'; font-weight:500; font-size:18px;
+      letter-spacing:.15em; text-transform:uppercase;
+      color:var(--warm-orange); margin-bottom:20px;
+    }
+    .overview-box ul { list-style:none; }
+    .overview-box ul li {
+      padding:10px 0;
+      border-bottom:1px solid rgba(168,212,230,.1);
+      font-size:14px; color:var(--snow-white);
+    }
+    .overview-box ul li:last-child { border-bottom:none; }
+    .overview-box ul li strong { color:var(--warm-orange); font-weight:700; }
+    .reminder-box {
+      background:rgba(168,212,230,.04);
+      border-left:3px solid var(--ice-blue);
+      padding:24px 36px;
+    }
+    .reminder-box p {
+      font-family:'Oswald'; font-weight:500; font-size:12px;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:var(--ice-blue); margin-bottom:14px;
+    }
+    .reminder-box ul { list-style:none; }
+    .reminder-box ul li { font-size:14px; color:var(--muted); padding:5px 0; }
+
+    /* ── Section Heading ── */
+    .section-heading {
+      font-family:'Oswald'; font-weight:500; font-size:20px;
+      letter-spacing:.15em; text-transform:uppercase;
+      color:var(--snow-white); margin-bottom:28px;
+      padding-bottom:12px;
+      border-bottom:1px solid rgba(168,212,230,.15);
+    }
+    .section-heading span { color:var(--warm-orange); }
+
+    /* ── Hotel Cards ── */
+    .hotel-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:20px; margin-bottom:56px;
+    }
+    .hotel-card {
+      background:rgba(168,212,230,.05);
+      border:1px solid rgba(168,212,230,.12); padding:24px;
+    }
+    .hotel-card h3 {
+      font-family:'Oswald'; font-weight:500; font-size:17px;
+      letter-spacing:.08em; color:var(--ice-blue); margin-bottom:10px;
+    }
+    .hotel-card > p { font-size:13px; color:var(--muted); margin-bottom:6px; }
+    .hotel-card > p strong { color:var(--snow-white); }
+    .hotel-image {
+      width:100%; height:180px; object-fit:cover;
+      margin:14px 0;
+      filter:brightness(.8) saturate(.85); transition:filter .3s;
+    }
+    .hotel-image:hover { filter:brightness(.95) saturate(1); }
+    .pros-section h4 {
+      font-family:'Oswald'; font-weight:400; font-size:11px;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:#4ade80; margin:14px 0 6px;
+    }
+    .pros-section.cons h4 { color:#f87171; }
+    .pros-section ul { list-style:none; }
+    .pros-section ul li { font-size:13px; color:var(--muted); padding:3px 0; }
+    .pros-section ul li::before { content:'— '; color:var(--ice-blue); }
+
+    /* ── Tip Box ── */
+    .tip-box {
+      background:rgba(168,212,230,.05);
+      border:1px solid rgba(168,212,230,.15);
+      border-left:3px solid var(--ice-blue);
+      padding:24px 28px; margin-bottom:44px;
+    }
+    .tip-box h3 {
+      font-family:'Oswald'; font-weight:500; font-size:15px;
+      letter-spacing:.15em; text-transform:uppercase;
+      color:var(--ice-blue); margin-bottom:10px;
+    }
+    .tip-box p { font-size:14px; color:var(--muted); margin-bottom:10px; }
+
+    /* ── Collapse Controls ── */
+    .collapse-controls { display:flex; gap:10px; margin-bottom:36px; flex-wrap:wrap; }
+    .collapse-btn {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.2em; text-transform:uppercase;
+      background:transparent; color:var(--muted);
+      border:1px solid rgba(168,212,230,.2); padding:8px 18px; cursor:pointer;
+      transition:all .2s;
+    }
+    .collapse-btn:hover { border-color:var(--ice-blue); color:var(--ice-blue); }
+
+    /* ── Timeline ── */
+    .timeline { position:relative; padding-left:40px; margin-bottom:56px; }
+    .timeline::before {
+      content:''; position:absolute; left:0; top:0; bottom:0;
+      width:1px; background:rgba(168,212,230,.2);
+    }
+    .tl-item { position:relative; margin-bottom:14px; }
+
+    /* dot */
+    .tl-dot {
+      position:absolute; left:-46px; top:22px;
+      width:13px; height:13px;
+      border:2px solid var(--warm-orange);
+      border-radius:50%; background:var(--deep-navy);
+      transition:background .3s;
+    }
+    .tl-item:hover .tl-dot { background:var(--warm-orange); }
+
+    /* Day Header */
+    .day-header {
+      background:rgba(168,212,230,.05);
+      border:1px solid rgba(168,212,230,.12);
+      border-left:2px solid var(--warm-orange);
+      padding:18px 24px; cursor:pointer;
+      display:flex; align-items:center; justify-content:space-between;
+      user-select:none; transition:background .2s;
+    }
+    .day-header:hover { background:rgba(168,212,230,.09); }
+    .day-label {
+      font-family:'Bebas Neue'; font-size:13px;
+      letter-spacing:.3em; color:var(--warm-orange);
+      display:block; margin-bottom:4px;
+    }
+    .day-title {
+      font-family:'Oswald'; font-weight:500; font-size:20px;
+      letter-spacing:.05em; color:var(--snow-white);
+    }
+    .day-date {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.12em; color:var(--muted);
+    }
+    .day-chevron { font-size:16px; color:var(--ice-blue); transition:transform .35s; }
+    .day-section.open .day-chevron { transform:rotate(180deg); }
+    .day-body { max-height:0; overflow:hidden; transition:max-height .45s ease; }
+    .day-section.open .day-body { max-height:9000px; }
+    .day-body-inner {
+      padding:22px 24px 26px;
+      background:rgba(10,15,26,.5);
+      border:1px solid rgba(168,212,230,.08); border-top:none;
+    }
+    .ski-tag {
+      font-family:'Oswald'; font-weight:300; font-size:10px;
+      letter-spacing:.2em; text-transform:uppercase;
+      border:1px solid rgba(168,212,230,.3); color:var(--ice-blue);
+      padding:2px 9px; margin-left:8px;
+    }
+
+    /* ── Activity ── */
+    .activity {
+      background:rgba(168,212,230,.04);
+      border-left:2px solid rgba(168,212,230,.2);
+      padding:16px 18px; margin-bottom:14px;
+    }
+    .activity h3 {
+      font-family:'Oswald'; font-weight:500; font-size:15px;
+      letter-spacing:.1em; color:var(--ice-blue); margin-bottom:8px;
+    }
+    .time {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.1em;
+      background:rgba(232,98,26,.2); color:var(--warm-orange);
+      border:1px solid rgba(232,98,26,.3); padding:1px 9px; margin-left:6px;
+    }
+    .activity p, .activity li { font-size:13px; color:var(--muted); }
+    .activity ul { list-style:none; }
+    .activity ul li::before { content:'— '; color:var(--ice-blue); }
+    .activity strong { color:var(--snow-white); }
+
+    /* ── Links ── */
+    .map-link {
+      display:inline-block;
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:var(--ice-blue); border:1px solid rgba(168,212,230,.3);
+      padding:4px 12px; margin:4px 4px 4px 0;
+      transition:all .2s;
+    }
+    .map-link::before { content:"↗ "; }
+    .map-link:hover { border-color:var(--ice-blue); background:rgba(168,212,230,.1); color:var(--snow-white); }
+    .route-link { color:var(--warm-orange); border-color:rgba(232,98,26,.3); }
+    .route-link::before { content:"→ "; }
+    .route-link:hover { border-color:var(--warm-orange); background:rgba(232,98,26,.1); color:var(--snow-white); }
+
+    /* ── Restaurant Card ── */
+    .restaurant-card {
+      background:rgba(168,212,230,.04);
+      border:1px solid rgba(168,212,230,.1);
+      padding:14px 18px; margin:9px 0; transition:border-color .2s;
+    }
+    .restaurant-card:hover { border-color:rgba(168,212,230,.3); }
+    .restaurant-card h4 {
+      font-family:'Oswald'; font-weight:500; font-size:14px;
+      letter-spacing:.08em; color:var(--ice-blue); margin-bottom:5px;
+    }
+    .restaurant-card p { font-size:13px; color:var(--muted); }
+
+    /* ── Optional Activity ── */
+    .optional-activity {
+      background:rgba(240,165,0,.06);
+      border-left:2px solid rgba(240,165,0,.4);
+      padding:14px 18px; margin:9px 0;
+    }
+    .optional-activity h4 {
+      font-family:'Oswald'; font-weight:400; font-size:14px;
+      letter-spacing:.08em; color:var(--amber); margin-bottom:7px;
+    }
+    .optional-activity .time {
+      background:rgba(240,165,0,.15); color:var(--amber);
+      border-color:rgba(240,165,0,.3);
+    }
+    .optional-activity p { font-size:13px; color:var(--muted); }
+    .optional-activity strong { color:var(--snow-white); }
+
+    /* ── Warning ── */
+    .warning {
+      background:rgba(248,113,113,.08);
+      border-left:2px solid rgba(248,113,113,.5);
+      padding:14px 18px; margin:10px 0;
+      font-size:13px; color:rgba(248,113,113,.9);
+    }
+    .warning strong { color:#f87171; }
+
+    /* ── Highlight & Tips ── */
+    .highlight {
+      background:rgba(168,212,230,.05);
+      border:1px solid rgba(168,212,230,.12);
+      border-left:3px solid var(--warm-orange);
+      padding:26px 30px; margin:28px 0;
+    }
+    .highlight h3 {
+      font-family:'Oswald'; font-weight:500; font-size:15px;
+      letter-spacing:.15em; text-transform:uppercase;
+      color:var(--warm-orange); margin-bottom:18px;
+    }
+    .highlight ul { list-style:none; }
+    .highlight ul li {
+      font-size:13px; color:var(--muted);
+      padding:5px 0; border-bottom:1px solid rgba(168,212,230,.08);
+    }
+    .highlight ul li:last-child { border-bottom:none; }
+    .highlight ul li strong { color:var(--snow-white); }
+    .highlight p { font-size:13px; color:var(--muted); margin-bottom:7px; }
+    .tips {
+      background:rgba(168,212,230,.04);
+      border:1px solid rgba(168,212,230,.12);
+      border-left:3px solid var(--ice-blue);
+      padding:26px 30px; margin:28px 0;
+    }
+    .tips h3 {
+      font-family:'Oswald'; font-weight:500; font-size:15px;
+      letter-spacing:.15em; text-transform:uppercase;
+      color:var(--ice-blue); margin-bottom:18px;
+    }
+    .tips ul { list-style:none; }
+    .tips ul li {
+      font-size:13px; color:var(--muted);
+      padding:5px 0; border-bottom:1px solid rgba(168,212,230,.08);
+    }
+    .tips ul li:last-child { border-bottom:none; }
+    .tips ul li strong { color:var(--snow-white); }
+    .tips p { font-size:13px; color:var(--muted); margin-bottom:7px; }
+
+    /* ── Cover Image ── */
+    .cover-image {
+      width:100%; max-height:480px; object-fit:cover;
+      margin-bottom:48px;
+      filter:brightness(.85) saturate(.85);
+    }
+
+    /* ── Scroll Reveal ── */
+    .reveal {
+      opacity:0; transform:translateX(-20px);
+      transition:opacity .5s, transform .5s;
+    }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      position:relative; z-index:1;
+      background:var(--warm-orange); padding:56px 64px;
+      display:flex; justify-content:space-between; align-items:center;
+      overflow:hidden;
+    }
+    .cta-banner::before {
+      content:'SKI'; position:absolute; right:40px; top:50%;
+      transform:translateY(-50%);
+      font-family:'Bebas Neue'; font-size:180px;
+      color:rgba(255,255,255,.08); pointer-events:none; line-height:1;
+    }
+    .cta-text h2 {
+      font-family:'Bebas Neue'; font-size:48px;
+      letter-spacing:.05em; color:#fff; margin-bottom:6px;
+    }
+    .cta-text p {
+      font-family:'Oswald'; font-weight:300; font-size:13px;
+      letter-spacing:.15em; color:rgba(255,255,255,.8);
+    }
+    .cta-btn {
+      font-family:'Oswald'; font-weight:500; font-size:12px;
+      letter-spacing:.2em; text-transform:uppercase;
+      background:#fff; color:var(--warm-orange); border:none;
+      padding:15px 32px; cursor:pointer;
+      transition:transform .2s, box-shadow .2s;
+      white-space:nowrap;
+    }
+    .cta-btn:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(0,0,0,.2); }
+
+    /* ── Footer ── */
+    footer {
+      position:relative; z-index:1;
+      background:var(--deep-navy);
+      border-top:1px solid rgba(168,212,230,.15);
+      padding:36px 56px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .footer-logo {
+      font-family:'Bebas Neue'; font-size:20px;
+      letter-spacing:.15em; color:var(--snow-white);
+    }
+    .footer-logo span { color:var(--warm-orange); }
+    footer p {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.15em; color:var(--muted);
+    }
+
+    /* ═══════════════════════════════════════════
+       RWD — Mobile
+    ═══════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      nav { padding:16px 20px; }
+      .nav-links { display:none; }
+
+      .hero-content { padding:0 24px; }
+      .hero-stats { gap:20px; }
+      .hero-cta { flex-direction:column; gap:10px; }
+      .btn-glow, .btn-outline { text-align:center; }
+
+      .scroll-indicator { display:none; }
+
+      .toggle-section { gap:14px; padding:16px 20px; }
+      .toggle-label { font-size:11px; }
+
+      .weather-bar { flex-wrap:wrap; gap:20px; padding:22px 24px; justify-content:center; }
+      .weather-divider { display:none; }
+      .weather-stat { min-width:80px; }
+
+      .main-content { padding:48px 20px; }
+
+      .overview-box { padding:24px 20px; }
+      .reminder-box { padding:20px; }
+
+      .hotel-grid { grid-template-columns:1fr; }
+
+      .timeline { padding-left:28px; }
+      .tl-dot { left:-34px; top:20px; }
+
+      .day-header { padding:14px 18px; }
+      .day-title { font-size:17px; }
+      .day-body-inner { padding:16px 18px 20px; }
+
+      .cta-banner { flex-direction:column; gap:20px; text-align:center; padding:36px 24px; }
+      .cta-banner::before { font-size:100px; }
+
+      footer { flex-direction:column; gap:12px; text-align:center; padding:28px 20px; }
+
+      .highlight, .tips { padding:20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title .line1 { font-size:clamp(56px, 14vw, 80px); }
+      .hero-title .line2 { font-size:clamp(40px, 11vw, 60px); }
+      .weather-bar { padding:18px 16px; }
+      .main-content { padding:36px 16px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>❄️ 富良野滑雪之旅 ⛷️</h1>
-            <div class="subtitle">北海道粉雪天堂 五天四夜完美行程</div>
-            <div class="dates">📅 2026年12月25日 - 12月29日</div>
+
+  <!-- Snow Canvas -->
+  <canvas id="snow-canvas"></canvas>
+
+  <!-- Custom Cursor (desktop only via JS check) -->
+  <div class="cursor" id="cursor" style="display:none"></div>
+  <div class="cursor-ring" id="cursorRing" style="display:none"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">FURANO<span>·</span>2026</div>
+    <ul class="nav-links">
+      <li><a href="#itinerary">行程</a></li>
+      <li><a href="#hotels">住宿</a></li>
+      <li><a href="#coach">教練</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">北海道粉雪天堂 · 2026 Winter</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="line1">富良野</span>
+        <span class="line2">滑雪<span class="accent">之旅</span></span>
+      </h1>
+      <p class="hero-subtitle">五天四夜完美行程 · 2026年12月25日 — 12月29日</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">5D4N</span>
+          <span class="hero-stat-label">行程天數</span>
         </div>
-        <div class="toggle-container">
-            <button class="toggle-btn active" id="simpleBtn" onclick="switchView('simple')">精簡版</button>
-            <button class="toggle-btn" id="detailBtn" onclick="switchView('detail')">詳細版</button>
+        <div class="hero-stat">
+          <span class="hero-stat-num">2.5</span>
+          <span class="hero-stat-label">滑雪天數</span>
         </div>
-        <div class="trip-info">
-            <div class="info-item">
-                <div class="icon">🏠</div>
-                <h3>住宿選擇</h3>
-                <p>2種飯店可選</p>
-            </div>
-            <div class="info-item">
-                <div class="icon">⛷️</div>
-                <h3>滑雪天數</h3>
-                <p>2.5天</p>
-            </div>
-            <div class="info-item">
-                <div class="icon">🛍️</div>
-                <h3>購物行程</h3>
-                <p>Day 4 下午+晚上</p>
-            </div>
-            <div class="info-item">
-                <div class="icon">✈️</div>
-                <h3>航班時間</h3>
-                <p>09:20→14:05</p>
-            </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">−10°C</span>
+          <span class="hero-stat-label">12月均溫</span>
         </div>
-        <div class="content simple-view" id="mainContent">
+      </div>
+      <div class="hero-cta">
+        <button class="btn-glow" onclick="document.getElementById('toggle-anchor').scrollIntoView({behavior:'smooth'})">查看行程</button>
+        <button class="btn-outline" onclick="setView('detail');document.getElementById('toggle-anchor').scrollIntoView({behavior:'smooth'})">詳細版</button>
+      </div>
+    </div>
+    <!-- Mountain Silhouette -->
+    <div class="hero-mountain">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style="width:100%;height:100px;display:block;">
+        <polygon points="0,100 180,32 320,78 480,14 660,68 800,8 980,62 1160,24 1350,72 1440,38 1440,100" fill="#0a0f1a"/>
+      </svg>
+    </div>
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <span class="scroll-indicator-text">SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-            <!-- 精簡版行程總覽 -->
-            <div class="highlight">
-                <h3>📋 行程總覽</h3>
-                <ul style="margin-left:20px">
-                    <li><strong>Day 1 (12/25)：</strong>抵達新千歲 → 租車 → 富良野入住 → 晚餐 → (選)森林精靈露台/歡寒村</li>
-                    <li><strong>Day 2 (12/26)：</strong>富良野滑雪全天 ⛷️ → 溫泉 → 燒肉晚餐 → (選)觀光景點</li>
-                    <li><strong>Day 3 (12/27)：</strong>富良野滑雪全天 ⛷️ → 晚餐 → (選)美瑛景點</li>
-                    <li><strong>Day 4 (12/28)：</strong>上午滑雪 ⛷️ → 富良野伴手禮採購 → 旭川UNIQLO → 旭川晚餐 → 返回富良野</li>
-                    <li><strong>Day 5 (12/29)：</strong>退房 → 前往新千歲機場 → 還車 → 15:20返台</li>
-                </ul>
-                <p style="margin-top:15px"><strong>💡 重點提醒：</strong></p>
-                <ul style="margin-left:20px">
-                    <li>Day 1-3 晚上可選擇觀光（森林精靈露台、歡寒村、美瑛景點）</li>
-                    <li>Day 4 行程較滿，建議早點出發</li>
-                    <li>Day 5 最晚11:00從富良野出發</li>
-                    <li>滑雪裝備建議Day 1先租好</li>
-                </ul>
-            </div>
+  <!-- Toggle Slider -->
+  <div class="toggle-section" id="toggle-anchor">
+    <span class="toggle-label active-label" id="label-simple">精簡版</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="viewToggle" onchange="onToggleChange(this)">
+      <span class="toggle-track"></span>
+    </label>
+    <span class="toggle-label inactive-label" id="label-detail">詳細版</span>
+  </div>
 
-            <!-- 詳細版內容 -->
-            <div class="detail-only">
+  <!-- Weather / Stats Bar -->
+  <div class="weather-bar">
+    <div class="weather-stat">
+      <span class="weather-num">2種</span>
+      <span class="weather-label">住宿選擇</span>
+    </div>
+    <div class="weather-divider"></div>
+    <div class="weather-stat">
+      <span class="weather-num">2.5天</span>
+      <span class="weather-label">滑雪天數</span>
+    </div>
+    <div class="weather-divider"></div>
+    <div class="weather-stat">
+      <span class="weather-num">Day 4</span>
+      <span class="weather-label">購物行程</span>
+    </div>
+    <div class="weather-divider"></div>
+    <div class="weather-stat">
+      <span class="weather-num">09:20</span>
+      <span class="weather-label">出發航班</span>
+    </div>
+  </div>
 
-                <!-- 行程封面圖 -->
-                <img src="trip-furano.png" alt="富良野滑雪行程" style="width:100%; border-radius:15px; margin:20px 0; box-shadow:0 10px 30px rgba(0,0,0,.2); display:block;">
+  <!-- Main Content -->
+  <div class="main-content content simple-view" id="mainContent">
 
-                <!-- 住宿比較 -->
-                <div class="accommodation-compare">
-                    <div class="compare-header">
-                        <h2>🏨 住宿選擇比較</h2>
-                        <p style="margin-top:10px;opacity:.9">兩間飯店都是優質選擇，依您的需求和預算挑選</p>
-                    </div>
-                    <div class="compare-grid">
-                        <div class="hotel-card">
-                            <h3>🏡 Furano HANASAKA House</h3>
-                            <p><strong>類型：</strong>民宿 / Guest House</p>
-                            <p><strong>位置：</strong>富良野市區</p>
-                            <a href="https://www.google.com/maps/search/Furano+HANASAKA+House" class="map-link" target="_blank">查看地圖</a>
-                            <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/689007737.jpg?k=1ed49ed17f61e2cca0e93e658cfc83291c8399af2f907faebf3e7d2758c995e1&o=" alt="Furano HANASAKA House" class="hotel-image">
-                            <div class="pros-cons">
-                                <h4>✅ 優點</h4>
-                                <ul>
-                                    <li>價格較經濟實惠</li>
-                                    <li>家庭式溫馨氛圍</li>
-                                    <li>更能體驗當地生活</li>
-                                    <li>通常有共用廚房，可自炊</li>
-                                    <li>適合想省錢的背包客</li>
-                                </ul>
-                            </div>
-                            <div class="pros-cons cons">
-                                <h4>❌ 缺點</h4>
-                                <ul>
-                                    <li>設施較簡單</li>
-                                    <li>可能需要共用衛浴</li>
-                                    <li>沒有溫泉或健身房</li>
-                                    <li>距離滑雪場需開車</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="hotel-card">
-                            <h3>🏨 Nozo Hotel</h3>
-                            <p><strong>類型：</strong>國際四星飯店（2023年12月開幕）</p>
-                            <p><strong>位置：</strong>富良野滑雪場北之峰區旁</p>
-                            <p><strong>地址：</strong>14-38 Kitanominecho, Furano, Hokkaido 076-0034</p>
-                            <a href="https://maps.app.goo.gl/6sW8JQJhN7ma5vkb6" class="map-link" target="_blank">查看地圖</a>
-                            <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/513392915.jpg?k=b304b75e739c9c6b79b0be0aae159395951cff3ce1cd2ddb87eeceff31e9d100&o=" alt="Nozo Hotel" class="hotel-image">
-                            <div class="pros-cons">
-                                <h4>✅ 優點</h4>
-                                <ul>
-                                    <li>⭐ 2023年12月全新開幕</li>
-                                    <li>🎿 距離北之峰纜車僅180米</li>
-                                    <li>♨️ 設有大浴場、溫泉、桑拿</li>
-                                    <li>🍽️ 餐廳、酒吧、麵包店齊全</li>
-                                    <li>🏋️ 健身房、兒童遊戲室</li>
-                                    <li>🏢 現代化設計、設施新穎</li>
-                                </ul>
-                            </div>
-                            <div class="pros-cons cons">
-                                <h4>❌ 缺點</h4>
-                                <ul>
-                                    <li>價格較高</li>
-                                    <li>距離市區較遠</li>
-                                    <li>周邊餐廳選擇少</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 教練連結 -->
-                <div class="tips" style="margin-bottom:30px;">
-                    <h3>🎿 推薦中文滑雪教練</h3>
-                    <p style="margin-top:10px;">SnowFun 滑雪趣平台提供多位持有國際認證的台灣中文教練，可在富良野或北海道各雪場授課。</p>
-                    <p style="margin-top:12px;">
-                        <a href="https://www.snowfun.com.tw/instructors" class="map-link" target="_blank" style="font-size:1em;">查看所有教練 →</a>
-                    </p>
-                </div>
-
-                <!-- 全部展開／折疊 -->
-                <div class="collapse-controls">
-                    <button class="collapse-btn" onclick="expandAll()">全部展開</button>
-                    <button class="collapse-btn" onclick="collapseAll()">全部折疊</button>
-                </div>
-
-                <!-- ===== 可折疊 Day 1 ===== -->
-                <div class="day-section" id="day1">
-                    <div class="day-header" onclick="toggleDay('day1')">
-                        <div class="day-header-left">
-                            <h2>Day 1 — 抵達與入住</h2>
-                            <div class="date">2026年12月25日（五）</div>
-                        </div>
-                        <div class="day-chevron">▼</div>
-                    </div>
-                    <div class="day-body">
-                        <div class="day-body-inner">
-                            <div class="activity">
-                                <h3>✈️ 上午 <span class="time">09:20-14:05</span></h3>
-                                <p><strong>星宇航空 JX850</strong></p>
-                                <p>台北桃園 09:20 → 新千歲機場 14:05</p>
-                                <a href="https://www.google.com/maps/place/New+Chitose+Airport/@42.7753,141.6921,15z" class="map-link" target="_blank">新千歲機場</a>
-                            </div>
-                            <div class="activity">
-                                <h3>🚗 取車 <span class="time">14:05-15:00</span></h3>
-                                <p><strong>新千歲機場租車</strong></p>
-                                <ul>
-                                    <li>租車公司：Times、Toyota、Nippon Rent a Car</li>
-                                    <li>確認配備雪胎、建議4WD、加購全險</li>
-                                </ul>
-                            </div>
-                            <div class="activity">
-                                <h3>🚗 前往富良野 <span class="time">15:00-17:30</span></h3>
-                                <p>新千歲機場 → 富良野（車程約2.5小時，142公里）</p>
-                                <a href="https://www.google.com/maps/dir/New+Chitose+Airport/Furano,+Hokkaido" class="route-link" target="_blank">查看路線</a>
-                                <p>💡 建議走道央自動車道</p>
-                            </div>
-                            <div class="activity">
-                                <h3>🏠 入住 <span class="time">17:30-18:00</span></h3>
-                                <p><strong>選項1：</strong>Furano HANASAKA House（民宿）</p>
-                                <a href="https://www.google.com/maps/search/Furano+HANASAKA+House" class="map-link" target="_blank">HANASAKA House</a>
-                                <p><strong>選項2：</strong>Nozo Hotel（滑雪場旁）</p>
-                                <a href="https://maps.app.goo.gl/6sW8JQJhN7ma5vkb6" class="map-link" target="_blank">Nozo Hotel</a>
-                            </div>
-                            <div class="activity">
-                                <h3>🍜 晚餐 <span class="time">18:30-20:00</span></h3>
-                                <div class="restaurant-card">
-                                    <h4>富川製麵所（米其林推薦）</h4>
-                                    <p>招牌味噌煙燻叉燒拉麵</p>
-                                    <p>📍 11:00-20:00（週三公休）</p>
-                                    <a href="https://www.google.com/maps/search/富川製麵所+富良野" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                                <div class="restaurant-card">
-                                    <h4>唯我獨尊</h4>
-                                    <p>超人氣咖哩專門店</p>
-                                    <p>📍 11:00-21:00（週一公休）</p>
-                                    <a href="https://www.google.com/maps/search/唯我獨尊+富良野" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                            </div>
-                            <div class="optional-activity">
-                                <h4>🌙 晚間觀光（選擇性）<span class="time">20:00後</span></h4>
-                                <p><strong>選項1：森林精靈露台 Ningle Terrace</strong></p>
-                                <p>📍 新富良野王子大飯店內，15座童話小木屋</p>
-                                <p>⏰ 12:00-20:45｜💰 免費入場</p>
-                                <p>✨ 冬季點燈超夢幻，販售手作工藝品</p>
-                                <a href="https://www.google.com/maps/place/Ningle+Terrace/@43.3311,142.3753,17z" class="map-link" target="_blank">森林精靈露台</a>
-                                <p style="margin-top:10px"><strong>選項2：富良野歡寒村 Kan Kan Mura</strong></p>
-                                <p>📍 新富良野王子大飯店旁（精靈露台隔壁）</p>
-                                <p>⏰ 16:00-20:00（12/21-2/28）｜💰 300日圓</p>
-                                <p>✨ 冰屋酒吧、雪上活動、6萬顆燈飾</p>
-                                <a href="https://www.google.com/maps/place/Furano+Kan+Kan+Mura/@43.3311,142.3753,17z" class="map-link" target="_blank">富良野歡寒村</a>
-                                <p style="margin-top:10px">💡 兩個景點相鄰，可一起參觀！</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ===== 可折疊 Day 2 ===== -->
-                <div class="day-section" id="day2">
-                    <div class="day-header" onclick="toggleDay('day2')">
-                        <div class="day-header-left">
-                            <h2>Day 2 — 富良野滑雪 <span class="ski-badge">滑雪全天</span></h2>
-                            <div class="date">2026年12月26日（六）</div>
-                        </div>
-                        <div class="day-chevron">▼</div>
-                    </div>
-                    <div class="day-body">
-                        <div class="day-body-inner">
-                            <div class="activity">
-                                <h3>⛷️ 全日滑雪 <span class="time">08:30-16:30</span></h3>
-                                <p><strong>富良野滑雪場</strong></p>
-                                <a href="https://www.google.com/maps/place/Furano+Ski+Resort/@43.3444,142.3636,15z" class="map-link" target="_blank">富良野滑雪場</a>
-                                <a href="https://www.google.com/maps/dir/14-38+Kitanominecho,+Furano/Furano+Ski+Resort" class="route-link" target="_blank">從Nozo Hotel出發</a>
-                                <ul>
-                                    <li>租借裝備（Furano Snow Force 中文服務）</li>
-                                    <li>購買一日券（6,500日圓）</li>
-                                    <li>初學者：富良野ZONE山腳</li>
-                                    <li>中高級：北之峰ZONE、未壓雪道</li>
-                                </ul>
-                            </div>
-                            <div class="activity">
-                                <h3>🍽️ 午餐 <span class="time">12:00-13:30</span></h3>
-                                <div class="restaurant-card">
-                                    <h4>山頂餐廳 Downhill</h4>
-                                    <p>招牌「白色咖哩」必點！</p>
-                                    <p>📍 雪場內山頂</p>
-                                </div>
-                            </div>
-                            <div class="activity">
-                                <h3>♨️ 傍晚溫泉 <span class="time">17:00-18:30</span></h3>
-                                <p><strong>Nozo Hotel住客：</strong>直接使用飯店溫泉</p>
-                                <p><strong>HANASAKA House住客：</strong>新富良野王子大飯店溫泉</p>
-                                <a href="https://www.google.com/maps/place/New+Furano+Prince+Hotel/@43.3311,142.3753,15z" class="map-link" target="_blank">新富良野王子大飯店</a>
-                            </div>
-                            <div class="activity">
-                                <h3>🍖 晚餐 <span class="time">19:00-21:00</span></h3>
-                                <div class="restaurant-card">
-                                    <h4>まんぐう 燒肉</h4>
-                                    <p>富良野最受歡迎燒肉店</p>
-                                    <p>📍 17:00-22:00 ⚠️ 建議提前訂位</p>
-                                    <a href="https://www.google.com/maps/search/まんぐう+富良野" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                            </div>
-                            <div class="optional-activity">
-                                <h4>🌙 晚間觀光（選擇性）<span class="time">21:00後</span></h4>
-                                <p>如Day 1未去，可選擇：</p>
-                                <p>✨ 森林精靈露台（至20:45）</p>
-                                <p>✨ 富良野歡寒村（至20:00）</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ===== 可折疊 Day 3 ===== -->
-                <div class="day-section" id="day3">
-                    <div class="day-header" onclick="toggleDay('day3')">
-                        <div class="day-header-left">
-                            <h2>Day 3 — 富良野滑雪 <span class="ski-badge">滑雪全天</span></h2>
-                            <div class="date">2026年12月27日（日）</div>
-                        </div>
-                        <div class="day-chevron">▼</div>
-                    </div>
-                    <div class="day-body">
-                        <div class="day-body-inner">
-                            <div class="activity">
-                                <h3>⛷️ 全日滑雪 <span class="time">08:30-16:30</span></h3>
-                                <p><strong>富良野滑雪場</strong></p>
-                                <ul>
-                                    <li>購買一日券，盡情享受滑雪</li>
-                                    <li>嘗試兩區互通的雪道</li>
-                                    <li>進階者挑戰世界盃賽道</li>
-                                </ul>
-                            </div>
-                            <div class="activity">
-                                <h3>🍽️ 晚餐 <span class="time">19:00-21:00</span></h3>
-                                <div class="restaurant-card">
-                                    <h4>くまげら（米其林推薦）</h4>
-                                    <p>鄉土料理餐廳，日劇《來自北國》場景</p>
-                                    <p>推薦：山賊鍋、和牛丼、壽喜燒</p>
-                                    <p>⚠️ 非常熱門，建議提前訂位</p>
-                                    <a href="https://www.google.com/maps/search/くまげら+富良野" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                                <div class="restaurant-card">
-                                    <h4>トピカル 迴轉壽司</h4>
-                                    <p>必點：厚岸生蠔、大干貝、螃蟹湯</p>
-                                    <a href="https://www.google.com/maps/search/トピカル+富良野" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                            </div>
-                            <div class="optional-activity">
-                                <h4>🌙 美瑛夜間觀光（選擇性，需開車）</h4>
-                                <p><strong>美瑛著名景點</strong></p>
-                                <p>📍 聖誕樹（クリスマスツリーの木）</p>
-                                <p>📍 七星之樹（セブンスターの木）</p>
-                                <p>📍 Ken &amp; Mary之樹</p>
-                                <p>🚗 富良野 → 美瑛 約30分鐘車程</p>
-                                <a href="https://www.google.com/maps/place/Christmas+Tree+Biei/@43.5833,142.4333,15z" class="map-link" target="_blank">聖誕樹</a>
-                                <a href="https://www.google.com/maps/place/Seven+Star+Tree/@43.5911,142.4481,15z" class="map-link" target="_blank">七星之樹</a>
-                                <p>💡 冬季積雪景色特別美，但需注意天黑後拍照較困難</p>
-                                <p>⚠️ 建議白天（Day 4早上）前往較佳</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ===== 可折疊 Day 4 ===== -->
-                <div class="day-section" id="day4">
-                    <div class="day-header" onclick="toggleDay('day4')">
-                        <div class="day-header-left">
-                            <h2>Day 4 — 滑雪 &amp; 採購大作戰 <span class="ski-badge">滑雪半天</span></h2>
-                            <div class="date">2026年12月28日（一）</div>
-                        </div>
-                        <div class="day-chevron">▼</div>
-                    </div>
-                    <div class="day-body">
-                        <div class="day-body-inner">
-                            <div class="activity">
-                                <h3>⛷️ 上午滑雪 <span class="time">08:30-12:00</span></h3>
-                                <p><strong>富良野滑雪場</strong></p>
-                                <p>購買5小時券，最後享受粉雪</p>
-                            </div>
-                            <div class="activity">
-                                <h3>🍽️ 午餐 <span class="time">12:00-13:00</span></h3>
-                                <div class="restaurant-card">
-                                    <h4>市場食堂</h4>
-                                    <p>超值市場定食 1350日圓</p>
-                                    <a href="https://www.google.com/maps/search/市場食堂+富良野" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                            </div>
-                            <div class="activity">
-                                <h3>🎁 富良野伴手禮 <span class="time">13:30-15:30</span></h3>
-                                <div class="restaurant-card">
-                                    <h4>Furano Marche ⭐推薦優先</h4>
-                                    <p>🛍️ 一站式購買大部分伴手禮</p>
-                                    <p>哈密瓜製品、農產品、零食、起司、葡萄酒</p>
-                                    <a href="https://www.google.com/maps/place/Furano+Marche/@43.3408,142.3828,17z" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                                <div class="restaurant-card">
-                                    <h4>富良野起司工房</h4>
-                                    <p>🛍️ 起司、冰淇淋</p>
-                                    <a href="https://www.google.com/maps/place/Furano+Cheese+Factory/@43.3258,142.3644,17z" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                            </div>
-                            <div class="activity">
-                                <h3>🚗 前往旭川 <span class="time">15:30-16:30</span></h3>
-                                <p>富良野 → 旭川（車程約1小時，55公里）</p>
-                                <a href="https://www.google.com/maps/dir/Furano/Asahikawa" class="route-link" target="_blank">查看路線</a>
-                            </div>
-                            <div class="activity">
-                                <h3>🛍️ 旭川 UNIQLO <span class="time">16:30-18:30</span></h3>
-                                <div class="restaurant-card">
-                                    <h4>UNIQLO 旭川永山パワーズ店</h4>
-                                    <p>📍 旭川市永山3条12丁目2-11</p>
-                                    <p>⏰ 10:00-20:00</p>
-                                    <p>🛍️ HEATTECH、羽絨外套、冬季用品</p>
-                                    <a href="https://www.google.com/maps/place/UNIQLO+Asahikawa+Nagayama+Powers/@43.8114,142.4453,17z" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                            </div>
-                            <div class="activity">
-                                <h3>🍜 旭川晚餐 <span class="time">18:30-20:00</span></h3>
-                                <div class="restaurant-card">
-                                    <h4>梅光軒（旭川拉麵名店）</h4>
-                                    <p>旭川醬油拉麵代表</p>
-                                    <a href="https://www.google.com/maps/search/梅光軒+旭川" class="map-link" target="_blank">查看地圖</a>
-                                </div>
-                            </div>
-                            <div class="activity">
-                                <h3>🚗 返回富良野 <span class="time">20:00-21:00</span></h3>
-                                <p>旭川 → 富良野（車程約1小時）</p>
-                                <a href="https://www.google.com/maps/dir/Asahikawa/Furano" class="route-link" target="_blank">查看路線</a>
-                                <p>整理行李準備明天返程</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ===== 可折疊 Day 5 ===== -->
-                <div class="day-section" id="day5">
-                    <div class="day-header" onclick="toggleDay('day5')">
-                        <div class="day-header-left">
-                            <h2>Day 5 — 輕鬆返程日</h2>
-                            <div class="date">2026年12月29日（二）</div>
-                        </div>
-                        <div class="day-chevron">▼</div>
-                    </div>
-                    <div class="day-body">
-                        <div class="day-body-inner">
-                            <div class="warning">
-                                <strong>⚠️ 時間提醒：</strong>15:20起飛，建議14:20前完成check-in<br>
-                                富良野→新千歲約2.5小時 + 還車30分鐘<br>
-                                <strong>最晚11:00必須從富良野出發</strong>
-                            </div>
-                            <div class="activity">
-                                <h3>🏠 退房 <span class="time">08:00-09:00</span></h3>
-                                <p>Check-out，整理行李上車</p>
-                            </div>
-                            <div class="activity">
-                                <h3>🚗 出發前往機場 <span class="time">10:30-11:00出發</span></h3>
-                                <p>富良野 → 新千歲機場（約2.5小時，142公里）</p>
-                                <a href="https://www.google.com/maps/dir/Furano/New+Chitose+Airport" class="route-link" target="_blank">查看路線</a>
-                                <p>⛽ 途中加油站加滿油</p>
-                            </div>
-                            <div class="activity">
-                                <h3>🚗 還車 <span class="time">13:00-13:30</span></h3>
-                                <p>新千歲機場還車</p>
-                            </div>
-                            <div class="activity">
-                                <h3>✈️ 機場候機 <span class="time">13:30-15:20</span></h3>
-                                <p><strong>星宇航空 JX851</strong></p>
-                                <p>新千歲機場 15:20 → 台北桃園 19:05</p>
-                                <p>💡 新千歲機場很好逛！哆啦A夢樂園、Royce巧克力、伴手禮店</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ===== (instructor cards removed) ===== -->
-                <div style="display:none"><div>
-
-                        <!-- 大翔 -->
-                        <div class="instructor-card">
-                            <div class="instructor-photo-wrap">
-                                <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=400&h=300&fit=crop&crop=face" alt="大翔教練">
-                                <div class="instructor-level-badge">Level 1</div>
-                                <div class="instructor-discipline">
-                                    <span class="disc-tag">⛷️ 雙板</span>
-                                </div>
-                            </div>
-                            <div class="instructor-info">
-                                <h3>大翔 教練</h3>
-                                <div class="instructor-meta">
-                                    <span class="instructor-rating">★★★★★ 5.0</span>
-                                    <span class="instructor-price">起 ¥13,000/hr</span>
-                                </div>
-                                <div class="instructor-certs">
-                                    <span class="cert-tag">ISIA 國際認證</span>
-                                    <span class="cert-tag">中文授課</span>
-                                </div>
-                                <div class="instructor-desc">
-                                    台北人，2015年在公司旅遊時第一次接觸滑雪即愛上，迅速取得教練執照。個性幽默親切，「就算你放棄自己，他也不放棄你」，擅長從零基礎帶起。
-                                </div>
-                                <div class="instructor-resorts">
-                                    <span>曾駐點雪場：</span>富良野・苗場・輕井澤・志賀高原・二世谷・安比高原
-                                </div>
-                                <a href="https://www.snowfun.com.tw/instructors/53" class="instructor-btn" target="_blank">前往預訂 →</a>
-                            </div>
-                        </div>
-
-                        <!-- Leilei -->
-                        <div class="instructor-card">
-                            <div class="instructor-photo-wrap">
-                                <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop&crop=top" alt="Leilei教練">
-                                <div class="instructor-level-badge">Level 1</div>
-                                <div class="instructor-discipline">
-                                    <span class="disc-tag">🏂 單板</span>
-                                    <span class="disc-tag">⛷️ 雙板</span>
-                                </div>
-                            </div>
-                            <div class="instructor-info">
-                                <h3>Leilei 教練</h3>
-                                <div class="instructor-meta">
-                                    <span class="instructor-rating">★★★★★ 5.0</span>
-                                    <span class="instructor-price">起 ¥14,000/hr</span>
-                                </div>
-                                <div class="instructor-certs">
-                                    <span class="cert-tag">CASI Lv.1 單板</span>
-                                    <span class="cert-tag">SAJ 單板二級</span>
-                                    <span class="cert-tag">APSI Lv.1 雙板</span>
-                                    <span class="cert-tag">CPR／AED</span>
-                                </div>
-                                <div class="instructor-desc">
-                                    2003年在歐洲初次接觸滑雪，從「怕冷怕痛怕速度」的膽小鬼蛻變為橫跨歐洲、日本、韓國多國雪場的全能教練。教學時使用無線耳麥即時指導，課後在群組詳細說明進度，學員評價「非常用心專業」。
-                                </div>
-                                <div class="instructor-resorts">
-                                    <span>曾駐點雪場：</span>義大利・瑞士・韓國・日本多地
-                                </div>
-                                <a href="https://www.snowfun.com.tw/instructors/4" class="instructor-btn" target="_blank">前往預訂 →</a>
-                            </div>
-                        </div>
-
-                        <!-- Howard C. -->
-                        <div class="instructor-card">
-                            <div class="instructor-photo-wrap">
-                                <img src="https://images.unsplash.com/photo-1605540436563-5bca919ae766?w=400&h=300&fit=crop&crop=top" alt="Howard C. 教練">
-                                <div class="instructor-level-badge">Level 1</div>
-                                <div class="instructor-discipline">
-                                    <span class="disc-tag">⛷️ 雙板</span>
-                                    <span class="disc-tag">🏂 單板</span>
-                                </div>
-                            </div>
-                            <div class="instructor-info">
-                                <h3>Howard C. 教練</h3>
-                                <div class="instructor-meta">
-                                    <span class="instructor-rating">★★★★★ 5.0</span>
-                                    <span class="instructor-price">起 ¥14,000/hr</span>
-                                </div>
-                                <div class="instructor-certs">
-                                    <span class="cert-tag">CSIA Lv.1 雙板</span>
-                                    <span class="cert-tag">CASI Lv.1 單板</span>
-                                    <span class="cert-tag">中英文授課</span>
-                                </div>
-                                <div class="instructor-desc">
-                                    2002年赴美攻讀研究所時初接觸滑雪，2018年一家三口前往紐西蘭 Treble Cone 接受長達11週的專業訓練並取得雙照。擅長親子滑雪，曾多次帶領家庭滑雪團。把零基礎學員帶上纜車順利滑行，是他最大的成就感。
-                                </div>
-                                <div class="instructor-resorts">
-                                    <span>曾駐點雪場：</span>日本本島・北海道・歐洲・杜拜室內雪場
-                                </div>
-                                <a href="https://www.snowfun.com.tw/instructors/24" class="instructor-btn" target="_blank">前往預訂 →</a>
-                            </div>
-                        </div>
-
-                        <!-- LACO -->
-                        <div class="instructor-card">
-                            <div class="instructor-photo-wrap">
-                                <img src="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=400&h=300&fit=crop&crop=top" alt="LACO 教練">
-                                <div class="instructor-level-badge">Level 2</div>
-                                <div class="instructor-discipline">
-                                    <span class="disc-tag">🏂 單板</span>
-                                    <span class="disc-tag">⛷️ 雙板</span>
-                                </div>
-                            </div>
-                            <div class="instructor-info">
-                                <h3>LACO 教練</h3>
-                                <div class="instructor-meta">
-                                    <span class="instructor-rating">★★★★★ 5.0</span>
-                                    <span class="instructor-price">起 ¥15,000/hr</span>
-                                </div>
-                                <div class="instructor-certs">
-                                    <span class="cert-tag">CASI Lv.2 單板</span>
-                                    <span class="cert-tag">CSIA Lv.1 雙板</span>
-                                    <span class="cert-tag">近10年教學資歷</span>
-                                </div>
-                                <div class="instructor-desc">
-                                    近十年滑雪與教學資歷，曾受僱於澳洲最大滑雪場 Perisher。初級教學、高階技術、花式動作皆得心應手，個性幽默搞笑，陪你享受快樂的滑雪旅程。
-                                </div>
-                                <div class="instructor-resorts">
-                                    <span>曾駐點雪場：</span>澳洲 Perisher・日本北海道各地
-                                </div>
-                                <a href="https://www.snowfun.com.tw/instructors/1516" class="instructor-btn" target="_blank">前往預訂 →</a>
-                            </div>
-                        </div>
-
-                        <!-- MoMo -->
-                        <div class="instructor-card">
-                            <div class="instructor-photo-wrap">
-                                <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400&h=300&fit=crop&crop=top" alt="MoMo 教練">
-                                <div class="instructor-level-badge">Level 1</div>
-                                <div class="instructor-discipline">
-                                    <span class="disc-tag">🏂 單板</span>
-                                    <span class="disc-tag">⛷️ 雙板</span>
-                                </div>
-                            </div>
-                            <div class="instructor-info">
-                                <h3>MoMo 教練</h3>
-                                <div class="instructor-meta">
-                                    <span class="instructor-rating">★★★★★ 5.0</span>
-                                    <span class="instructor-price">起 ¥13,000/hr</span>
-                                </div>
-                                <div class="instructor-certs">
-                                    <span class="cert-tag">CASI Snowboard Lv.1</span>
-                                    <span class="cert-tag">CSIA Ski Lv.1</span>
-                                    <span class="cert-tag">北海道駐點</span>
-                                </div>
-                                <div class="instructor-desc">
-                                    成長於台灣山林，對戶外活動充滿熱情。長期駐點北海道，曾在札幌手稻、二世谷、留壽都授課，熟悉北海道雪況。致力為初學者到成人打造安全且具成效的學習環境。
-                                </div>
-                                <div class="instructor-resorts">
-                                    <span>曾駐點雪場：</span>札幌手稻・二世谷・留壽都
-                                </div>
-                                <a href="https://www.snowfun.com.tw/instructors/4301" class="instructor-btn" target="_blank">前往預訂 →</a>
-                            </div>
-                        </div>
-
-                        <!-- 肯特 Kent -->
-                        <div class="instructor-card">
-                            <div class="instructor-photo-wrap">
-                                <img src="https://images.unsplash.com/photo-1548515894-c8c0eba38a06?w=400&h=300&fit=crop&crop=top" alt="肯特教練">
-                                <div class="instructor-level-badge">Level 1</div>
-                                <div class="instructor-discipline">
-                                    <span class="disc-tag">⛷️ 雙板</span>
-                                    <span class="disc-tag">🏂 單板</span>
-                                </div>
-                            </div>
-                            <div class="instructor-info">
-                                <h3>肯特 (Kent) 教練</h3>
-                                <div class="instructor-meta">
-                                    <span class="instructor-rating">★★★★★ 5.0</span>
-                                    <span class="instructor-price">起 ¥18,333/hr</span>
-                                </div>
-                                <div class="instructor-certs">
-                                    <span class="cert-tag">CSIA Lv.1 雙板 (2020)</span>
-                                    <span class="cert-tag">CASI Lv.1 單板 (2023)</span>
-                                    <span class="cert-tag">TOEIC 945</span>
-                                    <span class="cert-tag">中英文授課</span>
-                                </div>
-                                <div class="instructor-desc">
-                                    英文能力超強（TOEIC 945），同時擔任台灣語言中心英文老師。曾帶領台灣國立體育大學滑雪社前往日本，可同時以中英文流利授課，適合有外籍同行的團體。
-                                </div>
-                                <div class="instructor-resorts">
-                                    <span>擅長：</span>雙板與單板雙認證・中英文混合團體教學
-                                </div>
-                                <a href="https://www.snowfun.com.tw/instructors/2091" class="instructor-btn" target="_blank">前往預訂 →</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="highlight">
-                    <h3>🌙 晚間觀光景點總整理</h3>
-                    <div class="restaurant-card">
-                        <h4>🧚 森林精靈露台 Ningle Terrace</h4>
-                        <p>📍 新富良野王子大飯店內</p>
-                        <p>⏰ 12:00-20:45｜💰 免費</p>
-                        <p>✨ 15座童話小木屋、手作工藝品、冬季點燈夢幻</p>
-                    </div>
-                    <div class="restaurant-card">
-                        <h4>❄️ 富良野歡寒村 Kan Kan Mura</h4>
-                        <p>📍 新富良野王子大飯店旁</p>
-                        <p>⏰ 16:00-20:00（12/21-2/28）｜💰 300日圓</p>
-                        <p>✨ 冰屋酒吧、雪上活動、6萬顆燈飾、狗拉雪橇</p>
-                    </div>
-                    <div class="restaurant-card">
-                        <h4>🌲 美瑛景點（建議白天前往）</h4>
-                        <p>📍 聖誕樹、七星之樹、Ken &amp; Mary之樹</p>
-                        <p>🚗 距富良野30分鐘車程</p>
-                        <p>✨ 冬季積雪景色絕美，適合攝影</p>
-                    </div>
-                </div>
-                <div class="highlight">
-                    <h3>🎁 Day 4 採購時間軸</h3>
-                    <ul>
-                        <li>08:30-12:00：富良野滑雪</li>
-                        <li>12:00-13:00：午餐</li>
-                        <li>13:30-15:30：富良野伴手禮</li>
-                        <li>15:30-16:30：開車去旭川</li>
-                        <li>16:30-18:30：UNIQLO採購</li>
-                        <li>18:30-20:00：旭川晚餐</li>
-                        <li>20:00-21:00：返回富良野</li>
-                    </ul>
-                </div>
-                <div class="highlight">
-                    <h3>🎿 富良野滑雪場資訊</h3>
-                    <p><strong>纜車票價：</strong></p>
-                    <ul>
-                        <li>一日券：6,500日圓</li>
-                        <li>5小時券：5,500日圓</li>
-                        <li>3小時券：4,500日圓</li>
-                    </ul>
-                    <p style="margin-top:15px"><strong>特色：</strong></p>
-                    <ul>
-                        <li>28條雪道，適合各程度</li>
-                        <li>世界級粉雪品質</li>
-                        <li>曾舉辦12次世界盃賽事</li>
-                        <li>營業：08:30-19:30（含夜滑）</li>
-                    </ul>
-                </div>
-                <div class="tips">
-                    <h3>💡 實用建議</h3>
-                    <ul>
-                        <li><strong>住宿選擇：</strong>預算有限選HANASAKA House，想要舒適便利選Nozo Hotel</li>
-                        <li><strong>晚間觀光：</strong>森林精靈露台和歡寒村相鄰，可一起參觀（約1.5小時）</li>
-                        <li><strong>美瑛景點：</strong>建議白天前往，冬季天黑早不易拍照</li>
-                        <li><strong>租車：</strong>新千歲機場取還最方便</li>
-                        <li><strong>裝備：</strong>Day 1先租好（Furano Snow Force中文服務）</li>
-                        <li><strong>Day 4：</strong>行程較滿，早點出發</li>
-                        <li><strong>訂位：</strong>まんぐう、くまげら提前1-2天訂位</li>
-                        <li><strong>天氣：</strong>12月底約-7°C~-10°C</li>
-                        <li><strong>保險：</strong>建議購買滑雪險</li>
-                    </ul>
-                </div>
-                <div class="highlight">
-                    <h3>🍴 美食清單</h3>
-                    <div class="restaurant-card">
-                        <h4>【拉麵】富川製麵所 ⭐米其林</h4>
-                        <p>11:00-20:00（週三公休）</p>
-                    </div>
-                    <div class="restaurant-card">
-                        <h4>【燒肉】まんぐう</h4>
-                        <p>17:00-22:00（需訂位）</p>
-                    </div>
-                    <div class="restaurant-card">
-                        <h4>【壽司】トピカル</h4>
-                        <p>迴轉壽司，CP值高</p>
-                    </div>
-                    <div class="restaurant-card">
-                        <h4>【鄉土料理】くまげら ⭐米其林</h4>
-                        <p>山賊鍋、和牛丼（需訂位）</p>
-                    </div>
-                    <div class="restaurant-card">
-                        <h4>【咖哩】唯我獨尊</h4>
-                        <p>11:00-21:00（週一公休）</p>
-                    </div>
-                    <div class="restaurant-card">
-                        <h4>【平價】市場食堂</h4>
-                        <p>市場定食1350日圓</p>
-                    </div>
-                    <div class="restaurant-card">
-                        <h4>【旭川拉麵】梅光軒</h4>
-                        <p>旭川醬油拉麵代表</p>
-                    </div>
-                </div>
-                <div class="tips">
-                    <h3>🚗 租車資訊</h3>
-                    <p><strong>推薦：</strong>Times（中文）、Toyota、Nippon Rent a Car</p>
-                    <p><strong>預算：</strong>5天約25,000-35,000日圓</p>
-                    <p><strong>重點：</strong></p>
-                    <ul>
-                        <li>確認雪胎（必備）</li>
-                        <li>建議4WD車款</li>
-                        <li>加購全險</li>
-                        <li>需國際駕照+台灣駕照</li>
-                    </ul>
-                </div>
-            </div><!-- end detail-only -->
-        </div><!-- end content -->
-        <div class="footer">
-            <p>🎿 祝你有個美好的富良野滑雪之旅！❄️</p>
-            <p>享受北海道世界級的粉雪</p>
-        </div>
+    <!-- ── 精簡版行程總覽 ── -->
+    <div class="overview-box reveal">
+      <h3>行程總覽</h3>
+      <ul>
+        <li><strong>Day 1 (12/25)：</strong>抵達新千歲 → 租車 → 富良野入住 → 晚餐 → (選)森林精靈露台/歡寒村</li>
+        <li><strong>Day 2 (12/26)：</strong>富良野滑雪全天 ⛷️ → 溫泉 → 燒肉晚餐 → (選)觀光景點</li>
+        <li><strong>Day 3 (12/27)：</strong>富良野滑雪全天 ⛷️ → 晚餐 → (選)美瑛景點</li>
+        <li><strong>Day 4 (12/28)：</strong>上午滑雪 ⛷️ → 富良野伴手禮採購 → 旭川UNIQLO → 旭川晚餐 → 返回富良野</li>
+        <li><strong>Day 5 (12/29)：</strong>退房 → 前往新千歲機場 → 還車 → 15:20返台</li>
+      </ul>
+    </div>
+    <div class="reminder-box reveal">
+      <p>重點提醒</p>
+      <ul>
+        <li>Day 1-3 晚上可選擇觀光（森林精靈露台、歡寒村、美瑛景點）</li>
+        <li>Day 4 行程較滿，建議早點出發</li>
+        <li>Day 5 最晚11:00從富良野出發</li>
+        <li>滑雪裝備建議Day 1先租好</li>
+      </ul>
     </div>
 
-    <script>
-        function switchView(view) {
-            const content = document.getElementById('mainContent');
-            const simpleBtn = document.getElementById('simpleBtn');
-            const detailBtn = document.getElementById('detailBtn');
-            if (view === 'simple') {
-                content.className = 'content simple-view';
-                simpleBtn.classList.add('active');
-                detailBtn.classList.remove('active');
-            } else {
-                content.className = 'content detail-view';
-                detailBtn.classList.add('active');
-                simpleBtn.classList.remove('active');
-            }
-        }
+    <!-- ══════════════════════════════
+         詳細版內容
+    ══════════════════════════════ -->
+    <div class="detail-only" id="itinerary">
 
-        function toggleDay(id) {
-            document.getElementById(id).classList.toggle('open');
-        }
-        function expandAll() {
-            document.querySelectorAll('.day-section').forEach(s => s.classList.add('open'));
-        }
-        function collapseAll() {
-            document.querySelectorAll('.day-section').forEach(s => s.classList.remove('open'));
-        }
-    </script>
+      <!-- Cover Image -->
+      <img src="trip-furano.png" alt="富良野滑雪行程" class="cover-image">
+
+      <!-- 住宿比較 -->
+      <div id="hotels" style="margin-bottom:56px;">
+        <h2 class="section-heading">住宿選擇 <span>比較</span></h2>
+        <p style="font-family:'Oswald';font-weight:300;font-size:13px;letter-spacing:.15em;color:var(--muted);margin-bottom:22px;">兩間飯店都是優質選擇，依您的需求和預算挑選</p>
+        <div class="hotel-grid">
+          <div class="hotel-card">
+            <h3>Furano HANASAKA House</h3>
+            <p><strong>類型：</strong>民宿 / Guest House</p>
+            <p><strong>位置：</strong>富良野市區</p>
+            <a href="https://www.google.com/maps/search/Furano+HANASAKA+House" class="map-link" target="_blank">查看地圖</a>
+            <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/689007737.jpg?k=1ed49ed17f61e2cca0e93e658cfc83291c8399af2f907faebf3e7d2758c995e1&o=" alt="Furano HANASAKA House" class="hotel-image">
+            <div class="pros-section">
+              <h4>優點</h4>
+              <ul>
+                <li>價格較經濟實惠</li>
+                <li>家庭式溫馨氛圍</li>
+                <li>更能體驗當地生活</li>
+                <li>通常有共用廚房，可自炊</li>
+                <li>適合想省錢的背包客</li>
+              </ul>
+            </div>
+            <div class="pros-section cons">
+              <h4>缺點</h4>
+              <ul>
+                <li>設施較簡單</li>
+                <li>可能需要共用衛浴</li>
+                <li>沒有溫泉或健身房</li>
+                <li>距離滑雪場需開車</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <h3>Nozo Hotel</h3>
+            <p><strong>類型：</strong>國際四星飯店（2023年12月開幕）</p>
+            <p><strong>位置：</strong>富良野滑雪場北之峰區旁</p>
+            <p><strong>地址：</strong>14-38 Kitanominecho, Furano, Hokkaido 076-0034</p>
+            <a href="https://maps.app.goo.gl/6sW8JQJhN7ma5vkb6" class="map-link" target="_blank">查看地圖</a>
+            <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/513392915.jpg?k=b304b75e739c9c6b79b0be0aae159395951cff3ce1cd2ddb87eeceff31e9d100&o=" alt="Nozo Hotel" class="hotel-image">
+            <div class="pros-section">
+              <h4>優點</h4>
+              <ul>
+                <li>⭐ 2023年12月全新開幕</li>
+                <li>🎿 距離北之峰纜車僅180米</li>
+                <li>♨️ 設有大浴場、溫泉、桑拿</li>
+                <li>🍽️ 餐廳、酒吧、麵包店齊全</li>
+                <li>🏋️ 健身房、兒童遊戲室</li>
+                <li>🏢 現代化設計、設施新穎</li>
+              </ul>
+            </div>
+            <div class="pros-section cons">
+              <h4>缺點</h4>
+              <ul>
+                <li>價格較高</li>
+                <li>距離市區較遠</li>
+                <li>周邊餐廳選擇少</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 教練連結 -->
+      <div class="tip-box reveal" id="coach">
+        <h3>推薦中文滑雪教練</h3>
+        <p>SnowFun 滑雪趣平台提供多位持有國際認證的台灣中文教練，可在富良野或北海道各雪場授課。</p>
+        <a href="https://www.snowfun.com.tw/instructors" class="map-link" target="_blank">查看所有教練 →</a>
+      </div>
+
+      <!-- Collapse Controls -->
+      <div class="collapse-controls">
+        <button class="collapse-btn" onclick="expandAll()">全部展開</button>
+        <button class="collapse-btn" onclick="collapseAll()">全部折疊</button>
+      </div>
+
+      <!-- ── Timeline ── -->
+      <div class="timeline">
+
+        <!-- Day 1 -->
+        <div class="tl-item day-section" id="day1">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day1')">
+            <div>
+              <span class="day-label">DAY 01 · 2026.12.25 (五)</span>
+              <span class="day-title">抵達與入住</span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body">
+            <div class="day-body-inner">
+              <div class="activity">
+                <h3>上午 — 航班出發 <span class="time">09:20 - 14:05</span></h3>
+                <p><strong>星宇航空 JX850</strong></p>
+                <p>台北桃園 09:20 → 新千歲機場 14:05</p>
+                <a href="https://www.google.com/maps/place/New+Chitose+Airport/@42.7753,141.6921,15z" class="map-link" target="_blank">新千歲機場</a>
+              </div>
+              <div class="activity">
+                <h3>取車 <span class="time">14:05 - 15:00</span></h3>
+                <p><strong>新千歲機場租車</strong></p>
+                <ul>
+                  <li>租車公司：Times、Toyota、Nippon Rent a Car</li>
+                  <li>確認配備雪胎、建議4WD、加購全險</li>
+                </ul>
+              </div>
+              <div class="activity">
+                <h3>前往富良野 <span class="time">15:00 - 17:30</span></h3>
+                <p>新千歲機場 → 富良野（車程約2.5小時，142公里）</p>
+                <a href="https://www.google.com/maps/dir/New+Chitose+Airport/Furano,+Hokkaido" class="route-link" target="_blank">查看路線</a>
+                <p>建議走道央自動車道</p>
+              </div>
+              <div class="activity">
+                <h3>入住 <span class="time">17:30 - 18:00</span></h3>
+                <p><strong>選項1：</strong>Furano HANASAKA House（民宿）</p>
+                <a href="https://www.google.com/maps/search/Furano+HANASAKA+House" class="map-link" target="_blank">HANASAKA House</a>
+                <p><strong>選項2：</strong>Nozo Hotel（滑雪場旁）</p>
+                <a href="https://maps.app.goo.gl/6sW8JQJhN7ma5vkb6" class="map-link" target="_blank">Nozo Hotel</a>
+              </div>
+              <div class="activity">
+                <h3>晚餐 <span class="time">18:30 - 20:00</span></h3>
+                <div class="restaurant-card">
+                  <h4>富川製麵所（米其林推薦）</h4>
+                  <p>招牌味噌煙燻叉燒拉麵</p>
+                  <p>📍 11:00-20:00（週三公休）</p>
+                  <a href="https://www.google.com/maps/search/富川製麵所+富良野" class="map-link" target="_blank">查看地圖</a>
+                </div>
+                <div class="restaurant-card">
+                  <h4>唯我獨尊</h4>
+                  <p>超人氣咖哩專門店</p>
+                  <p>📍 11:00-21:00（週一公休）</p>
+                  <a href="https://www.google.com/maps/search/唯我獨尊+富良野" class="map-link" target="_blank">查看地圖</a>
+                </div>
+              </div>
+              <div class="optional-activity">
+                <h4>晚間觀光（選擇性）<span class="time">20:00後</span></h4>
+                <p><strong>選項1：森林精靈露台 Ningle Terrace</strong></p>
+                <p>📍 新富良野王子大飯店內，15座童話小木屋</p>
+                <p>⏰ 12:00-20:45｜💰 免費入場</p>
+                <p>✨ 冬季點燈超夢幻，販售手作工藝品</p>
+                <a href="https://www.google.com/maps/place/Ningle+Terrace/@43.3311,142.3753,17z" class="map-link" target="_blank">森林精靈露台</a>
+                <p style="margin-top:10px"><strong>選項2：富良野歡寒村 Kan Kan Mura</strong></p>
+                <p>📍 新富良野王子大飯店旁（精靈露台隔壁）</p>
+                <p>⏰ 16:00-20:00（12/21-2/28）｜💰 300日圓</p>
+                <p>✨ 冰屋酒吧、雪上活動、6萬顆燈飾</p>
+                <a href="https://www.google.com/maps/place/Furano+Kan+Kan+Mura/@43.3311,142.3753,17z" class="map-link" target="_blank">富良野歡寒村</a>
+                <p style="margin-top:8px">兩個景點相鄰，可一起參觀！</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="tl-item day-section" id="day2">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day2')">
+            <div>
+              <span class="day-label">DAY 02 · 2026.12.26 (六)</span>
+              <span class="day-title">富良野滑雪 <span class="ski-tag">全天</span></span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body">
+            <div class="day-body-inner">
+              <div class="activity">
+                <h3>全日滑雪 <span class="time">08:30 - 16:30</span></h3>
+                <p><strong>富良野滑雪場</strong></p>
+                <a href="https://www.google.com/maps/place/Furano+Ski+Resort/@43.3444,142.3636,15z" class="map-link" target="_blank">富良野滑雪場</a>
+                <a href="https://www.google.com/maps/dir/14-38+Kitanominecho,+Furano/Furano+Ski+Resort" class="route-link" target="_blank">從Nozo Hotel出發</a>
+                <ul>
+                  <li>租借裝備（Furano Snow Force 中文服務）</li>
+                  <li>購買一日券（6,500日圓）</li>
+                  <li>初學者：富良野ZONE山腳</li>
+                  <li>中高級：北之峰ZONE、未壓雪道</li>
+                </ul>
+              </div>
+              <div class="activity">
+                <h3>午餐 <span class="time">12:00 - 13:30</span></h3>
+                <div class="restaurant-card">
+                  <h4>山頂餐廳 Downhill</h4>
+                  <p>招牌「白色咖哩」必點！</p>
+                  <p>📍 雪場內山頂</p>
+                </div>
+              </div>
+              <div class="activity">
+                <h3>傍晚溫泉 <span class="time">17:00 - 18:30</span></h3>
+                <p><strong>Nozo Hotel住客：</strong>直接使用飯店溫泉</p>
+                <p><strong>HANASAKA House住客：</strong>新富良野王子大飯店溫泉</p>
+                <a href="https://www.google.com/maps/place/New+Furano+Prince+Hotel/@43.3311,142.3753,15z" class="map-link" target="_blank">新富良野王子大飯店</a>
+              </div>
+              <div class="activity">
+                <h3>晚餐 <span class="time">19:00 - 21:00</span></h3>
+                <div class="restaurant-card">
+                  <h4>まんぐう 燒肉</h4>
+                  <p>富良野最受歡迎燒肉店</p>
+                  <p>📍 17:00-22:00 ⚠️ 建議提前訂位</p>
+                  <a href="https://www.google.com/maps/search/まんぐう+富良野" class="map-link" target="_blank">查看地圖</a>
+                </div>
+              </div>
+              <div class="optional-activity">
+                <h4>晚間觀光（選擇性）<span class="time">21:00後</span></h4>
+                <p>如Day 1未去，可選擇：</p>
+                <p>✨ 森林精靈露台（至20:45）</p>
+                <p>✨ 富良野歡寒村（至20:00）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="tl-item day-section" id="day3">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day3')">
+            <div>
+              <span class="day-label">DAY 03 · 2026.12.27 (日)</span>
+              <span class="day-title">富良野滑雪 <span class="ski-tag">全天</span></span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body">
+            <div class="day-body-inner">
+              <div class="activity">
+                <h3>全日滑雪 <span class="time">08:30 - 16:30</span></h3>
+                <p><strong>富良野滑雪場</strong></p>
+                <ul>
+                  <li>購買一日券，盡情享受滑雪</li>
+                  <li>嘗試兩區互通的雪道</li>
+                  <li>進階者挑戰世界盃賽道</li>
+                </ul>
+              </div>
+              <div class="activity">
+                <h3>晚餐 <span class="time">19:00 - 21:00</span></h3>
+                <div class="restaurant-card">
+                  <h4>くまげら（米其林推薦）</h4>
+                  <p>鄉土料理餐廳，日劇《來自北國》場景</p>
+                  <p>推薦：山賊鍋、和牛丼、壽喜燒</p>
+                  <p>⚠️ 非常熱門，建議提前訂位</p>
+                  <a href="https://www.google.com/maps/search/くまげら+富良野" class="map-link" target="_blank">查看地圖</a>
+                </div>
+                <div class="restaurant-card">
+                  <h4>トピカル 迴轉壽司</h4>
+                  <p>必點：厚岸生蠔、大干貝、螃蟹湯</p>
+                  <a href="https://www.google.com/maps/search/トピカル+富良野" class="map-link" target="_blank">查看地圖</a>
+                </div>
+              </div>
+              <div class="optional-activity">
+                <h4>美瑛夜間觀光（選擇性，需開車）</h4>
+                <p><strong>美瑛著名景點</strong></p>
+                <p>📍 聖誕樹（クリスマスツリーの木）</p>
+                <p>📍 七星之樹（セブンスターの木）</p>
+                <p>📍 Ken &amp; Mary之樹</p>
+                <p>🚗 富良野 → 美瑛 約30分鐘車程</p>
+                <a href="https://www.google.com/maps/place/Christmas+Tree+Biei/@43.5833,142.4333,15z" class="map-link" target="_blank">聖誕樹</a>
+                <a href="https://www.google.com/maps/place/Seven+Star+Tree/@43.5911,142.4481,15z" class="map-link" target="_blank">七星之樹</a>
+                <p>冬季積雪景色特別美，但需注意天黑後拍照較困難</p>
+                <p>⚠️ 建議白天（Day 4早上）前往較佳</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="tl-item day-section" id="day4">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day4')">
+            <div>
+              <span class="day-label">DAY 04 · 2026.12.28 (一)</span>
+              <span class="day-title">滑雪 &amp; 採購大作戰 <span class="ski-tag">半天</span></span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body">
+            <div class="day-body-inner">
+              <div class="activity">
+                <h3>上午滑雪 <span class="time">08:30 - 12:00</span></h3>
+                <p><strong>富良野滑雪場</strong></p>
+                <p>購買5小時券，最後享受粉雪</p>
+              </div>
+              <div class="activity">
+                <h3>午餐 <span class="time">12:00 - 13:00</span></h3>
+                <div class="restaurant-card">
+                  <h4>市場食堂</h4>
+                  <p>超值市場定食 1350日圓</p>
+                  <a href="https://www.google.com/maps/search/市場食堂+富良野" class="map-link" target="_blank">查看地圖</a>
+                </div>
+              </div>
+              <div class="activity">
+                <h3>富良野伴手禮 <span class="time">13:30 - 15:30</span></h3>
+                <div class="restaurant-card">
+                  <h4>Furano Marche ⭐推薦優先</h4>
+                  <p>一站式購買大部分伴手禮</p>
+                  <p>哈密瓜製品、農產品、零食、起司、葡萄酒</p>
+                  <a href="https://www.google.com/maps/place/Furano+Marche/@43.3408,142.3828,17z" class="map-link" target="_blank">查看地圖</a>
+                </div>
+                <div class="restaurant-card">
+                  <h4>富良野起司工房</h4>
+                  <p>起司、冰淇淋</p>
+                  <a href="https://www.google.com/maps/place/Furano+Cheese+Factory/@43.3258,142.3644,17z" class="map-link" target="_blank">查看地圖</a>
+                </div>
+              </div>
+              <div class="activity">
+                <h3>前往旭川 <span class="time">15:30 - 16:30</span></h3>
+                <p>富良野 → 旭川（車程約1小時，55公里）</p>
+                <a href="https://www.google.com/maps/dir/Furano/Asahikawa" class="route-link" target="_blank">查看路線</a>
+              </div>
+              <div class="activity">
+                <h3>旭川 UNIQLO <span class="time">16:30 - 18:30</span></h3>
+                <div class="restaurant-card">
+                  <h4>UNIQLO 旭川永山パワーズ店</h4>
+                  <p>📍 旭川市永山3条12丁目2-11</p>
+                  <p>⏰ 10:00-20:00</p>
+                  <p>HEATTECH、羽絨外套、冬季用品</p>
+                  <a href="https://www.google.com/maps/place/UNIQLO+Asahikawa+Nagayama+Powers/@43.8114,142.4453,17z" class="map-link" target="_blank">查看地圖</a>
+                </div>
+              </div>
+              <div class="activity">
+                <h3>旭川晚餐 <span class="time">18:30 - 20:00</span></h3>
+                <div class="restaurant-card">
+                  <h4>梅光軒（旭川拉麵名店）</h4>
+                  <p>旭川醬油拉麵代表</p>
+                  <a href="https://www.google.com/maps/search/梅光軒+旭川" class="map-link" target="_blank">查看地圖</a>
+                </div>
+              </div>
+              <div class="activity">
+                <h3>返回富良野 <span class="time">20:00 - 21:00</span></h3>
+                <p>旭川 → 富良野（車程約1小時）</p>
+                <a href="https://www.google.com/maps/dir/Asahikawa/Furano" class="route-link" target="_blank">查看路線</a>
+                <p>整理行李準備明天返程</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 5 -->
+        <div class="tl-item day-section" id="day5">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day5')">
+            <div>
+              <span class="day-label">DAY 05 · 2026.12.29 (二)</span>
+              <span class="day-title">輕鬆返程日</span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body">
+            <div class="day-body-inner">
+              <div class="warning">
+                <strong>⚠️ 時間提醒：</strong>15:20起飛，建議14:20前完成check-in<br>
+                富良野→新千歲約2.5小時 + 還車30分鐘<br>
+                <strong>最晚11:00必須從富良野出發</strong>
+              </div>
+              <div class="activity">
+                <h3>退房 <span class="time">08:00 - 09:00</span></h3>
+                <p>Check-out，整理行李上車</p>
+              </div>
+              <div class="activity">
+                <h3>出發前往機場 <span class="time">10:30 - 11:00出發</span></h3>
+                <p>富良野 → 新千歲機場（約2.5小時，142公里）</p>
+                <a href="https://www.google.com/maps/dir/Furano/New+Chitose+Airport" class="route-link" target="_blank">查看路線</a>
+                <p>途中加油站加滿油</p>
+              </div>
+              <div class="activity">
+                <h3>還車 <span class="time">13:00 - 13:30</span></h3>
+                <p>新千歲機場還車</p>
+              </div>
+              <div class="activity">
+                <h3>機場候機 <span class="time">13:30 - 15:20</span></h3>
+                <p><strong>星宇航空 JX851</strong></p>
+                <p>新千歲機場 15:20 → 台北桃園 19:05</p>
+                <p>新千歲機場很好逛！哆啦A夢樂園、Royce巧克力、伴手禮店</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end timeline -->
+
+      <!-- Highlights & Tips -->
+      <div class="highlight reveal">
+        <h3>晚間觀光景點總整理</h3>
+        <div class="restaurant-card">
+          <h4>森林精靈露台 Ningle Terrace</h4>
+          <p>📍 新富良野王子大飯店內</p>
+          <p>⏰ 12:00-20:45｜💰 免費</p>
+          <p>✨ 15座童話小木屋、手作工藝品、冬季點燈夢幻</p>
+        </div>
+        <div class="restaurant-card">
+          <h4>富良野歡寒村 Kan Kan Mura</h4>
+          <p>📍 新富良野王子大飯店旁</p>
+          <p>⏰ 16:00-20:00（12/21-2/28）｜💰 300日圓</p>
+          <p>✨ 冰屋酒吧、雪上活動、6萬顆燈飾、狗拉雪橇</p>
+        </div>
+        <div class="restaurant-card">
+          <h4>美瑛景點（建議白天前往）</h4>
+          <p>📍 聖誕樹、七星之樹、Ken &amp; Mary之樹</p>
+          <p>🚗 距富良野30分鐘車程</p>
+          <p>✨ 冬季積雪景色絕美，適合攝影</p>
+        </div>
+      </div>
+
+      <div class="highlight reveal">
+        <h3>Day 4 採購時間軸</h3>
+        <ul>
+          <li>08:30-12:00：富良野滑雪</li>
+          <li>12:00-13:00：午餐</li>
+          <li>13:30-15:30：富良野伴手禮</li>
+          <li>15:30-16:30：開車去旭川</li>
+          <li>16:30-18:30：UNIQLO採購</li>
+          <li>18:30-20:00：旭川晚餐</li>
+          <li>20:00-21:00：返回富良野</li>
+        </ul>
+      </div>
+
+      <div class="highlight reveal">
+        <h3>富良野滑雪場資訊</h3>
+        <p><strong>纜車票價：</strong></p>
+        <ul>
+          <li>一日券：6,500日圓</li>
+          <li>5小時券：5,500日圓</li>
+          <li>3小時券：4,500日圓</li>
+        </ul>
+        <p style="margin-top:14px"><strong>特色：</strong></p>
+        <ul>
+          <li>28條雪道，適合各程度</li>
+          <li>世界級粉雪品質</li>
+          <li>曾舉辦12次世界盃賽事</li>
+          <li>營業：08:30-19:30（含夜滑）</li>
+        </ul>
+      </div>
+
+      <div class="tips reveal">
+        <h3>實用建議</h3>
+        <ul>
+          <li><strong>住宿選擇：</strong>預算有限選HANASAKA House，想要舒適便利選Nozo Hotel</li>
+          <li><strong>晚間觀光：</strong>森林精靈露台和歡寒村相鄰，可一起參觀（約1.5小時）</li>
+          <li><strong>美瑛景點：</strong>建議白天前往，冬季天黑早不易拍照</li>
+          <li><strong>租車：</strong>新千歲機場取還最方便</li>
+          <li><strong>裝備：</strong>Day 1先租好（Furano Snow Force中文服務）</li>
+          <li><strong>Day 4：</strong>行程較滿，早點出發</li>
+          <li><strong>訂位：</strong>まんぐう、くまげら提前1-2天訂位</li>
+          <li><strong>天氣：</strong>12月底約-7°C~-10°C</li>
+          <li><strong>保險：</strong>建議購買滑雪險</li>
+        </ul>
+      </div>
+
+      <div class="highlight reveal">
+        <h3>美食清單</h3>
+        <div class="restaurant-card">
+          <h4>【拉麵】富川製麵所 ⭐米其林</h4>
+          <p>11:00-20:00（週三公休）</p>
+        </div>
+        <div class="restaurant-card">
+          <h4>【燒肉】まんぐう</h4>
+          <p>17:00-22:00（需訂位）</p>
+        </div>
+        <div class="restaurant-card">
+          <h4>【壽司】トピカル</h4>
+          <p>迴轉壽司，CP值高</p>
+        </div>
+        <div class="restaurant-card">
+          <h4>【鄉土料理】くまげら ⭐米其林</h4>
+          <p>山賊鍋、和牛丼（需訂位）</p>
+        </div>
+        <div class="restaurant-card">
+          <h4>【咖哩】唯我獨尊</h4>
+          <p>11:00-21:00（週一公休）</p>
+        </div>
+        <div class="restaurant-card">
+          <h4>【平價】市場食堂</h4>
+          <p>市場定食1350日圓</p>
+        </div>
+        <div class="restaurant-card">
+          <h4>【旭川拉麵】梅光軒</h4>
+          <p>旭川醬油拉麵代表</p>
+        </div>
+      </div>
+
+      <div class="tips reveal">
+        <h3>租車資訊</h3>
+        <p><strong>推薦：</strong>Times（中文）、Toyota、Nippon Rent a Car</p>
+        <p><strong>預算：</strong>5天約25,000-35,000日圓</p>
+        <p><strong>重點：</strong></p>
+        <ul>
+          <li>確認雪胎（必備）</li>
+          <li>建議4WD車款</li>
+          <li>加購全險</li>
+          <li>需國際駕照+台灣駕照</li>
+        </ul>
+      </div>
+
+    </div><!-- end detail-only -->
+  </div><!-- end main-content -->
+
+  <!-- CTA Banner -->
+  <div class="cta-banner">
+    <div class="cta-text">
+      <h2>預約中文滑雪教練</h2>
+      <p>SnowFun 滑雪趣 · 國際認證 · 台灣中文教練</p>
+    </div>
+    <a href="https://www.snowfun.com.tw/instructors" class="cta-btn" target="_blank">查看所有教練</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">FURANO<span>·</span>2026</div>
+    <p>祝你有個美好的富良野滑雪之旅 · 享受北海道世界級的粉雪</p>
+  </footer>
+
+  <script>
+    /* ── Toggle Slider ── */
+    function onToggleChange(checkbox) {
+      if (checkbox.checked) {
+        setView('detail');
+      } else {
+        setView('simple');
+      }
+    }
+    function setView(view) {
+      const content = document.getElementById('mainContent');
+      const toggle  = document.getElementById('viewToggle');
+      const ls = document.getElementById('label-simple');
+      const ld = document.getElementById('label-detail');
+      if (view === 'simple') {
+        content.className = 'main-content content simple-view';
+        toggle.checked = false;
+        ls.classList.add('active-label');    ls.classList.remove('inactive-label');
+        ld.classList.add('inactive-label');  ld.classList.remove('active-label');
+      } else {
+        content.className = 'main-content content detail-view';
+        toggle.checked = true;
+        ld.classList.add('active-label');    ld.classList.remove('inactive-label');
+        ls.classList.add('inactive-label');  ls.classList.remove('active-label');
+        setTimeout(initReveal, 100);
+      }
+    }
+
+    /* ── Day Toggle ── */
+    function toggleDay(id) { document.getElementById(id).classList.toggle('open'); }
+    function expandAll()   { document.querySelectorAll('.day-section').forEach(s => s.classList.add('open')); }
+    function collapseAll() { document.querySelectorAll('.day-section').forEach(s => s.classList.remove('open')); }
+
+    /* ── Custom Cursor (desktop only) ── */
+    const matchHover = window.matchMedia('(hover: hover)');
+    if (matchHover.matches) {
+      const cursor = document.getElementById('cursor');
+      const ring   = document.getElementById('cursorRing');
+      cursor.style.display = 'block';
+      ring.style.display   = 'block';
+      let rx = 0, ry = 0, mx = 0, my = 0;
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      });
+      (function animRing() {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.left = rx + 'px';
+        ring.style.top  = ry + 'px';
+        requestAnimationFrame(animRing);
+      })();
+    }
+
+    /* ── Snowflakes ── */
+    const canvas = document.getElementById('snow-canvas');
+    const ctx    = canvas.getContext('2d');
+    let W, H;
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize);
+    const flakes = Array.from({length: 80}, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: .5 + Math.random() * 2.5,
+      speed: .3 + Math.random() * .8,
+      drift: (Math.random() - .5) * .4,
+      opacity: .1 + Math.random() * .5
+    }));
+    (function drawSnow() {
+      ctx.clearRect(0, 0, W, H);
+      flakes.forEach(f => {
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(168,212,230,${f.opacity})`;
+        ctx.fill();
+        f.y += f.speed; f.x += f.drift;
+        if (f.y > H) { f.y = -5; f.x = Math.random() * W; }
+        if (f.x > W) f.x = 0; if (f.x < 0) f.x = W;
+      });
+      requestAnimationFrame(drawSnow);
+    })();
+
+    /* ── Scroll Reveal ── */
+    function initReveal() {
+      const items = document.querySelectorAll('.tl-item, .reveal');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const all = Array.from(document.querySelectorAll('.tl-item, .reveal'));
+            const idx = all.indexOf(e.target);
+            setTimeout(() => e.target.classList.add('visible'), (idx % 8) * 120);
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      items.forEach(el => obs.observe(el));
+    }
+    initReveal();
+  </script>
 </body>
 </html>
