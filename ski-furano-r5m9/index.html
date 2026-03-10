@@ -277,7 +277,20 @@
     /* ── Hotel Cards ── */
     .hotel-grid {
       display:grid; grid-template-columns:1fr 1fr;
+      gap:20px; margin-bottom:36px;
+    }
+    .villa-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
       gap:20px; margin-bottom:56px;
+    }
+    .accom-label {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.3em; text-transform:uppercase;
+      color:var(--warm-orange); margin:28px 0 14px;
+      display:flex; align-items:center; gap:12px;
+    }
+    .accom-label::after {
+      content:''; flex:1; height:1px; background:rgba(232,98,26,.2);
     }
     .hotel-card {
       background:rgba(168,212,230,.05);
@@ -592,6 +605,7 @@
       .reminder-box { padding:20px; }
 
       .hotel-grid { grid-template-columns:1fr; }
+      .villa-grid { grid-template-columns:1fr 1fr; }
 
       .timeline { padding-left:28px; }
       .tl-dot { left:-34px; top:20px; }
@@ -613,6 +627,7 @@
       .hero-title .line2 { font-size:clamp(40px, 11vw, 60px); }
       .weather-bar { padding:18px 16px; }
       .main-content { padding:36px 16px; }
+      .villa-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -694,7 +709,7 @@
   <!-- Weather / Stats Bar -->
   <div class="weather-bar">
     <div class="weather-stat">
-      <span class="weather-num">2種</span>
+      <span class="weather-num">6種</span>
       <span class="weather-label">住宿選擇</span>
     </div>
     <div class="weather-divider"></div>
@@ -751,34 +766,11 @@
       <!-- 住宿比較 -->
       <div id="hotels" style="margin-bottom:56px;">
         <h2 class="section-heading">住宿選擇 <span>比較</span></h2>
-        <p style="font-family:'Oswald';font-weight:300;font-size:13px;letter-spacing:.15em;color:var(--muted);margin-bottom:22px;">兩間飯店都是優質選擇，依您的需求和預算挑選</p>
+        <p style="font-family:'Oswald';font-weight:300;font-size:13px;letter-spacing:.15em;color:var(--muted);margin-bottom:8px;">共 6 間備選 · 旅館類適合個人或小群組 · Villa 類適合多人包棟</p>
+
+        <!-- 旅館類 -->
+        <div class="accom-label">🏨 旅館類</div>
         <div class="hotel-grid">
-          <div class="hotel-card">
-            <h3>Furano HANASAKA House</h3>
-            <p><strong>類型：</strong>民宿 / Guest House</p>
-            <p><strong>位置：</strong>富良野市區</p>
-            <a href="https://www.google.com/maps/search/Furano+HANASAKA+House" class="map-link" target="_blank">查看地圖</a>
-            <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/689007737.jpg?k=1ed49ed17f61e2cca0e93e658cfc83291c8399af2f907faebf3e7d2758c995e1&o=" alt="Furano HANASAKA House" class="hotel-image">
-            <div class="pros-section">
-              <h4>優點</h4>
-              <ul>
-                <li>價格較經濟實惠</li>
-                <li>家庭式溫馨氛圍</li>
-                <li>更能體驗當地生活</li>
-                <li>通常有共用廚房，可自炊</li>
-                <li>適合想省錢的背包客</li>
-              </ul>
-            </div>
-            <div class="pros-section cons">
-              <h4>缺點</h4>
-              <ul>
-                <li>設施較簡單</li>
-                <li>可能需要共用衛浴</li>
-                <li>沒有溫泉或健身房</li>
-                <li>距離滑雪場需開車</li>
-              </ul>
-            </div>
-          </div>
           <div class="hotel-card">
             <h3>Nozo Hotel</h3>
             <p><strong>類型：</strong>國際四星飯店（2023年12月開幕）</p>
@@ -803,6 +795,149 @@
                 <li>價格較高</li>
                 <li>距離市區較遠</li>
                 <li>周邊餐廳選擇少</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <h3>Fenix Furano</h3>
+            <p><strong>類型：</strong>精品飯店</p>
+            <p><strong>位置：</strong>富良野市區，鄰近富良野站</p>
+            <a href="https://www.google.com/maps/search/Fenix+Furano+Hotel" class="map-link" target="_blank">查看地圖</a>
+            <div class="pros-section">
+              <h4>優點</h4>
+              <ul>
+                <li>🏙️ 位於富良野市區，生活機能佳</li>
+                <li>🍜 附近餐廳選擇豐富</li>
+                <li>♨️ 設有溫泉浴場</li>
+                <li>🚗 開車至滑雪場約10分鐘</li>
+                <li>💰 價位相對合理</li>
+              </ul>
+            </div>
+            <div class="pros-section cons">
+              <h4>缺點</h4>
+              <ul>
+                <li>距滑雪場需開車</li>
+                <li>設施不如Nozo新穎</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Villa 類 -->
+        <div class="accom-label">🏠 Villa 類（包棟・6人適用）</div>
+        <div class="villa-grid">
+          <div class="hotel-card">
+            <h3>Retreat Furano A</h3>
+            <p><strong>類型：</strong>整棟 Villa 包棟</p>
+            <p><strong>容納：</strong>最多 6 人</p>
+            <p><strong>位置：</strong>富良野市區</p>
+            <a href="https://www.google.com/maps/search/Retreat+Furano" class="map-link" target="_blank">查看地圖</a>
+            <div class="pros-section">
+              <h4>優點</h4>
+              <ul>
+                <li>🏠 整棟包租，私密性高</li>
+                <li>🍳 備有廚房，可自炊</li>
+                <li>👨‍👩‍👧‍👦 6人分攤費用CP值高</li>
+                <li>🛋️ 客廳可共享，凝聚感強</li>
+              </ul>
+            </div>
+            <div class="pros-section cons">
+              <h4>缺點</h4>
+              <ul>
+                <li>需自行打掃</li>
+                <li>無飯店服務</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <h3>Retreat Furano B</h3>
+            <p><strong>類型：</strong>整棟 Villa 包棟</p>
+            <p><strong>容納：</strong>最多 6 人</p>
+            <p><strong>位置：</strong>富良野市區</p>
+            <a href="https://www.google.com/maps/search/Retreat+Furano" class="map-link" target="_blank">查看地圖</a>
+            <div class="pros-section">
+              <h4>優點</h4>
+              <ul>
+                <li>🏠 整棟包租，私密性高</li>
+                <li>🍳 備有廚房，可自炊</li>
+                <li>👨‍👩‍👧‍👦 6人分攤費用CP值高</li>
+                <li>🛋️ 客廳可共享，凝聚感強</li>
+              </ul>
+            </div>
+            <div class="pros-section cons">
+              <h4>缺點</h4>
+              <ul>
+                <li>需自行打掃</li>
+                <li>無飯店服務</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <h3>山荘 春の樹</h3>
+            <p><strong>類型：</strong>山莊包棟</p>
+            <p><strong>容納：</strong>最多 6 人</p>
+            <p><strong>位置：</strong>富良野郊區</p>
+            <a href="https://www.google.com/maps/search/山荘+春の樹+富良野" class="map-link" target="_blank">查看地圖</a>
+            <div class="pros-section">
+              <h4>優點</h4>
+              <ul>
+                <li>🌲 被樹林環繞，雪景絕美</li>
+                <li>🏕️ 北海道山莊氛圍濃厚</li>
+                <li>🔥 暖爐取暖，超有feel</li>
+                <li>🍳 廚房設備完善，可自炊</li>
+              </ul>
+            </div>
+            <div class="pros-section cons">
+              <h4>缺點</h4>
+              <ul>
+                <li>郊區交通較不便</li>
+                <li>需開車進出</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <h3>Furano Sanso</h3>
+            <p><strong>類型：</strong>山莊別墅包棟</p>
+            <p><strong>容納：</strong>最多 6 人</p>
+            <p><strong>位置：</strong>富良野</p>
+            <a href="https://www.google.com/maps/search/Furano+Sanso" class="map-link" target="_blank">查看地圖</a>
+            <div class="pros-section">
+              <h4>優點</h4>
+              <ul>
+                <li>🏔️ 富良野山莊風格</li>
+                <li>🛁 設有私人浴室</li>
+                <li>🍳 配備齊全廚房</li>
+                <li>👨‍👩‍👧‍👦 6人包棟超值</li>
+              </ul>
+            </div>
+            <div class="pros-section cons">
+              <h4>缺點</h4>
+              <ul>
+                <li>需自行採買食材</li>
+                <li>無溫泉設施</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <h3>雪玉 Snowball Hostel</h3>
+            <p><strong>類型：</strong>背包客旅館 / 特色包房</p>
+            <p><strong>位置：</strong>富良野市區</p>
+            <a href="https://www.google.com/maps/search/Snowball+Hostel+Furano" class="map-link" target="_blank">查看地圖</a>
+            <div class="pros-section">
+              <h4>優點</h4>
+              <ul>
+                <li>💰 價格最經濟實惠</li>
+                <li>🧑‍🤝‍🧑 旅人交流氛圍佳</li>
+                <li>🏙️ 市區位置便利</li>
+                <li>🛎️ 提供基本服務</li>
+              </ul>
+            </div>
+            <div class="pros-section cons">
+              <h4>缺點</h4>
+              <ul>
+                <li>隱私性較低</li>
+                <li>設施較簡單</li>
+                <li>可能需共用衛浴</li>
               </ul>
             </div>
           </div>
@@ -859,10 +994,11 @@
               </div>
               <div class="activity">
                 <h3>入住 <span class="time">17:30 - 18:00</span></h3>
-                <p><strong>選項1：</strong>Furano HANASAKA House（民宿）</p>
-                <a href="https://www.google.com/maps/search/Furano+HANASAKA+House" class="map-link" target="_blank">HANASAKA House</a>
-                <p><strong>選項2：</strong>Nozo Hotel（滑雪場旁）</p>
+                <p><strong>【旅館】Nozo Hotel</strong>（滑雪場旁，北之峰纜車180米）</p>
                 <a href="https://maps.app.goo.gl/6sW8JQJhN7ma5vkb6" class="map-link" target="_blank">Nozo Hotel</a>
+                <p><strong>【旅館】Fenix Furano</strong>（市區，生活機能佳）</p>
+                <a href="https://www.google.com/maps/search/Fenix+Furano+Hotel" class="map-link" target="_blank">Fenix Furano</a>
+                <p><strong>【Villa】Retreat Furano A/B・山荘 春の樹・Furano Sanso・Snowball Hostel</strong>（6人包棟/背包客選項，詳見住宿比較）</p>
               </div>
               <div class="activity">
                 <h3>晚餐 <span class="time">18:30 - 20:00</span></h3>
@@ -932,7 +1068,7 @@
               <div class="activity">
                 <h3>傍晚溫泉 <span class="time">17:00 - 18:30</span></h3>
                 <p><strong>Nozo Hotel住客：</strong>直接使用飯店溫泉</p>
-                <p><strong>HANASAKA House住客：</strong>新富良野王子大飯店溫泉</p>
+                <p><strong>其他住宿住客：</strong>新富良野王子大飯店溫泉（付費入湯）</p>
                 <a href="https://www.google.com/maps/place/New+Furano+Prince+Hotel/@43.3311,142.3753,15z" class="map-link" target="_blank">新富良野王子大飯店</a>
               </div>
               <div class="activity">
@@ -1037,7 +1173,7 @@
               </div>
               <div class="activity">
                 <h3>溫泉 <span class="time">16:30 - 18:00</span></h3>
-                <p><strong>HANASAKA House住客：</strong>新富良野王子大飯店溫泉</p>
+                <p><strong>其他住宿住客：</strong>新富良野王子大飯店溫泉（付費入湯）</p>
                 <a href="https://www.google.com/maps/place/New+Furano+Prince+Hotel/@43.3311,142.3753,15z" class="map-link" target="_blank">新富良野王子大飯店</a>
               </div>
               <div class="activity">
@@ -1247,7 +1383,7 @@
       <div class="tips reveal">
         <h3>實用建議</h3>
         <ul>
-          <li><strong>住宿選擇：</strong>預算有限選HANASAKA House，想要舒適便利選Nozo Hotel</li>
+          <li><strong>住宿選擇：</strong>滑雪場旁選Nozo、市區選Fenix Furano；多人包棟選Retreat/山荘/Sanso；背包客選Snowball</li>
           <li><strong>晚間觀光：</strong>森林精靈露台和歡寒村相鄰，可一起參觀（約1.5小時）</li>
           <li><strong>美瑛景點：</strong>建議白天前往，冬季天黑早不易拍照</li>
           <li><strong>租車：</strong>新千歲機場取還最方便</li>
