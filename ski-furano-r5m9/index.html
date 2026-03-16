@@ -629,6 +629,106 @@
       .main-content { padding:36px 16px; }
       .villa-grid { grid-template-columns:1fr; }
     }
+
+    /* ── Cost Estimate Section ── */
+    .cost-grid-2 {
+      display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-bottom:28px;
+    }
+    .cost-card {
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(168,212,230,.1);
+      border-radius:12px; overflow:hidden;
+    }
+    .cost-card-header {
+      padding:20px 22px; border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .cost-card-header.own {
+      background:linear-gradient(135deg,rgba(232,98,26,.22),rgba(240,165,0,.08));
+      border-left:4px solid var(--warm-orange);
+    }
+    .cost-card-header.rent {
+      background:linear-gradient(135deg,rgba(168,212,230,.12),rgba(168,212,230,.03));
+      border-left:4px solid var(--ice-blue);
+    }
+    .cost-card-header h3 {
+      font-family:'Bebas Neue'; font-size:22px; letter-spacing:.1em; color:#fff; margin-bottom:4px;
+    }
+    .cost-card-header p {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.2em; text-transform:uppercase; color:var(--muted);
+    }
+    .cost-row {
+      display:flex; justify-content:space-between; align-items:baseline;
+      padding:9px 20px; border-bottom:1px solid rgba(255,255,255,.04);
+      gap:12px;
+    }
+    .cost-row:last-child { border-bottom:none; }
+    .cost-row.divider-row {
+      background:rgba(255,255,255,.025); padding:6px 20px;
+    }
+    .cost-row.divider-row .cost-label {
+      font-family:'Oswald'; font-weight:500; font-size:10px;
+      letter-spacing:.3em; text-transform:uppercase; color:rgba(168,212,230,.55);
+    }
+    .cost-label {
+      font-family:'Oswald'; font-weight:300; font-size:12px;
+      letter-spacing:.06em; color:var(--muted); flex:1;
+    }
+    .cost-label small {
+      display:block; font-size:10px; letter-spacing:.04em;
+      color:rgba(168,212,230,.4); margin-top:1px;
+    }
+    .cost-value {
+      font-family:'Bebas Neue'; font-size:17px; letter-spacing:.05em;
+      color:var(--snow-white); white-space:nowrap; flex-shrink:0;
+    }
+    .cost-value.zero { font-family:'Oswald'; font-size:12px; color:rgba(240,244,248,.35); }
+    .cost-value.rental { color:var(--ice-blue); }
+    .cost-totals {
+      background:rgba(0,0,0,.25); border-top:1px solid rgba(232,98,26,.2);
+      padding:16px 20px;
+    }
+    .cost-total-line {
+      display:flex; justify-content:space-between; align-items:baseline;
+      padding:5px 0;
+    }
+    .cost-total-line .tl { font-family:'Oswald'; font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
+    .cost-total-line .tv { font-family:'Bebas Neue'; font-size:16px; letter-spacing:.05em; }
+    .cost-total-line.sub .tl { color:rgba(240,244,248,.45); }
+    .cost-total-line.sub .tv { color:var(--snow-white); }
+    .cost-total-line.grand {
+      margin-top:8px; padding-top:8px;
+      border-top:1px solid rgba(232,98,26,.3);
+    }
+    .cost-total-line.grand .tl { color:var(--warm-orange); font-weight:500; }
+    .cost-total-line.grand .tv { font-size:22px; color:#fff; }
+    .cost-flight-banner {
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(232,98,26,.1); border:1px solid rgba(232,98,26,.28);
+      border-radius:12px; padding:20px 26px; margin-bottom:26px; gap:20px;
+    }
+    .cost-flight-banner .flight-label {
+      font-family:'Oswald'; font-size:11px; letter-spacing:.3em;
+      text-transform:uppercase; color:var(--ice-blue); margin-bottom:5px;
+    }
+    .cost-flight-banner .flight-desc {
+      font-family:'Oswald'; font-size:11px; letter-spacing:.15em; color:var(--muted);
+    }
+    .cost-flight-banner .flight-price {
+      font-family:'Bebas Neue'; font-size:38px; letter-spacing:.04em; color:var(--warm-orange);
+      white-space:nowrap;
+    }
+    .cost-flight-banner .flight-price span {
+      font-family:'Oswald'; font-size:12px; letter-spacing:.2em; color:var(--muted);
+      display:block; text-align:right; margin-top:-4px;
+    }
+    .accom-note-row {
+      display:flex; gap:6px; align-items:flex-start;
+      background:rgba(168,212,230,.05); border-left:2px solid rgba(168,212,230,.3);
+      padding:8px 20px; font-size:12px; color:rgba(168,212,230,.7);
+      font-family:'Oswald'; letter-spacing:.06em;
+    }
+    @media (max-width:768px) { .cost-grid-2 { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -647,6 +747,7 @@
       <li><a href="#itinerary">行程</a></li>
       <li><a href="#hotels">住宿</a></li>
       <li><a href="#coach">教練</a></li>
+      <li><a href="#cost">費用</a></li>
     </ul>
   </nav>
 
@@ -1444,6 +1545,205 @@
           <li>需國際駕照+台灣駕照</li>
         </ul>
       </div>
+
+      <!-- ── 費用估算 ── -->
+      <div id="cost" style="margin-bottom:56px;">
+        <h2 class="section-heading">費用估算 <span>每人參考</span></h2>
+
+        <!-- 已付機票 -->
+        <div class="cost-flight-banner reveal">
+          <div>
+            <div class="flight-label">✅ 已刷卡確認 · 星宇航空</div>
+            <div style="font-family:'Bebas Neue';font-size:18px;letter-spacing:.1em;color:#fff;margin-bottom:3px;">JX850 TPE → CTS · JX851 CTS → TPE</div>
+            <div class="flight-desc">12/25 去程 · 12/30 CTS 15:20 → TPE 19:05 回程</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="flight-price">NT$29,324<span>每人機票費</span></div>
+          </div>
+        </div>
+
+        <!-- 住宿說明 -->
+        <div class="accom-note-row reveal" style="margin-bottom:22px;border-radius:6px;">
+          ℹ️ 以下費用表以住宿類型分為 Villa（6人÷6，含早餐需自理）與 旅館（Nozo/Fenix，多含早餐）兩種基礎估算。富良野 4 晚 + 旭川 1 晚。
+        </div>
+
+        <div class="cost-grid-2 reveal">
+
+          <!-- ── 自備雪具 ── -->
+          <div class="cost-card">
+            <div class="cost-card-header own">
+              <h3>🎿 自備雪具方案</h3>
+              <p>自帶滑雪板/雪鞋/雪衣 · 無租借費用</p>
+            </div>
+
+            <div class="cost-row divider-row"><span class="cost-label">── 住宿 ──</span></div>
+            <div class="cost-row">
+              <span class="cost-label">🏠 Villa 6人包棟 × 4晚<small>Retreat A/B · 山荘春の樹 · Furano Sanso 等</small></span>
+              <span class="cost-value">¥36,000</span>
+            </div>
+            <div class="cost-row" style="opacity:.55;">
+              <span class="cost-label" style="font-size:11px;">🏨 或選旅館（Nozo / Fenix）× 4晚</span>
+              <span class="cost-value" style="font-size:14px;">¥52,000</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">🏨 旭川過夜 × 1晚<small>Day 5 旭山動物園後</small></span>
+              <span class="cost-value">¥7,000</span>
+            </div>
+
+            <div class="cost-row divider-row"><span class="cost-label">── 交通 ──</span></div>
+            <div class="cost-row">
+              <span class="cost-label">🚗 租車 + 油費 + 高速 ÷ 6人<small>大型ワゴン 6日 or 2台 · 含雪胎 · 全險</small></span>
+              <span class="cost-value">¥10,000</span>
+            </div>
+
+            <div class="cost-row divider-row"><span class="cost-label">── 滑雪 ──</span></div>
+            <div class="cost-row">
+              <span class="cost-label">🎟️ 富良野スキー場 纜車 × 3日<small>一日券 ¥6,500 × 3（Day 2–4）</small></span>
+              <span class="cost-value">¥19,500</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">🎿 雪具費用<small>自帶裝備，無需額外支出</small></span>
+              <span class="cost-value zero">— 自備</span>
+            </div>
+
+            <div class="cost-row divider-row"><span class="cost-label">── 其他 ──</span></div>
+            <div class="cost-row">
+              <span class="cost-label">🐧 旭山動物園入場<small>冬季企鵝散步 11:00 &amp; 14:30</small></span>
+              <span class="cost-value">¥1,000</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">🍜 餐費 × 6日<small>坡頂午餐 + 富良野餐廳 + 旭川拉麵</small></span>
+              <span class="cost-value">¥25,000</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">🛍️ 購物 / 雜費<small>藥妝 · 伴手禮 · 溫泉 · 便利商店</small></span>
+              <span class="cost-value">¥15,000</span>
+            </div>
+
+            <div class="cost-totals">
+              <div class="cost-total-line sub">
+                <span class="tl">JPY 小計（Villa 住宿）</span>
+                <span class="tv">¥ 113,500</span>
+              </div>
+              <div class="cost-total-line sub" style="opacity:.7;">
+                <span class="tl">JPY 小計（旅館住宿）</span>
+                <span class="tv">¥ 129,500</span>
+              </div>
+              <div class="cost-total-line sub" style="opacity:.55;">
+                <span class="tl" style="color:var(--ice-blue);">換算 NTD（× 0.21）</span>
+                <span class="tv" style="color:var(--ice-blue);font-size:13px;">Villa NT$23,835 ／ 旅館 NT$27,195</span>
+              </div>
+              <div class="cost-total-line grand">
+                <span class="tl">總計 含機票（Villa）</span>
+                <span class="tv">NT$ 53,159</span>
+              </div>
+              <div class="cost-total-line grand" style="opacity:.8;">
+                <span class="tl">總計 含機票（旅館）</span>
+                <span class="tv">NT$ 56,519</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 租借雪具 ── -->
+          <div class="cost-card">
+            <div class="cost-card-header rent">
+              <h3>🏂 租借雪具方案</h3>
+              <p>現場租借裝備 · 含雪衣雪褲全套</p>
+            </div>
+
+            <div class="cost-row divider-row"><span class="cost-label">── 住宿 ──</span></div>
+            <div class="cost-row">
+              <span class="cost-label">🏠 Villa 6人包棟 × 4晚<small>Retreat A/B · 山荘春の樹 · Furano Sanso 等</small></span>
+              <span class="cost-value">¥36,000</span>
+            </div>
+            <div class="cost-row" style="opacity:.55;">
+              <span class="cost-label" style="font-size:11px;">🏨 或選旅館（Nozo / Fenix）× 4晚</span>
+              <span class="cost-value" style="font-size:14px;">¥52,000</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">🏨 旭川過夜 × 1晚<small>Day 5 旭山動物園後</small></span>
+              <span class="cost-value">¥7,000</span>
+            </div>
+
+            <div class="cost-row divider-row"><span class="cost-label">── 交通 ──</span></div>
+            <div class="cost-row">
+              <span class="cost-label">🚗 租車 + 油費 + 高速 ÷ 6人<small>大型ワゴン 6日 or 2台 · 含雪胎 · 全險</small></span>
+              <span class="cost-value">¥10,000</span>
+            </div>
+
+            <div class="cost-row divider-row"><span class="cost-label">── 滑雪 ──</span></div>
+            <div class="cost-row">
+              <span class="cost-label">🎟️ 富良野スキー場 纜車 × 3日<small>一日券 ¥6,500 × 3（Day 2–4）</small></span>
+              <span class="cost-value">¥19,500</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">🎿 板 / 靴 / 杖 租借 × 3日<small>¥5,500/日（Furano Snow Force 中文服務）</small></span>
+              <span class="cost-value rental">¥16,500</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">⛑️ 頭盔租借 × 3日<small>¥800/日 · 強烈建議配戴</small></span>
+              <span class="cost-value rental">¥2,400</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">🧥 雪衣上下套租借 × 3日<small>¥4,000/日 · 若無自備雪衣</small></span>
+              <span class="cost-value rental">¥12,000</span>
+            </div>
+
+            <div class="cost-row divider-row"><span class="cost-label">── 其他 ──</span></div>
+            <div class="cost-row">
+              <span class="cost-label">🐧 旭山動物園入場<small>冬季企鵝散步 11:00 &amp; 14:30</small></span>
+              <span class="cost-value">¥1,000</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">🍜 餐費 × 6日<small>坡頂午餐 + 富良野餐廳 + 旭川拉麵</small></span>
+              <span class="cost-value">¥25,000</span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">🛍️ 購物 / 雜費<small>藥妝 · 伴手禮 · 溫泉 · 便利商店</small></span>
+              <span class="cost-value">¥15,000</span>
+            </div>
+
+            <div class="cost-totals">
+              <div class="cost-total-line sub">
+                <span class="tl">JPY 小計（Villa 住宿）</span>
+                <span class="tv">¥ 144,400</span>
+              </div>
+              <div class="cost-total-line sub" style="opacity:.7;">
+                <span class="tl">JPY 小計（旅館住宿）</span>
+                <span class="tv">¥ 160,400</span>
+              </div>
+              <div class="cost-total-line sub" style="opacity:.55;">
+                <span class="tl" style="color:var(--ice-blue);">換算 NTD（× 0.21）</span>
+                <span class="tv" style="color:var(--ice-blue);font-size:13px;">Villa NT$30,324 ／ 旅館 NT$33,684</span>
+              </div>
+              <div class="cost-total-line grand">
+                <span class="tl">總計 含機票（Villa）</span>
+                <span class="tv">NT$ 59,648</span>
+              </div>
+              <div class="cost-total-line grand" style="opacity:.8;">
+                <span class="tl">總計 含機票（旅館）</span>
+                <span class="tv">NT$ 63,008</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end cost-grid-2 -->
+
+        <!-- 費用備註 -->
+        <div class="tips reveal" style="margin-top:0;">
+          <h3>費用估算說明</h3>
+          <ul>
+            <li><strong>匯率：</strong>以 1 JPY = 0.21 NTD 估算（實際匯率請出發前確認）</li>
+            <li><strong>住宿：</strong>Villa 以聖誕旺季 ¥9,000/人/晚 估算；旅館以 ¥13,000/人/晚 估算（可能含早餐）</li>
+            <li><strong>租車：</strong>大型ワゴン（8人座）6日約 ¥50,000-60,000，÷6人 ≈ ¥9,000；若租 2 台一般車則每人約 ¥12,000</li>
+            <li><strong>雪具租借：</strong>以 Furano Snow Force 旺季價估算；租雪衣為 <strong>每人多花約 NT$6,500</strong> 的差異</li>
+            <li><strong>餐費：</strong>Villa 自炊早餐可省 ¥500/日；旅館若含 2 食則可省 ¥8,000-12,000</li>
+            <li><strong>滑雪保險：</strong>強烈建議另加購旅遊平安險含滑雪傷害，約 NT$500-1,500/人</li>
+            <li><strong>雪具行李：</strong>自備雪具若需托運超重，視航空公司規定，額外費用約 NT$1,000-3,000</li>
+          </ul>
+        </div>
+
+      </div><!-- end cost section -->
 
     </div><!-- end detail-only -->
   </div><!-- end main-content -->
