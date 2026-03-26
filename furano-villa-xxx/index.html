@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa 費用分攤表 - 每晚明細</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 10px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .summary {
+            background: #f8f9fa;
+            padding: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .summary-label {
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .summary-value {
+            font-size: 20px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        /* 手機優先的表格設計 */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 10px 8px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 13px;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .total-row {
+            background: #f8f9fa !important;
+            font-weight: bold;
+        }
+
+        .total-row td {
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        .highlight {
+            background: #fff3cd;
+        }
+
+        .discount-highlight {
+            background: #d4edda;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        /* 卡片式設計（手機優先） */
+        .person-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .person-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f1f3f5;
+        }
+
+        .person-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .person-total {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .person-details {
+            font-size: 13px;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .night-breakdown {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .night-item {
+            text-align: center;
+            padding: 8px 4px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+
+        .night-label {
+            display: block;
+            color: #6c757d;
+            margin-bottom: 3px;
+        }
+
+        .night-value {
+            display: block;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .info-box h3 {
+            color: #004085;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            color: #004085;
+            padding: 6px 0;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .info-box li::before {
+            content: "• ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .note-content {
+            color: #856404;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .check-box {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .check-title {
+            color: #155724;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .check-title::before {
+            content: "✓";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #28a745;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .check-content {
+            font-family: 'Courier New', monospace;
+            color: #155724;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* 平板以上 */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .summary {
+                padding: 25px;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+
+            .summary-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+
+            .summary-label {
+                margin-bottom: 8px;
+            }
+
+            .summary-value {
+                font-size: 24px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+
+            td {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+
+            .night-breakdown {
+                gap: 8px;
+            }
+
+            .night-item {
+                padding: 10px 6px;
+                font-size: 12px;
+            }
+        }
+
+        /* 桌面 */
+        @media (min-width: 1024px) {
+            body {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 40px 30px;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+            .content {
+                padding: 30px;
+            }
+
+            table {
+                font-size: 15px;
+                min-width: auto;
+            }
+
+            th {
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            td {
+                padding: 15px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Villa 費用分攤表</h1>
+            <p>9人方案 | 每晚明細分攤</p>
+        </div>
+
+        <div class="summary">
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-label">Villa 總費用</div>
+                    <div class="summary-value">NT$189,284</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">每晚費用</div>
+                    <div class="summary-value">NT$37,857</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">住宿晚數</div>
+                    <div class="summary-value">5晚</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- 每晚床位價格 -->
+            <div class="section">
+                <h2 class="section-title">💰 每晚床位價格明細</h2>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>時段</th>
+                                <th>人數</th>
+                                <th>雙人床/晚</th>
+                                <th>單人床/晚</th>
+                                <th>地鋪/晚</th>
+                                <th>每晚總費用</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>前4晚</strong><br><small>(第1-4晚)</small></td>
+                                <td>9人</td>
+                                <td>NT$4,408<br><small>(7張)</small></td>
+                                <td>NT$4,000<br><small>(彥蓁)</small></td>
+                                <td>NT$3,000<br><small>(Frank)</small></td>
+                                <td class="highlight"><strong>NT$37,857</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>第5晚</strong></td>
+                                <td>8人</td>
+                                <td>NT$4,780<br><small>(7張)</small></td>
+                                <td>NT$4,400<br><small>(Frank)</small></td>
+                                <td class="discount-highlight">-<br><small>(無)</small></td>
+                                <td class="highlight"><strong>NT$37,857</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <h3>價格說明</h3>
+                    <ul>
+                        <li><strong>前4晚：</strong>每晚NT$37,857由9人分攤（7雙人床 + 1單人床 + 1地鋪）</li>
+                        <li><strong>第5晚：</strong>每晚NT$37,857由8人分攤（7雙人床 + 1單人床，彥蓁離開，Frank換單人床）</li>
+                        <li><strong>地鋪固定：</strong>NT$3,000/晚（前4晚）</li>
+                        <li><strong>彥蓁單人床：</strong>NT$4,000/晚（前4晚）</li>
+                        <li><strong>Frank單人床：</strong>NT$4,400/晚（第5晚，升級費用）</li>
+                        <li><strong>雙人床變動：</strong>前4晚NT$4,408，第5晚NT$4,780（因人數減少而上漲）</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 每晚個人分攤 -->
+            <div class="section">
+                <h2 class="section-title">📅 每晚個人分攤明細</h2>
+
+                <!-- 卡片式設計（手機優先） -->
+                <div class="person-cards">
+                    <div class="person-card">
+                        <div class="person-card-header">
+                            <span class="person-name">豪哥 / Leon / Sky / 育愷 / Cooper / Ting / Ada</span>
+                            <span class="person-total">各 NT$22,412</span>
+                        </div>
+                        <div class="person-details">雙人床 | 5晚（7人相同）</div>
+                        <div class="night-breakdown">
+                            <div class="night-item">
+                                <span class="night-label">第1晚</span>
+                                <span class="night-value">$4,408</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第2晚</span>
+                                <span class="night-value">$4,408</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第3晚</span>
+                                <span class="night-value">$4,408</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第4晚</span>
+                                <span class="night-value">$4,408</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第5晚</span>
+                                <span class="night-value">$4,780</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="person-card highlight">
+                        <div class="person-card-header">
+                            <span class="person-name">Frank</span>
+                            <span class="person-total" style="color: #28a745;">NT$16,400</span>
+                        </div>
+                        <div class="person-details">地鋪4晚 + 單人床1晚 | 5晚</div>
+                        <div class="night-breakdown">
+                            <div class="night-item">
+                                <span class="night-label">第1晚</span>
+                                <span class="night-value">$3,000</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第2晚</span>
+                                <span class="night-value">$3,000</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第3晚</span>
+                                <span class="night-value">$3,000</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第4晚</span>
+                                <span class="night-value">$3,000</span>
+                            </div>
+                            <div class="night-item" style="background: #d4edda;">
+                                <span class="night-label">第5晚</span>
+                                <span class="night-value">$4,400</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="person-card highlight">
+                        <div class="person-card-header">
+                            <span class="person-name">彥蓁</span>
+                            <span class="person-total" style="color: #28a745;">NT$16,000</span>
+                        </div>
+                        <div class="person-details">單人床 | 4晚（第5晚離開）</div>
+                        <div class="night-breakdown">
+                            <div class="night-item">
+                                <span class="night-label">第1晚</span>
+                                <span class="night-value">$4,000</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第2晚</span>
+                                <span class="night-value">$4,000</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第3晚</span>
+                                <span class="night-value">$4,000</span>
+                            </div>
+                            <div class="night-item">
+                                <span class="night-label">第4晚</span>
+                                <span class="night-value">$4,000</span>
+                            </div>
+                            <div class="night-item" style="background: #f8f9fa;">
+                                <span class="night-label">第5晚</span>
+                                <span class="night-value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <div class="note-title">💡 分攤說明</div>
+                    <div class="note-content">
+                        • <strong>雙人床（7人）：</strong>前4晚各NT$4,408/晚，第5晚NT$4,780/晚<br>
+                        • <strong>Frank：</strong>前4晚地鋪NT$3,000/晚，第5晚換單人床NT$4,400/晚<br>
+                        • <strong>彥蓁：</strong>只住4晚，每晚NT$4,000（第5晚離開）<br>
+                        • <strong>每晚總費用：</strong>固定NT$37,857（由當晚入住人數分攤）
+                    </div>
+                </div>
+            </div>
+
+            <!-- 個人總費用匯總 -->
+            <div class="section">
+                <h2 class="section-title">👥 個人總費用匯總</h2>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>床位</th>
+                                <th>入住晚數</th>
+                                <th>計算方式</th>
+                                <th>應付金額</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>豪哥</td>
+                                <td>雙人床</td>
+                                <td>5晚</td>
+                                <td><small>4,408×4 + 4,780×1</small></td>
+                                <td><strong>NT$22,412</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Leon</td>
+                                <td>雙人床</td>
+                                <td>5晚</td>
+                                <td><small>4,408×4 + 4,780×1</small></td>
+                                <td><strong>NT$22,412</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Sky</td>
+                                <td>雙人床</td>
+                                <td>5晚</td>
+                                <td><small>4,408×4 + 4,780×1</small></td>
+                                <td><strong>NT$22,412</strong></td>
+                            </tr>
+                            <tr>
+                                <td>育愷</td>
+                                <td>雙人床</td>
+                                <td>5晚</td>
+                                <td><small>4,408×4 + 4,780×1</small></td>
+                                <td><strong>NT$22,412</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Cooper</td>
+                                <td>雙人床</td>
+                                <td>5晚</td>
+                                <td><small>4,408×4 + 4,780×1</small></td>
+                                <td><strong>NT$22,412</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Ting</td>
+                                <td>雙人床</td>
+                                <td>5晚</td>
+                                <td><small>4,408×4 + 4,780×1</small></td>
+                                <td><strong>NT$22,412</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Ada</td>
+                                <td>雙人床（單人房）</td>
+                                <td>5晚</td>
+                                <td><small>4,408×4 + 4,780×1</small></td>
+                                <td><strong>NT$22,412</strong></td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>Frank</td>
+                                <td>地鋪4晚+單人床1晚</td>
+                                <td>5晚</td>
+                                <td><small>3,000×4 + 4,400×1</small></td>
+                                <td class="discount-highlight"><strong>NT$16,400</strong></td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>彥蓁</td>
+                                <td>單人床</td>
+                                <td>4晚</td>
+                                <td><small>4,000×4</small></td>
+                                <td class="discount-highlight"><strong>NT$16,000</strong></td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="4"><strong>總計</strong></td>
+                                <td><strong>NT$189,284</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 驗算 -->
+            <div class="section">
+                <h2 class="section-title">✅ 驗算確認</h2>
+
+                <div class="check-box">
+                    <div class="check-title">總金額驗算</div>
+                    <div class="check-content">
+                        7人（雙人床）× NT$22,412 = NT$156,884<br>
+                        Frank × NT$16,400 = NT$16,400<br>
+                        彥蓁 × NT$16,000 = NT$16,000<br>
+                        ──────────────────<br>
+                        <strong>總和 = NT$189,284 ✓ 完全正確！</strong>
+                    </div>
+                </div>
+
+                <div class="info-box" style="background: #d4edda; border-color: #28a745;">
+                    <h3 style="color: #155724;">✨ 分攤原則</h3>
+                    <ul>
+                        <li style="color: #155724;">每晚費用固定NT$37,857</li>
+                        <li style="color: #155724;">前4晚由9人分攤，第5晚由8人分攤</li>
+                        <li style="color: #155724;">地鋪NT$3,000/晚，彥蓁單人床NT$4,000/晚，Frank單人床NT$4,400/晚（升級費用）</li>
+                        <li style="color: #155724;">雙人床價格隨分攤人數調整（前4晚NT$4,408，第5晚NT$4,780）</li>
+                        <li style="color: #155724;">7人雙人床住客費用完全相同（各NT$22,412）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
