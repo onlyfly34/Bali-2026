@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>澎湖 2026 · 4月小旅行</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #faf7f2;
+            --butter: #f5ede0;
+            --caramel: #c8956c;
+            --amber: #d4a052;
+            --sage: #8ba888;
+            --sky: #7fb3d4;
+            --dark: #2d1f16;
+            --text: #443028;
+            --muted: #9b8878;
+            --border: #e8ddd0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(160deg, #5ba3c9 0%, #6dbfb0 45%, #d4a052 100%);
+            padding: 64px 20px 52px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 26 Q13 16 26 26 Q39 36 52 26' stroke='%23ffffff' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3C/svg%3E");
+            background-size: 52px 52px;
+        }
+
+        .hero-content { position: relative; }
+
+        .hero-eyebrow {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.82);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 14px rgba(0,0,0,0.15);
+            margin-bottom: 6px;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            color: rgba(255,255,255,0.88);
+            margin-bottom: 26px;
+            letter-spacing: 0.06em;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.32);
+            color: white;
+            font-size: 12px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── Layout ── */
+        .section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 20px;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .section-sub {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+
+        /* ── Flight Groups ── */
+        .flight-group {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+        }
+
+        .flight-group-header {
+            background: var(--butter);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .airline-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            flex-shrink: 0;
+        }
+
+        .airline-uniair { background: #00336e; color: white; }
+        .airline-mandarin { background: #b00020; color: white; }
+
+        .flight-group-name {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .flight-group-name strong {
+            font-size: 14px;
+            color: var(--dark);
+            display: block;
+        }
+
+        .flight-group-name span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .booking-ref {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--caramel);
+            letter-spacing: 0.1em;
+            background: rgba(200,149,108,0.12);
+            padding: 3px 10px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .flight-legs {
+            padding: 14px 20px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .flight-leg {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--cream);
+            border-radius: 10px;
+            padding: 12px 16px;
+            flex-wrap: wrap;
+        }
+
+        .leg-dir {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .leg-dir.depart { background: var(--sky); }
+        .leg-dir.return { background: var(--sage); }
+
+        .leg-flight {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark);
+            min-width: 66px;
+            flex-shrink: 0;
+        }
+
+        .leg-route {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            min-width: 180px;
+        }
+
+        .leg-airport { font-weight: 700; color: var(--dark); }
+        .leg-time { font-size: 13px; color: var(--muted); }
+        .leg-arrow { color: var(--caramel); }
+
+        .leg-note {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .leg-price {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--caramel);
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+
+        .passengers {
+            padding: 0 20px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .passenger-chip {
+            background: var(--butter);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 5px 13px;
+            font-size: 12px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .passenger-chip .ticket {
+            color: var(--muted);
+            font-size: 10px;
+            display: block;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ── Summary Table ── */
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+            min-width: 540px;
+        }
+
+        thead th {
+            background: var(--butter);
+            padding: 12px 16px;
+            text-align: left;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: 0.06em;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        tbody tr { border-bottom: 1px solid var(--border); }
+        tbody tr:last-child { border-bottom: none; }
+        tbody tr:hover { background: var(--cream); }
+
+        td {
+            padding: 12px 16px;
+            vertical-align: top;
+            color: var(--text);
+        }
+
+        td.date-cell {
+            font-weight: 600;
+            white-space: nowrap;
+            color: var(--caramel);
+            font-size: 12px;
+        }
+
+        .spot-list { display: flex; flex-wrap: wrap; gap: 4px; }
+
+        .spot-tag {
+            background: var(--butter);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            color: var(--text);
+        }
+
+        /* ── Day Cards ── */
+        .day-section { margin-bottom: 40px; }
+
+        .day-header {
+            background: linear-gradient(135deg, var(--caramel), var(--amber));
+            border-radius: 12px 12px 0 0;
+            padding: 16px 22px;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .day-number {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+        }
+
+        .day-date {
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .day-theme {
+            font-size: 12px;
+            color: rgba(255,255,255,0.72);
+            margin-left: auto;
+            letter-spacing: 0.05em;
+        }
+
+        .spots-grid {
+            background: white;
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 14px;
+        }
+
+        .spot-card {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            display: block;
+            background: var(--cream);
+        }
+
+        .spot-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.1);
+        }
+
+        .spot-img {
+            width: 100%;
+            height: 115px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .spot-img-placeholder {
+            width: 100%;
+            height: 115px;
+            background: var(--butter);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+        }
+
+        .spot-info { padding: 10px 12px 12px; }
+
+        .spot-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 3px;
+        }
+
+        .spot-desc {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+
+        .spot-map {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 11px;
+            color: var(--sky);
+            text-decoration: none;
+        }
+
+        .spot-map:hover { color: var(--caramel); }
+
+        hr.divider { border: none; border-top: 1px solid var(--border); }
+
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.45);
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 620px) {
+            .hero h1 { font-size: 36px; }
+            .section { padding: 32px 16px; }
+            .flight-leg { gap: 6px; }
+            .leg-route { min-width: 100%; order: 3; }
+            .leg-price { margin-left: 0; }
+            .spots-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 380px) {
+            .spots-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-eyebrow">Taiwan · Penghu · 2026</div>
+        <h1>澎湖</h1>
+        <div class="hero-sub">玄武岩 · 天人菊 · 海天一色</div>
+        <div class="hero-badges">
+            <span class="badge">4月3日 – 6日</span>
+            <span class="badge">4天3夜</span>
+            <span class="badge">10人同行</span>
+            <span class="badge">馬公出發</span>
+        </div>
+    </div>
+</div>
+
+<!-- ══ FLIGHTS ══ -->
+<div class="section">
+    <div class="section-title">機票資訊</div>
+    <div class="section-sub">共 3 組班機・10 名旅客</div>
+
+    <!-- ─ Group A: 立榮 KHH 4人 ─ -->
+    <div class="flight-group">
+        <div class="flight-group-header">
+            <div class="airline-logo airline-uniair">立榮</div>
+            <div class="flight-group-name">
+                <strong>立榮航空・高雄出發・4 人</strong>
+                <span>黃克強・蔡碧雲・陳建宏・陸燕珠</span>
+            </div>
+            <span class="booking-ref">D5MGN9</span>
+        </div>
+        <div class="flight-legs">
+            <div class="flight-leg">
+                <span class="leg-dir depart">去程</span>
+                <span class="leg-flight">B7-8707</span>
+                <div class="leg-route">
+                    <span class="leg-airport">KHH</span>
+                    <span class="leg-time">14:15</span>
+                    <span class="leg-arrow">→</span>
+                    <span class="leg-airport">MZG</span>
+                    <span class="leg-time">15:00</span>
+                    <span class="leg-note">2026/04/03（五）</span>
+                </div>
+                <span class="leg-price">NT$1,812 / 人</span>
+            </div>
+            <div class="flight-leg">
+                <span class="leg-dir return">回程</span>
+                <span class="leg-flight">B7-8692</span>
+                <div class="leg-route">
+                    <span class="leg-airport">MZG</span>
+                    <span class="leg-time">09:20</span>
+                    <span class="leg-arrow">→</span>
+                    <span class="leg-airport">KHH</span>
+                    <span class="leg-time">10:00</span>
+                    <span class="leg-note">2026/04/06（一）・訂位 D5RS6Q</span>
+                </div>
+                <span class="leg-price">NT$1,726 / 人</span>
+            </div>
+        </div>
+        <div class="passengers">
+            <div class="passenger-chip">黃克強<span class="ticket">52524669693162</span></div>
+            <div class="passenger-chip">蔡碧雲<span class="ticket">52524669693163</span></div>
+            <div class="passenger-chip">陳建宏<span class="ticket">52524669693164</span></div>
+            <div class="passenger-chip">陸燕珠<span class="ticket">52524669693161</span></div>
+        </div>
+    </div>
+
+    <!-- ─ Group B: 華信 KHH 3人 ─ -->
+    <div class="flight-group">
+        <div class="flight-group-header">
+            <div class="airline-logo airline-mandarin">華信</div>
+            <div class="flight-group-name">
+                <strong>華信航空・高雄出發・3 人</strong>
+                <span>侯麗玲・張明玉・楊美麗</span>
+            </div>
+            <span class="booking-ref">D5P5DG</span>
+        </div>
+        <div class="flight-legs">
+            <div class="flight-leg">
+                <span class="leg-dir depart">去程</span>
+                <span class="leg-flight">AE-355</span>
+                <div class="leg-route">
+                    <span class="leg-airport">KHH</span>
+                    <span class="leg-time">15:00</span>
+                    <span class="leg-arrow">→</span>
+                    <span class="leg-airport">MZG</span>
+                    <span class="leg-time">15:40</span>
+                    <span class="leg-note">2026/04/03（五）</span>
+                </div>
+                <span class="leg-price">NT$1,911 / 人</span>
+            </div>
+            <div class="flight-leg">
+                <span class="leg-dir return">回程</span>
+                <span class="leg-flight">AE-336</span>
+                <div class="leg-route">
+                    <span class="leg-airport">MZG</span>
+                    <span class="leg-time">12:00</span>
+                    <span class="leg-arrow">→</span>
+                    <span class="leg-airport">KHH</span>
+                    <span class="leg-time">12:40</span>
+                    <span class="leg-note">2026/04/06（一）</span>
+                </div>
+                <span class="leg-price">NT$1,820 / 人</span>
+            </div>
+        </div>
+        <div class="passengers">
+            <div class="passenger-chip">侯麗玲<span class="ticket">去 8032337185240・回 8032337185241</span></div>
+            <div class="passenger-chip">張明玉<span class="ticket">去 8032337185242・回 8032337185243</span></div>
+            <div class="passenger-chip">楊美麗<span class="ticket">去 8032337185244・回 8032337185245</span></div>
+        </div>
+    </div>
+
+    <!-- ─ Group C: 立榮 TSA 3人 ─ -->
+    <div class="flight-group">
+        <div class="flight-group-header">
+            <div class="airline-logo airline-uniair">立榮</div>
+            <div class="flight-group-name">
+                <strong>立榮航空・台北松山出發・3 人</strong>
+                <span>黃啟澤・柯續驊・黃啟峰</span>
+            </div>
+            <span class="booking-ref">D50XG4</span>
+        </div>
+        <div class="flight-legs">
+            <div class="flight-leg">
+                <span class="leg-dir depart">去程</span>
+                <span class="leg-flight">B7-9109</span>
+                <div class="leg-route">
+                    <span class="leg-airport">TSA</span>
+                    <span class="leg-time">17:10</span>
+                    <span class="leg-arrow">→</span>
+                    <span class="leg-airport">MZG</span>
+                    <span class="leg-time">18:10</span>
+                    <span class="leg-note">2026/04/03（五）</span>
+                </div>
+                <span class="leg-price">NT$2,197 / 人</span>
+            </div>
+            <div class="flight-leg">
+                <span class="leg-dir return">回程</span>
+                <span class="leg-flight">B7-8608</span>
+                <div class="leg-route">
+                    <span class="leg-airport">MZG</span>
+                    <span class="leg-time">10:00</span>
+                    <span class="leg-arrow">→</span>
+                    <span class="leg-airport">TSA</span>
+                    <span class="leg-time">10:50</span>
+                    <span class="leg-note">2026/04/06（一）</span>
+                </div>
+                <span class="leg-price">NT$2,092 / 人</span>
+            </div>
+        </div>
+        <div class="passengers">
+            <div class="passenger-chip">黃啟澤<span class="ticket">52524669697962</span></div>
+            <div class="passenger-chip">柯續驊<span class="ticket">52524669697963</span></div>
+            <div class="passenger-chip">黃啟峰<span class="ticket">52524669697961</span></div>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ SUMMARY TABLE ══ -->
+<div class="section">
+    <div class="section-title">行程總表</div>
+    <div class="section-sub">4 天 3 夜 · 澎湖本島 + 南方四島</div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>上午</th>
+                    <th>下午</th>
+                    <th>晚上</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="date-cell">4/3 (五)<br>抵達</td>
+                    <td>各組出發</td>
+                    <td>
+                        <div class="spot-list">
+                            <span class="spot-tag">抵達馬公</span>
+                            <span class="spot-tag">澎湖天后宮</span>
+                            <span class="spot-tag">西瀛虹橋</span>
+                        </div>
+                    </td>
+                    <td>馬公市區晚餐・海鮮</td>
+                </tr>
+                <tr>
+                    <td class="date-cell">4/4 (六)<br>北環</td>
+                    <td>
+                        <div class="spot-list">
+                            <span class="spot-tag">林投公園</span>
+                            <span class="spot-tag">後寮天堂路</span>
+                            <span class="spot-tag">奎壁山摩西分海</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="spot-list">
+                            <span class="spot-tag">通樑古榕</span>
+                            <span class="spot-tag">澎湖跨海大橋</span>
+                            <span class="spot-tag">二崁古厝</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="spot-list">
+                            <span class="spot-tag">大菓葉玄武岩</span>
+                            <span class="spot-tag">小門鯨魚洞</span>
+                            <span class="spot-tag">漁翁島燈塔</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="date-cell">4/5 (日)<br>南方四島</td>
+                    <td>
+                        <div class="spot-list">
+                            <span class="spot-tag">搭船出發</span>
+                            <span class="spot-tag">七美島</span>
+                            <span class="spot-tag">雙心石滬</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="spot-list">
+                            <span class="spot-tag">望安島</span>
+                            <span class="spot-tag">南寮古厝</span>
+                            <span class="spot-tag">返回馬公</span>
+                        </div>
+                    </td>
+                    <td>馬公夜市・海鮮燒烤</td>
+                </tr>
+                <tr>
+                    <td class="date-cell">4/6 (一)<br>返程</td>
+                    <td>
+                        <div class="spot-list">
+                            <span class="spot-tag">隘門沙灘</span>
+                            <span class="spot-tag">伴手禮採購</span>
+                        </div>
+                    </td>
+                    <td>各組返程</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══ DAY BY DAY ══ -->
+<div class="section">
+    <div class="section-title">每日景點</div>
+    <div class="section-sub">點擊卡片開啟 Google Maps</div>
+
+    <!-- ─ Day 1 ─ -->
+    <div class="day-section">
+        <div class="day-header">
+            <span class="day-number">Day 1</span>
+            <span class="day-date">4月3日（五）</span>
+            <span class="day-theme">抵達 · 馬公市區</span>
+        </div>
+        <div class="spots-grid">
+
+            <a href="https://www.google.com/maps/search/?api=1&query=澎湖天后宮+馬公" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">⛩️</div>
+                <div class="spot-info">
+                    <div class="spot-name">澎湖天后宮</div>
+                    <div class="spot-desc">全台最古老的媽祖廟，創建於1604年，澎湖信仰中心</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=西瀛虹橋+澎湖+馬公" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">🌈</div>
+                <div class="spot-info">
+                    <div class="spot-name">西瀛虹橋</div>
+                    <div class="spot-desc">馬公港畔彩虹橋，夜間燈光璀璨，賞夕陽與夜景的絕佳地點</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- ─ Day 2 ─ -->
+    <div class="day-section">
+        <div class="day-header">
+            <span class="day-number">Day 2</span>
+            <span class="day-date">4月4日（六）</span>
+            <span class="day-theme">北環 · 西嶼全日遊</span>
+        </div>
+        <div class="spots-grid">
+
+            <a href="https://www.google.com/maps/search/?api=1&query=林投公園+澎湖" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">🌳</div>
+                <div class="spot-info">
+                    <div class="spot-name">林投公園</div>
+                    <div class="spot-desc">林投樹叢生的海濱公園，白色沙灘靜謐悠閒，適合清晨散步</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=後寮天堂路+澎湖+白沙" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">🛤️</div>
+                <div class="spot-info">
+                    <div class="spot-name">後寮天堂路</div>
+                    <div class="spot-desc">筆直延伸入海的沙洲小路，漲潮消失退潮現身，超夢幻打卡點</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=奎壁山摩西分海+澎湖" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">🌊</div>
+                <div class="spot-info">
+                    <div class="spot-name">奎壁山摩西分海</div>
+                    <div class="spot-desc">退潮時海水分開露出礫石步道可步行至赤嶼，澎湖版摩西奇景</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=通樑古榕+澎湖+白沙" target="_blank" class="spot-card">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/05/Taiwan-Penghu-Tongliang-Great-Banyan.JPG"
+                    alt="通樑古榕"
+                    class="spot-img"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                >
+                <div class="spot-img-placeholder" style="display:none">🌿</div>
+                <div class="spot-info">
+                    <div class="spot-name">通樑古榕</div>
+                    <div class="spot-desc">樹齡逾300年的大榕樹，氣根盤繞廟前，枝幹橫跨壯觀</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=澎湖跨海大橋" target="_blank" class="spot-card">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bridge_across_the_Houmen_Channel.jpg"
+                    alt="澎湖跨海大橋"
+                    class="spot-img"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                >
+                <div class="spot-img-placeholder" style="display:none">🌉</div>
+                <div class="spot-info">
+                    <div class="spot-name">澎湖跨海大橋</div>
+                    <div class="spot-desc">全長2,494公尺，連接白沙島與西嶼，昔日遠東最長跨海大橋</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=二崁古厝+澎湖+西嶼" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">🏚️</div>
+                <div class="spot-info">
+                    <div class="spot-name">二崁古厝</div>
+                    <div class="spot-desc">保存完整的閩南聚落，石砌傳統民居，慢步感受百年古樸風情</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=大菓葉玄武岩+澎湖+西嶼" target="_blank" class="spot-card">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/1/16/Daguoye_columnar_basalt.jpg"
+                    alt="大菓葉玄武岩"
+                    class="spot-img"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                >
+                <div class="spot-img-placeholder" style="display:none">🪨</div>
+                <div class="spot-info">
+                    <div class="spot-name">大菓葉玄武岩</div>
+                    <div class="spot-desc">整齊排列的柱狀玄武岩，堆疊如石柱藝廊，澎湖地質奇觀</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=小門鯨魚洞+澎湖" target="_blank" class="spot-card">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Whale_Cave_in_Penghu_-_side.JPG"
+                    alt="小門鯨魚洞"
+                    class="spot-img"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                >
+                <div class="spot-img-placeholder" style="display:none">🐋</div>
+                <div class="spot-info">
+                    <div class="spot-name">小門鯨魚洞</div>
+                    <div class="spot-desc">海浪侵蝕玄武岩形成的海蝕洞，形似鯨魚張嘴，震撼壯觀</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=漁翁島燈塔+西嶼燈塔+澎湖" target="_blank" class="spot-card">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/06/Lighthouse_in_Fisherman_Island.JPG"
+                    alt="漁翁島燈塔"
+                    class="spot-img"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                >
+                <div class="spot-img-placeholder" style="display:none">🏮</div>
+                <div class="spot-info">
+                    <div class="spot-name">漁翁島燈塔</div>
+                    <div class="spot-desc">建於1778年，全台最古老燈塔，白色塔身俯瞰澎湖海峽</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- ─ Day 3 ─ -->
+    <div class="day-section">
+        <div class="day-header">
+            <span class="day-number">Day 3</span>
+            <span class="day-date">4月5日（日）</span>
+            <span class="day-theme">七美 · 望安</span>
+        </div>
+        <div class="spots-grid">
+
+            <a href="https://www.google.com/maps/search/?api=1&query=七美島+澎湖" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">🏝️</div>
+                <div class="spot-info">
+                    <div class="spot-name">七美島</div>
+                    <div class="spot-desc">澎湖南方四島最大島，以雙心石滬、小台灣地形聞名於世</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=雙心石滬+七美+澎湖" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">💗</div>
+                <div class="spot-info">
+                    <div class="spot-name">雙心石滬</div>
+                    <div class="spot-desc">兩個相連愛心形狀的傳統捕魚石牆，空拍打卡澎湖最美地標</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=望安島+澎湖" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">🐢</div>
+                <div class="spot-info">
+                    <div class="spot-name">望安島</div>
+                    <div class="spot-desc">綠蠵龜重要產卵棲地，純樸離島風情，天台山可俯瞰全島</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=南寮古厝+望安+澎湖" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">🏛️</div>
+                <div class="spot-info">
+                    <div class="spot-name">南寮古厝</div>
+                    <div class="spot-desc">望安島傳統石砌民居群，保存良好的清代聚落建築，歷史感濃厚</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- ─ Day 4 ─ -->
+    <div class="day-section">
+        <div class="day-header">
+            <span class="day-number">Day 4</span>
+            <span class="day-date">4月6日（一）</span>
+            <span class="day-theme">返程</span>
+        </div>
+        <div class="spots-grid">
+
+            <a href="https://www.google.com/maps/search/?api=1&query=隘門沙灘+澎湖" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">🏖️</div>
+                <div class="spot-info">
+                    <div class="spot-name">隘門沙灘</div>
+                    <div class="spot-desc">澎湖最美沙灘之一，金色細沙搭配澄藍海水，晨間漫步絕景</div>
+                    <span class="spot-map">📍 Google Maps</span>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=馬公機場+澎湖" target="_blank" class="spot-card">
+                <div class="spot-img-placeholder">✈️</div>
+                <div class="spot-info">
+                    <div class="spot-name">各組返程</div>
+                    <div class="spot-desc">
+                        B7-8692 09:20 MZG→KHH<br>
+                        B7-8608 10:00 MZG→TSA<br>
+                        AE-336  12:00 MZG→KHH
+                    </div>
+                    <span class="spot-map">📍 馬公機場</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>澎湖 2026 · 4/3–4/6 · 10 人同行</p>
+    <p>圖片來源：Wikimedia Commons（CC BY-SA）</p>
+    <p style="margin-top:4px"><a href="../index.html" style="color:rgba(255,255,255,0.4);text-decoration:none">← 返回旅遊計畫首頁</a></p>
+</footer>
+
+</body>
+</html>
