@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>澎湖 2026 · 4月小旅行</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf7f2;
+  --card: #ffffff;
+  --butter: #f5ede0;
+  --border: #e8ddd0;
+  --text: #443028;
+  --text-mid: #6b5245;
+  --text-light: #9b8878;
+  --caramel: #c8956c;
+  --amber: #d4a052;
+  --sky: #5ba3c9;
+  --sky-light: #e8f3fa;
+  --sage: #8ba888;
+  --sage-light: #eaf3ea;
+  --rust: #c47a55;
+  --rust-light: #faeee6;
+  --shadow: 0 1px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 20px rgba(0,0,0,0.08);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --tab-height: 64px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { font-size: 15px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding-top: calc(var(--safe-top) + 52px);
+  padding-bottom: calc(var(--tab-height) + var(--safe-bottom) + 16px);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ── Header ── */
+.app-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(250,247,242,0.93);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: calc(var(--safe-top) + 8px) 20px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.header-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text);
+}
+
+.header-sub {
+  font-size: 0.68rem;
+  color: var(--text-light);
+  letter-spacing: 1px;
+}
+
+.header-badge {
+  font-size: 0.7rem;
+  color: var(--caramel);
+  font-weight: 500;
+  background: var(--butter);
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+/* ── Bottom Tab Bar ── */
+.tab-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  padding-bottom: var(--safe-bottom);
+  display: flex;
+  height: calc(var(--tab-height) + var(--safe-bottom));
+}
+
+.tab-item {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px;
+  font-size: 0.62rem;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 6px 0;
+  -webkit-user-select: none; user-select: none;
+}
+
+.tab-item.active { color: var(--caramel); }
+.tab-item svg { width: 22px; height: 22px; }
+.tab-item.active svg { stroke-width: 2.2; }
+
+/* ── Pages ── */
+.page { display: none; padding: 16px; animation: fadeIn 0.25s ease; }
+.page.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Hero Banner ── */
+.hero-banner {
+  background: linear-gradient(160deg, #5ba3c9 0%, #6dbfb0 45%, #d4a052 100%);
+  border-radius: var(--radius);
+  padding: 24px 20px 22px;
+  margin-bottom: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q10 4 20 10 Q30 16 40 10' stroke='%23ffffff' stroke-width='1' fill='none' stroke-opacity='0.1'/%3E%3C/svg%3E");
+  background-size: 40px 20px;
+}
+
+.hero-banner h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  letter-spacing: 0.1em;
+  position: relative;
+}
+
+.hero-banner .hero-sub {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.1em;
+  margin: 4px 0 12px;
+  position: relative;
+}
+
+.hero-chips {
+  display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+  position: relative;
+}
+
+.hero-chip {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  font-size: 0.68rem;
+  padding: 3px 12px;
+  border-radius: 12px;
+}
+
+/* ── Section Title ── */
+.section-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+/* ── Summary Table ── */
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  font-size: 0.75rem;
+  min-width: 420px;
+}
+
+thead th {
+  background: var(--butter);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+tbody tr { border-bottom: 1px solid var(--border); }
+tbody tr:last-child { border-bottom: none; }
+
+td { padding: 10px 12px; vertical-align: top; }
+td.date-cell { font-weight: 600; color: var(--caramel); white-space: nowrap; font-size: 0.7rem; }
+
+.spot-list { display: flex; flex-wrap: wrap; gap: 3px; }
+.spot-tag {
+  background: var(--butter);
+  border: 1px solid var(--border);
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+/* ── Day Header ── */
+.day-header {
+  display: flex; align-items: baseline; gap: 10px;
+  background: linear-gradient(135deg, var(--caramel), var(--amber));
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  padding: 12px 16px;
+}
+
+.day-number {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.day-date { font-size: 0.8rem; color: rgba(255,255,255,0.9); }
+.day-theme { font-size: 0.7rem; color: rgba(255,255,255,0.7); margin-left: auto; }
+
+/* ── Spot Grid ── */
+.spots-grid {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  padding: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.spot-card {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+  background: var(--bg);
+}
+
+.spot-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.spot-card:active { transform: scale(0.97); }
+
+.spot-img {
+  width: 100%; height: 90px;
+  object-fit: cover; display: block;
+}
+
+.spot-img-placeholder {
+  width: 100%; height: 90px;
+  background: var(--butter);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+}
+
+.spot-info { padding: 8px 10px 10px; }
+.spot-name { font-size: 0.75rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.spot-desc { font-size: 0.65rem; color: var(--text-light); line-height: 1.4; }
+
+/* ── Flight Cards ── */
+.flight-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--sky);
+}
+
+.flight-group-label {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 2px 9px;
+  border-radius: 10px;
+  margin-bottom: 4px;
+}
+
+.group-a { background: var(--sky-light); color: var(--sky); }
+.group-b { background: var(--rust-light); color: var(--rust); }
+.group-c { background: var(--sage-light); color: var(--sage); }
+
+.flight-label {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 2px;
+}
+
+.flight-route {
+  display: flex; align-items: center; gap: 10px;
+  margin: 10px 0 8px;
+}
+
+.flight-city { text-align: center; }
+.flight-code { font-size: 1.3rem; font-weight: 700; color: var(--text); }
+.flight-name { font-size: 0.62rem; color: var(--text-light); }
+.flight-time-big { font-size: 1rem; font-weight: 600; color: var(--caramel); }
+
+.flight-arrow {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+
+.flight-arrow-line {
+  width: 100%; height: 1px;
+  background: var(--border);
+  position: relative;
+}
+
+.flight-arrow-line::after {
+  content: '✈';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.85rem;
+  background: var(--card);
+  padding: 0 5px;
+}
+
+.flight-duration { font-size: 0.62rem; color: var(--text-light); }
+
+.flight-meta {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  font-size: 0.7rem; color: var(--text-mid);
+}
+
+.flight-meta-item { display: flex; align-items: center; gap: 3px; }
+
+.booking-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--caramel);
+  background: var(--butter);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+/* ── Hotel Page ── */
+.hotel-hero {
+  background: linear-gradient(135deg, #5ba3c9 0%, #8ba888 100%);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.hotel-hero-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.hotel-hero-reg {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.hotel-contact-row {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+
+.hotel-contact-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  font-size: 0.72rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.hotel-contact-btn:active { background: rgba(255,255,255,0.35); }
+
+.info-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.info-card-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.5px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.info-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+.info-item .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+.info-item.full { grid-column: 1 / -1; }
+
+.wifi-table { width: 100%; font-size: 0.78rem; border-collapse: collapse; }
+.wifi-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); color: var(--text-mid); }
+.wifi-table tr:last-child td { border-bottom: none; }
+.wifi-table td:first-child { font-weight: 500; color: var(--text); width: 40%; }
+.wifi-pw { font-family: monospace; letter-spacing: 0.1em; color: var(--caramel); font-weight: 600; }
+
+.rules-list { list-style: none; }
+.rules-list li {
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+  padding: 5px 0 5px 18px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.rules-list li:last-child { border-bottom: none; }
+.rules-list li::before {
+  content: '●';
+  position: absolute; left: 0;
+  color: var(--caramel);
+  font-size: 0.55rem;
+  top: 8px;
+}
+.rules-list li.warn { color: #c0392b; font-weight: 500; }
+.rules-list li.warn::before { color: #c0392b; }
+
+.time-row {
+  display: flex; gap: 10px; margin-bottom: 14px;
+}
+
+.time-box {
+  flex: 1;
+  background: var(--butter);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+}
+
+.time-label { font-size: 0.68rem; color: var(--text-light); margin-bottom: 2px; }
+.time-value { font-size: 1.1rem; font-weight: 700; color: var(--caramel); font-family: 'Noto Serif TC', serif; }
+.time-note { font-size: 0.65rem; color: var(--text-light); margin-top: 1px; }
+
+.notice-box {
+  background: #fff8e8;
+  border: 1px solid #f0d080;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  font-size: 0.75rem;
+  color: #5a4200;
+  line-height: 1.6;
+}
+
+.notice-box .notice-title {
+  font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;
+  display: flex; align-items: center; gap: 5px;
+}
+
+.notice-cols {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px;
+}
+
+.notice-col-title {
+  font-weight: 600; font-size: 0.72rem; color: #7a5a00; margin-bottom: 4px;
+}
+
+.notice-col-list {
+  font-size: 0.7rem; color: #6a4a00; line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="app-header">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">澎湖</div>
+      <div class="header-sub">2026 · 4/3 – 4/6</div>
+    </div>
+    <div class="header-badge">10人同行</div>
+  </div>
+</header>
+
+<!-- ══ 行程 PAGE ══ -->
+<div class="page active" id="page-itinerary">
+
+  <div class="hero-banner">
+    <h1>澎湖</h1>
+    <div class="hero-sub">玄武岩 · 天人菊 · 海天一色</div>
+    <div class="hero-chips">
+      <span class="hero-chip">4月3日 – 6日</span>
+      <span class="hero-chip">4天3夜</span>
+      <span class="hero-chip">10人同行</span>
+    </div>
+  </div>
+
+  <!-- 行程總表 -->
+  <div class="section-title">行程總表</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>上午</th>
+          <th>下午</th>
+          <th>晚上</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="date-cell">4/3 (五)<br>抵達</td>
+          <td>各組出發</td>
+          <td><div class="spot-list"><span class="spot-tag">澎湖天后宮</span><span class="spot-tag">西瀛虹橋</span></div></td>
+          <td>馬公市區・海鮮</td>
+        </tr>
+        <tr>
+          <td class="date-cell">4/4 (六)<br>北環</td>
+          <td><div class="spot-list"><span class="spot-tag">林投公園</span><span class="spot-tag">後寮天堂路</span><span class="spot-tag">奎壁山摩西分海</span></div></td>
+          <td><div class="spot-list"><span class="spot-tag">通樑古榕</span><span class="spot-tag">澎湖跨海大橋</span><span class="spot-tag">二崁古厝</span></div></td>
+          <td><div class="spot-list"><span class="spot-tag">大菓葉玄武岩</span><span class="spot-tag">小門鯨魚洞</span><span class="spot-tag">漁翁島燈塔</span></div></td>
+        </tr>
+        <tr>
+          <td class="date-cell">4/5 (日)<br>南方四島</td>
+          <td><div class="spot-list"><span class="spot-tag">七美島</span><span class="spot-tag">雙心石滬</span></div></td>
+          <td><div class="spot-list"><span class="spot-tag">望安島</span><span class="spot-tag">南寮古厝</span></div></td>
+          <td>馬公夜市・海鮮燒烤</td>
+        </tr>
+        <tr>
+          <td class="date-cell">4/6 (一)<br>返程</td>
+          <td><div class="spot-list"><span class="spot-tag">隘門沙灘</span><span class="spot-tag">伴手禮</span></div></td>
+          <td>各組返程</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-header">
+    <span class="day-number">Day 1</span>
+    <span class="day-date">4月3日（五）</span>
+    <span class="day-theme">抵達 · 馬公市區</span>
+  </div>
+  <div class="spots-grid">
+    <a href="https://www.google.com/maps/search/?api=1&query=澎湖天后宮+馬公" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Penghu_Mazu_Temple_1919.jpg" alt="澎湖天后宮" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">⛩️</div>
+      <div class="spot-info"><div class="spot-name">澎湖天后宮</div><div class="spot-desc">全台最古老媽祖廟，創建1604年</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=西瀛虹橋+澎湖+馬公" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/Siying_Rainbow_Bridge_under_cloudy_sky_on_18_June_2015.jpg" alt="西瀛虹橋" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">🌈</div>
+      <div class="spot-info"><div class="spot-name">西瀛虹橋</div><div class="spot-desc">馬公港畔彩虹橋，賞夕陽絕景</div></div>
+    </a>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-header">
+    <span class="day-number">Day 2</span>
+    <span class="day-date">4月4日（六）</span>
+    <span class="day-theme">北環 · 西嶼全日遊</span>
+  </div>
+  <div class="spots-grid">
+    <a href="https://www.google.com/maps/search/?api=1&query=林投公園+澎湖" target="_blank" class="spot-card">
+      <div class="spot-img-placeholder">🌳</div>
+      <div class="spot-info"><div class="spot-name">林投公園</div><div class="spot-desc">林投樹海濱公園，靜謐白沙灘</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=後寮天堂路+澎湖+白沙" target="_blank" class="spot-card">
+      <div class="spot-img-placeholder">🛤️</div>
+      <div class="spot-info"><div class="spot-name">後寮天堂路</div><div class="spot-desc">延伸入海的沙洲小路，退潮現身</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=奎壁山摩西分海+澎湖" target="_blank" class="spot-card">
+      <div class="spot-img-placeholder">🌊</div>
+      <div class="spot-info"><div class="spot-name">奎壁山摩西分海</div><div class="spot-desc">退潮步行至赤嶼，澎湖版奇景</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=通樑古榕+澎湖+白沙" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Taiwan-Penghu-Tongliang-Great-Banyan.JPG" alt="通樑古榕" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">🌿</div>
+      <div class="spot-info"><div class="spot-name">通樑古榕</div><div class="spot-desc">300年大榕樹，氣根盤繞廟前</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=澎湖跨海大橋" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/%E6%BE%8E%E6%B9%96%E8%B7%A8%E6%B5%B7%E5%A4%A7%E6%A9%8B_%E8%B7%AF%E9%9D%A2.jpg" alt="澎湖跨海大橋" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">🌉</div>
+      <div class="spot-info"><div class="spot-name">澎湖跨海大橋</div><div class="spot-desc">全長2,494公尺，連接白沙與西嶼</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=二崁古厝+澎湖+西嶼" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/%E6%BE%8E%E6%B9%96%E7%B8%A3%E4%BA%8C%E5%B4%81%E9%99%B3%E5%AE%85.jpg" alt="二崁古厝" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">🏚️</div>
+      <div class="spot-info"><div class="spot-name">二崁古厝</div><div class="spot-desc">閩南石砌聚落，百年古樸風情</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=大菓葉玄武岩+澎湖+西嶼" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/%E6%BE%8E%E6%B9%96%E8%A5%BF%E5%B6%BC-%E6%B1%A0%E6%9D%B1%E5%A4%A7%E8%8F%93%E8%91%89%E7%8E%84%E6%AD%A6%E5%B2%A9.jpg" alt="大菓葉玄武岩" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">🪨</div>
+      <div class="spot-info"><div class="spot-name">大菓葉玄武岩</div><div class="spot-desc">柱狀玄武岩石柱藝廊，地質奇觀</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=小門鯨魚洞+澎湖" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Whale_Cave_in_Penghu_-_side.JPG" alt="小門鯨魚洞" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">🐋</div>
+      <div class="spot-info"><div class="spot-name">小門鯨魚洞</div><div class="spot-desc">海蝕洞形似鯨魚張嘴，震撼壯觀</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=漁翁島燈塔+西嶼燈塔+澎湖" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Walking_to_West_Islet_Lighthouse.jpg" alt="漁翁島燈塔" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">🏮</div>
+      <div class="spot-info"><div class="spot-name">漁翁島燈塔</div><div class="spot-desc">全台最古老燈塔，俯瞰澎湖海峽</div></div>
+    </a>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-header">
+    <span class="day-number">Day 3</span>
+    <span class="day-date">4月5日（日）</span>
+    <span class="day-theme">七美 · 望安</span>
+  </div>
+  <div class="spots-grid">
+    <a href="https://www.google.com/maps/search/?api=1&query=七美島+澎湖" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Coastal_view_from_the_hill_top%2C_Qimei%2C_Penghu%2C_Taiwan.JPG" alt="七美島" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">🏝️</div>
+      <div class="spot-info"><div class="spot-name">七美島</div><div class="spot-desc">南方四島最大島，小台灣地形</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=雙心石滬+七美+澎湖" target="_blank" class="spot-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Double-Heart_of_Stacked_Stones_20150721.jpg" alt="雙心石滬" class="spot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="spot-img-placeholder" style="display:none">💗</div>
+      <div class="spot-info"><div class="spot-name">雙心石滬</div><div class="spot-desc">空拍愛心石牆，澎湖最美地標</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=望安島+澎湖" target="_blank" class="spot-card">
+      <div class="spot-img-placeholder">🐢</div>
+      <div class="spot-info"><div class="spot-name">望安島</div><div class="spot-desc">綠蠵龜棲地，純樸離島風情</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=南寮古厝+望安+澎湖" target="_blank" class="spot-card">
+      <div class="spot-img-placeholder">🏛️</div>
+      <div class="spot-info"><div class="spot-name">南寮古厝</div><div class="spot-desc">清代石砌聚落，歷史感濃厚</div></div>
+    </a>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day-header">
+    <span class="day-number">Day 4</span>
+    <span class="day-date">4月6日（一）</span>
+    <span class="day-theme">返程</span>
+  </div>
+  <div class="spots-grid">
+    <a href="https://www.google.com/maps/search/?api=1&query=隘門沙灘+澎湖" target="_blank" class="spot-card">
+      <div class="spot-img-placeholder">🏖️</div>
+      <div class="spot-info"><div class="spot-name">隘門沙灘</div><div class="spot-desc">金色細沙澄藍海水，晨間漫步</div></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=馬公機場+澎湖" target="_blank" class="spot-card">
+      <div class="spot-img-placeholder">✈️</div>
+      <div class="spot-info"><div class="spot-name">各組返程</div><div class="spot-desc">MZG→KHH／MZG→TSA</div></div>
+    </a>
+  </div>
+
+</div>
+
+<!-- ══ 機票 PAGE ══ -->
+<div class="page" id="page-flights">
+
+  <div class="section-title">去程航班 · 2026/04/03（五）</div>
+
+  <!-- A組 立榮 KHH -->
+  <div class="flight-card" style="border-left-color: var(--sky);">
+    <div class="flight-group-label group-a">A組 · 立榮航空</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+      <div class="flight-label">Uni Air B7-8707</div>
+      <span class="booking-badge">D5MGN9</span>
+    </div>
+    <div class="flight-route">
+      <div class="flight-city">
+        <div class="flight-time-big">14:15</div>
+        <div class="flight-code">KHH</div>
+        <div class="flight-name">高雄</div>
+      </div>
+      <div class="flight-arrow">
+        <div class="flight-duration">直飛 45m</div>
+        <div class="flight-arrow-line"></div>
+      </div>
+      <div class="flight-city">
+        <div class="flight-time-big">15:00</div>
+        <div class="flight-code">MZG</div>
+        <div class="flight-name">馬公</div>
+      </div>
+    </div>
+    <div class="flight-meta">
+      <div class="flight-meta-item">💰 NT$1,812 / 人</div>
+      <div class="flight-meta-item">👥 4人</div>
+    </div>
+  </div>
+
+  <!-- B組 華信 KHH -->
+  <div class="flight-card" style="border-left-color: var(--rust);">
+    <div class="flight-group-label group-b">B組 · 華信航空</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+      <div class="flight-label">Mandarin Airlines AE-355</div>
+      <span class="booking-badge">D5P5DG</span>
+    </div>
+    <div class="flight-route">
+      <div class="flight-city">
+        <div class="flight-time-big">15:00</div>
+        <div class="flight-code">KHH</div>
+        <div class="flight-name">高雄</div>
+      </div>
+      <div class="flight-arrow">
+        <div class="flight-duration">直飛 40m</div>
+        <div class="flight-arrow-line"></div>
+      </div>
+      <div class="flight-city">
+        <div class="flight-time-big">15:40</div>
+        <div class="flight-code">MZG</div>
+        <div class="flight-name">馬公</div>
+      </div>
+    </div>
+    <div class="flight-meta">
+      <div class="flight-meta-item">💰 NT$1,911 / 人</div>
+      <div class="flight-meta-item">👥 3人</div>
+    </div>
+  </div>
+
+  <!-- C組 立榮 TSA -->
+  <div class="flight-card" style="border-left-color: var(--sage);">
+    <div class="flight-group-label group-c">C組 · 立榮航空</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+      <div class="flight-label">Uni Air B7-9109</div>
+      <span class="booking-badge">D50XG4</span>
+    </div>
+    <div class="flight-route">
+      <div class="flight-city">
+        <div class="flight-time-big">17:10</div>
+        <div class="flight-code">TSA</div>
+        <div class="flight-name">台北松山</div>
+      </div>
+      <div class="flight-arrow">
+        <div class="flight-duration">直飛 60m</div>
+        <div class="flight-arrow-line"></div>
+      </div>
+      <div class="flight-city">
+        <div class="flight-time-big">18:10</div>
+        <div class="flight-code">MZG</div>
+        <div class="flight-name">馬公</div>
+      </div>
+    </div>
+    <div class="flight-meta">
+      <div class="flight-meta-item">💰 NT$2,197 / 人</div>
+      <div class="flight-meta-item">👥 3人</div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:8px">回程航班 · 2026/04/06（一）</div>
+
+  <!-- A組 回程 立榮 KHH -->
+  <div class="flight-card" style="border-left-color: var(--sky);">
+    <div class="flight-group-label group-a">A組 · 立榮航空</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+      <div class="flight-label">Uni Air B7-8692</div>
+      <span class="booking-badge">D5RS6Q</span>
+    </div>
+    <div class="flight-route">
+      <div class="flight-city">
+        <div class="flight-time-big">09:20</div>
+        <div class="flight-code">MZG</div>
+        <div class="flight-name">馬公</div>
+      </div>
+      <div class="flight-arrow">
+        <div class="flight-duration">直飛 40m</div>
+        <div class="flight-arrow-line"></div>
+      </div>
+      <div class="flight-city">
+        <div class="flight-time-big">10:00</div>
+        <div class="flight-code">KHH</div>
+        <div class="flight-name">高雄</div>
+      </div>
+    </div>
+    <div class="flight-meta">
+      <div class="flight-meta-item">💰 NT$1,726 / 人</div>
+      <div class="flight-meta-item">👥 4人</div>
+    </div>
+  </div>
+
+  <!-- C組 回程 立榮 TSA -->
+  <div class="flight-card" style="border-left-color: var(--sage);">
+    <div class="flight-group-label group-c">C組 · 立榮航空</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+      <div class="flight-label">Uni Air B7-8608</div>
+      <span class="booking-badge">D50XG4</span>
+    </div>
+    <div class="flight-route">
+      <div class="flight-city">
+        <div class="flight-time-big">10:00</div>
+        <div class="flight-code">MZG</div>
+        <div class="flight-name">馬公</div>
+      </div>
+      <div class="flight-arrow">
+        <div class="flight-duration">直飛 50m</div>
+        <div class="flight-arrow-line"></div>
+      </div>
+      <div class="flight-city">
+        <div class="flight-time-big">10:50</div>
+        <div class="flight-code">TSA</div>
+        <div class="flight-name">台北松山</div>
+      </div>
+    </div>
+    <div class="flight-meta">
+      <div class="flight-meta-item">💰 NT$2,092 / 人</div>
+      <div class="flight-meta-item">👥 3人</div>
+    </div>
+  </div>
+
+  <!-- B組 回程 華信 KHH -->
+  <div class="flight-card" style="border-left-color: var(--rust);">
+    <div class="flight-group-label group-b">B組 · 華信航空</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+      <div class="flight-label">Mandarin Airlines AE-336</div>
+      <span class="booking-badge">D5P5DG</span>
+    </div>
+    <div class="flight-route">
+      <div class="flight-city">
+        <div class="flight-time-big">12:00</div>
+        <div class="flight-code">MZG</div>
+        <div class="flight-name">馬公</div>
+      </div>
+      <div class="flight-arrow">
+        <div class="flight-duration">直飛 40m</div>
+        <div class="flight-arrow-line"></div>
+      </div>
+      <div class="flight-city">
+        <div class="flight-time-big">12:40</div>
+        <div class="flight-code">KHH</div>
+        <div class="flight-name">高雄</div>
+      </div>
+    </div>
+    <div class="flight-meta">
+      <div class="flight-meta-item">💰 NT$1,820 / 人</div>
+      <div class="flight-meta-item">👥 3人</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ 住宿 PAGE ══ -->
+<div class="page" id="page-hotel">
+
+  <!-- Hero card -->
+  <div class="hotel-hero">
+    <div class="hotel-hero-name">海島漫旅民宿</div>
+    <div class="hotel-hero-reg">澎湖縣民宿 1004 號</div>
+    <div class="hotel-contact-row">
+      <a href="tel:0977488371" class="hotel-contact-btn">📞 0977-488371</a>
+      <a href="tel:0920557330" class="hotel-contact-btn">📞 0920-557330</a>
+      <a href="https://line.me/ti/p/~@852bpurw" target="_blank" class="hotel-contact-btn">💬 LINE @852bpurw</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=海島漫旅民宿+澎湖" target="_blank" class="hotel-contact-btn">📍 Google Maps</a>
+    </div>
+  </div>
+
+  <!-- 入退房時間 -->
+  <div class="time-row">
+    <div class="time-box">
+      <div class="time-label">入住時間</div>
+      <div class="time-value">15:00</div>
+      <div class="time-note">之後辦理入住</div>
+    </div>
+    <div class="time-box">
+      <div class="time-label">退房時間</div>
+      <div class="time-value">11:00</div>
+      <div class="time-note">之前退房</div>
+    </div>
+  </div>
+
+  <!-- 房型 & 設施 -->
+  <div class="info-card">
+    <div class="info-card-title">房型 & 設施</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="icon">🛏️</span><span>雙人房、四人房</span></div>
+      <div class="info-item"><span class="icon">💧</span><span>飲水機</span></div>
+      <div class="info-item"><span class="icon">👥</span><span>可入住 20 人（不含加床）</span></div>
+      <div class="info-item"><span class="icon">❄️</span><span>冰箱</span></div>
+      <div class="info-item full"><span class="icon">🍳</span><span>住宿即享在地特色早餐</span></div>
+      <div class="info-item full"><span class="icon">🀄</span><span>包棟可享麻將桌組</span></div>
+      <div class="info-item full"><span class="icon">🎤</span><span>包棟可享卡拉 OK</span></div>
+    </div>
+  </div>
+
+  <!-- 服務項目 -->
+  <div class="info-card">
+    <div class="info-card-title">服務項目</div>
+    <div class="info-grid">
+      <div class="info-item full"><span class="icon">🚗</span><span>機場／碼頭來回接送</span></div>
+      <div class="info-item full"><span class="icon">📋</span><span>代訂：租用汽機車、行程、船票、名產</span></div>
+    </div>
+  </div>
+
+  <!-- Wi-Fi -->
+  <div class="info-card">
+    <div class="info-card-title">Wi-Fi 帳號密碼</div>
+    <table class="wifi-table">
+      <tr>
+        <td>一樓大廳</td>
+        <td>帳號：<strong>海島漫旅</strong></td>
+        <td class="wifi-pw">00000000</td>
+      </tr>
+      <tr>
+        <td>二樓</td>
+        <td>帳號：<strong>2F</strong></td>
+        <td class="wifi-pw">00000000</td>
+      </tr>
+      <tr>
+        <td>三樓</td>
+        <td>帳號：<strong>3F</strong></td>
+        <td class="wifi-pw">0985150433</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 住宿須知 -->
+  <div class="info-card">
+    <div class="info-card-title">旅客住宿須知</div>
+    <ul class="rules-list">
+      <li>退房時請協助關閉房間內電源及門窗，維護房間內整潔。</li>
+      <li>晚上十點後請勿大聲喧嘩，以避免影響其他旅客及周遭鄰居安寧。</li>
+      <li>室內嚴禁喝酒、抽煙、嚼檳榔、打麻將，並且禁止攜帶寵物或影響鄰居安寧。</li>
+      <li class="warn">如有上述情事，依煙害防治法處予 600–3,000 元罰鍰。</li>
+      <li>離開房間時請配合關閉房間內電源及門窗。</li>
+      <li>退房時請務必將房間鑰匙放置一樓大廳或轉交民宿人員。</li>
+      <li>個人貴重物品請自行妥善保管，如有遺失恕不負責。</li>
+      <li>嚴禁將客房內及公共物品攜出或破壞，否則民宿得請求照價賠償並依法追究責任。</li>
+      <li>住房期間請共同維護民宿整潔及寧靜，謝絕訪客。</li>
+      <li>房客如有違反本注意事項，本民宿得拒絕住宿，並不予退費。</li>
+    </ul>
+  </div>
+
+  <!-- 一次用品法規 -->
+  <div class="notice-box">
+    <div class="notice-title">⚠️ 114年起：一次用旅宿用品管制措施</div>
+    <div style="font-size:0.72rem">管制對象：觀光旅館業、旅館業、民宿及其他住宿業</div>
+    <div class="notice-cols">
+      <div>
+        <div class="notice-col-title">🧴 4瓶以大代小（≥180ml）</div>
+        <div class="notice-col-list">沐浴乳・洗髮乳<br>潤髮乳・乳液</div>
+      </div>
+      <div>
+        <div class="notice-col-title">🚫 6項不得陳列於客房</div>
+        <div class="notice-col-list">牙膏・牙刷・梳子<br>浴帽・刮鬍刀・刮鬍泡</div>
+      </div>
+    </div>
+    <div style="margin-top:8px;font-size:0.68rem;opacity:0.8">請自行攜帶上述盥洗用品</div>
+  </div>
+
+</div>
+
+<!-- ── Bottom Tab Bar ── -->
+<nav class="tab-bar">
+  <div class="tab-item active" data-page="page-itinerary">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg>
+    <span>行程</span>
+  </div>
+  <div class="tab-item" data-page="page-flights">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+    <span>機票</span>
+  </div>
+  <div class="tab-item" data-page="page-hotel">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>住宿</span>
+  </div>
+</nav>
+
+<script>
+const tabs = document.querySelectorAll('.tab-item');
+const pages = document.querySelectorAll('.page');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    pages.forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.page).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>

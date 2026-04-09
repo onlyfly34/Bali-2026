@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>大邱 × 釜山 六天五夜 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:   #faf7f2;
+      --white:   #ffffff;
+      --navy:    #1c1c2e;
+      --coral:   #e8441a;
+      --amber:   #f59e0b;
+      --sky:     #3b82f6;
+      --mint:    #10b981;
+      --muted:   rgba(28,28,46,0.55);
+      --border:  rgba(28,28,46,0.1);
+      --shadow:  0 2px 20px rgba(28,28,46,0.08);
+      --shadowL: 0 8px 40px rgba(28,28,46,0.13);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--cream); color:var(--navy);
+      font-family:'Noto Sans TC', sans-serif; font-weight:300;
+      line-height:1.85; overflow-x:hidden;
+    }
+    a { text-decoration:none; }
+
+    /* ── Nav ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:50;
+      background:rgba(250,247,242,0.92); backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      padding:14px 56px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .nav-logo { font-family:'Bebas Neue'; font-size:22px; letter-spacing:.15em; color:var(--navy); }
+    .nav-logo span { color:var(--coral); }
+    .nav-links { display:flex; gap:28px; list-style:none; }
+    .nav-links a {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:var(--muted); transition:color .2s;
+    }
+    .nav-links a:hover { color:var(--coral); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height:100vh;
+      background:linear-gradient(135deg,#ff6b35 0%,#e8441a 38%,#ffa726 72%,#ffcc02 100%);
+      display:flex; align-items:center;
+      position:relative; overflow:hidden; padding-top:80px;
+    }
+    .hero::before {
+      content:''; position:absolute; top:-20%; right:-10%;
+      width:580px; height:580px; border-radius:50%;
+      background:rgba(255,255,255,.08);
+    }
+    .hero::after {
+      content:''; position:absolute; bottom:-15%; left:-8%;
+      width:380px; height:380px; border-radius:50%;
+      background:rgba(255,255,255,.06);
+    }
+    .hero-content { position:relative; z-index:2; padding:0 80px; max-width:940px; }
+    .hero-eyebrow { display:flex; align-items:center; gap:16px; margin-bottom:24px; }
+    .hero-eyebrow-line { width:48px; height:2px; background:#fff; }
+    .hero-eyebrow-text {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.4em; text-transform:uppercase; color:rgba(255,255,255,.8);
+    }
+    .hero-title { line-height:1; margin-bottom:28px; }
+    .hero-title .line1 {
+      display:block; font-family:'Bebas Neue';
+      font-size:clamp(72px,10vw,160px); letter-spacing:.05em; color:#fff;
+    }
+    .hero-title .line2 {
+      display:block; font-family:'Bebas Neue';
+      font-size:clamp(52px,7vw,120px); letter-spacing:.08em;
+      -webkit-text-stroke:2px rgba(255,255,255,.6); color:transparent;
+    }
+    .hero-title .accent { color:#ffcc02; -webkit-text-stroke:0; }
+    .hero-subtitle {
+      font-family:'Oswald'; font-weight:300; font-size:14px;
+      letter-spacing:.2em; color:rgba(255,255,255,.85); margin-bottom:36px;
+    }
+    .hero-stats { display:flex; gap:36px; margin-bottom:44px; flex-wrap:wrap; }
+    .hero-stat { border-left:2px solid rgba(255,255,255,.5); padding-left:14px; }
+    .hero-stat-num { font-family:'Bebas Neue'; font-size:30px; color:#fff; display:block; line-height:1; }
+    .hero-stat-label {
+      font-family:'Oswald'; font-weight:300; font-size:10px;
+      letter-spacing:.25em; color:rgba(255,255,255,.7); text-transform:uppercase;
+    }
+    .hero-cta { display:flex; gap:14px; flex-wrap:wrap; }
+    .btn-primary {
+      font-family:'Oswald'; font-weight:500; font-size:12px;
+      letter-spacing:.2em; text-transform:uppercase;
+      background:#fff; color:var(--coral); border:none;
+      padding:13px 30px; cursor:pointer; border-radius:2px;
+      transition:transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(0,0,0,.2); }
+    .btn-secondary {
+      font-family:'Oswald'; font-weight:400; font-size:12px;
+      letter-spacing:.2em; text-transform:uppercase;
+      background:transparent; color:#fff;
+      border:2px solid rgba(255,255,255,.5); padding:11px 28px;
+      cursor:pointer; border-radius:2px; transition:border-color .2s, background .2s;
+    }
+    .btn-secondary:hover { border-color:#fff; background:rgba(255,255,255,.15); }
+    .hero-deco {
+      position:absolute; right:80px; top:50%; transform:translateY(-50%);
+      font-family:'Bebas Neue'; font-size:220px; line-height:1;
+      color:rgba(255,255,255,.07); pointer-events:none; z-index:1; user-select:none;
+      letter-spacing:.05em;
+    }
+    .hero-wave {
+      position:absolute; bottom:0; left:0; right:0; z-index:2; line-height:0;
+    }
+
+    /* ── Toggle Slider ── */
+    .toggle-section {
+      position:relative; z-index:1;
+      background:var(--white); border-bottom:1px solid var(--border);
+      padding:18px 24px;
+      display:flex; align-items:center; justify-content:center; gap:20px;
+      box-shadow:var(--shadow);
+    }
+    .toggle-label {
+      font-family:'Oswald'; font-weight:300; font-size:12px;
+      letter-spacing:.25em; text-transform:uppercase; transition:color .3s;
+    }
+    .toggle-label.active-label { color:var(--coral); font-weight:500; }
+    .toggle-label.inactive-label { color:var(--muted); }
+    .toggle-switch { position:relative; display:inline-block; width:56px; height:28px; flex-shrink:0; }
+    .toggle-switch input { opacity:0; width:0; height:0; }
+    .toggle-track {
+      position:absolute; inset:0; cursor:pointer;
+      background:#e5e7eb; border-radius:14px; transition:background .3s;
+    }
+    .toggle-track::before {
+      content:''; position:absolute;
+      height:20px; width:20px; left:4px; bottom:4px;
+      background:var(--coral); border-radius:50%;
+      transition:transform .3s; box-shadow:0 2px 6px rgba(232,68,26,.4);
+    }
+    .toggle-switch input:checked + .toggle-track { background:rgba(232,68,26,.15); }
+    .toggle-switch input:checked + .toggle-track::before { transform:translateX(28px); }
+
+    /* ── Stats Bar ── */
+    .stats-bar {
+      position:relative; z-index:1;
+      background:var(--white); border-bottom:3px solid var(--cream);
+      padding:22px 48px;
+      display:flex; justify-content:space-around; align-items:center;
+    }
+    .stat-item { text-align:center; }
+    .stat-num { font-family:'Bebas Neue'; font-size:26px; color:var(--navy); display:block; line-height:1; }
+    .stat-label {
+      font-family:'Oswald'; font-weight:300; font-size:10px;
+      letter-spacing:.25em; color:var(--muted); text-transform:uppercase;
+    }
+    .stat-divider { width:1px; height:40px; background:var(--border); }
+
+    /* ── Main Content ── */
+    .main-content { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:60px 40px; }
+
+    /* ── View Logic ── */
+    .detail-only { display:none; }
+    .simple-view .detail-only { display:none; }
+    .detail-view .detail-only { display:block; }
+
+    /* ── Overview ── */
+    .overview-box {
+      background:var(--white); border-radius:12px;
+      border-left:4px solid var(--coral);
+      padding:32px 36px; margin-bottom:20px; box-shadow:var(--shadow);
+    }
+    .overview-box h3 {
+      font-family:'Oswald'; font-weight:600; font-size:17px;
+      letter-spacing:.15em; text-transform:uppercase; color:var(--coral); margin-bottom:18px;
+    }
+    .overview-box ul { list-style:none; }
+    .overview-box ul li {
+      padding:9px 0; border-bottom:1px solid var(--border);
+      font-size:14px; color:var(--navy); display:flex; gap:10px; align-items:flex-start;
+    }
+    .overview-box ul li:last-child { border-bottom:none; }
+    .overview-box ul li strong { color:var(--coral); font-weight:700; white-space:nowrap; }
+    .reminder-box {
+      background:var(--white); border-radius:12px;
+      border-left:4px solid var(--sky);
+      padding:22px 32px; box-shadow:var(--shadow);
+    }
+    .reminder-box p {
+      font-family:'Oswald'; font-weight:500; font-size:12px;
+      letter-spacing:.2em; text-transform:uppercase; color:var(--sky); margin-bottom:12px;
+    }
+    .reminder-box ul { list-style:none; }
+    .reminder-box ul li { font-size:14px; color:var(--muted); padding:4px 0; display:flex; gap:8px; }
+    .reminder-box ul li::before { content:'→'; color:var(--sky); flex-shrink:0; }
+
+    /* ── Section Heading ── */
+    .section-heading {
+      font-family:'Oswald'; font-weight:600; font-size:20px;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:var(--navy); margin-bottom:24px; padding-bottom:10px;
+      border-bottom:2px solid var(--coral);
+    }
+    .section-heading span { color:var(--coral); }
+
+    /* ── Collapse Controls ── */
+    .collapse-controls { display:flex; gap:10px; margin-bottom:30px; flex-wrap:wrap; }
+    .collapse-btn {
+      font-family:'Oswald'; font-weight:400; font-size:11px;
+      letter-spacing:.2em; text-transform:uppercase;
+      background:var(--white); color:var(--muted);
+      border:1px solid var(--border); padding:8px 18px;
+      cursor:pointer; border-radius:20px; transition:all .2s;
+    }
+    .collapse-btn:hover { border-color:var(--coral); color:var(--coral); }
+
+    /* ── Timeline ── */
+    .timeline { position:relative; padding-left:40px; margin-bottom:56px; }
+    .timeline::before {
+      content:''; position:absolute; left:0; top:0; bottom:0;
+      width:2px; background:linear-gradient(to bottom,var(--coral),var(--amber)); border-radius:2px;
+    }
+    .tl-item { position:relative; margin-bottom:14px; }
+    .tl-dot {
+      position:absolute; left:-46px; top:20px;
+      width:14px; height:14px;
+      border:2px solid var(--coral); border-radius:50%; background:var(--white);
+      transition:background .3s, transform .2s;
+      box-shadow:0 0 0 3px rgba(232,68,26,.15);
+    }
+    .tl-item:hover .tl-dot { background:var(--coral); transform:scale(1.2); }
+
+    /* Day Header */
+    .day-header {
+      background:var(--white); border:1px solid var(--border);
+      border-left:4px solid var(--coral);
+      padding:16px 22px; cursor:pointer;
+      display:flex; align-items:center; justify-content:space-between;
+      user-select:none; border-radius:0 8px 8px 0;
+      transition:all .2s; box-shadow:var(--shadow);
+    }
+    .day-header:hover { box-shadow:var(--shadowL); transform:translateX(4px); }
+    .day-label { font-family:'Bebas Neue'; font-size:13px; letter-spacing:.3em; color:var(--coral); display:block; margin-bottom:3px; }
+    .day-title { font-family:'Oswald'; font-weight:600; font-size:19px; letter-spacing:.05em; color:var(--navy); }
+    .day-chevron { font-size:16px; color:var(--muted); transition:transform .35s; }
+    .day-section.open .day-chevron { transform:rotate(180deg); color:var(--coral); }
+    .day-body { max-height:0; overflow:hidden; transition:max-height .45s ease; }
+    .day-section.open .day-body { max-height:9000px; }
+    .day-body-inner {
+      padding:18px 22px 22px;
+      background:#fefefe;
+      border:1px solid var(--border); border-top:none;
+      border-radius:0 0 8px 8px;
+    }
+    .type-tag {
+      font-family:'Oswald'; font-weight:400; font-size:10px;
+      letter-spacing:.15em; text-transform:uppercase;
+      background:rgba(232,68,26,.1); color:var(--coral);
+      border:1px solid rgba(232,68,26,.2);
+      padding:2px 9px; margin-left:8px; border-radius:20px;
+    }
+
+    /* ── Activity ── */
+    .activity {
+      background:#f9f8f6; border-left:3px solid rgba(232,68,26,.3);
+      padding:13px 15px; margin-bottom:11px; border-radius:0 8px 8px 0;
+    }
+    .activity h3 {
+      font-family:'Oswald'; font-weight:500; font-size:15px;
+      letter-spacing:.08em; color:var(--navy); margin-bottom:7px;
+    }
+    .time-tag {
+      font-family:'Oswald'; font-weight:300; font-size:11px;
+      letter-spacing:.1em; background:rgba(245,158,11,.15); color:#d97706;
+      border:1px solid rgba(245,158,11,.3); padding:1px 9px;
+      margin-left:6px; border-radius:20px;
+    }
+    .activity p, .activity li { font-size:13px; color:var(--muted); }
+    .activity ul { list-style:none; }
+    .activity ul li { padding:2px 0; }
+    .activity ul li::before { content:'· '; color:var(--coral); font-weight:700; }
+    .activity strong { color:var(--navy); }
+
+    /* ── Links ── */
+    .map-link {
+      display:inline-flex; align-items:center; gap:3px;
+      font-family:'Oswald'; font-weight:400; font-size:11px;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:var(--sky); border:1px solid rgba(59,130,246,.3);
+      padding:3px 11px; margin:4px 4px 4px 0; border-radius:20px; transition:all .2s;
+    }
+    .map-link::before { content:"↗"; font-size:10px; }
+    .map-link:hover { background:var(--sky); color:#fff; border-color:var(--sky); }
+    .route-link { color:#d97706; border-color:rgba(217,119,6,.3); }
+    .route-link::before { content:"→"; }
+    .route-link:hover { background:#d97706; color:#fff; border-color:#d97706; }
+
+    /* ── POI Card ── */
+    .poi-card {
+      background:var(--white); border:1px solid var(--border);
+      padding:13px 16px; margin:8px 0; border-radius:8px;
+      transition:all .2s; box-shadow:0 1px 8px rgba(28,28,46,.06);
+    }
+    .poi-card:hover { box-shadow:var(--shadow); transform:translateY(-1px); }
+    .poi-card h4 {
+      font-family:'Oswald'; font-weight:600; font-size:14px;
+      letter-spacing:.06em; color:var(--navy); margin-bottom:4px;
+    }
+    .poi-card p { font-size:13px; color:var(--muted); }
+    .star-badge {
+      display:inline-block; font-size:11px; font-family:'Oswald';
+      background:rgba(245,158,11,.15); color:#d97706;
+      border:1px solid rgba(245,158,11,.3); padding:1px 8px; border-radius:20px;
+      margin-left:6px; vertical-align:middle;
+    }
+
+    /* ── Optional Activity ── */
+    .optional-activity {
+      background:rgba(245,158,11,.06);
+      border:1px solid rgba(245,158,11,.2);
+      border-left:3px solid var(--amber);
+      padding:12px 16px; margin:8px 0; border-radius:0 8px 8px 0;
+    }
+    .optional-activity h4 {
+      font-family:'Oswald'; font-weight:500; font-size:14px;
+      letter-spacing:.06em; color:#d97706; margin-bottom:6px;
+    }
+    .optional-activity p { font-size:13px; color:var(--muted); }
+    .optional-activity strong { color:var(--navy); }
+
+    /* ── Warning ── */
+    .warning {
+      background:rgba(239,68,68,.06); border-left:3px solid #ef4444;
+      padding:13px 16px; margin:10px 0; font-size:13px; color:#dc2626;
+      border-radius:0 8px 8px 0;
+    }
+    .warning strong { color:#dc2626; font-weight:700; }
+
+    /* ── Highlight & Tips ── */
+    .highlight {
+      background:var(--white); border-radius:12px;
+      border-left:4px solid var(--coral);
+      padding:24px 28px; margin:24px 0; box-shadow:var(--shadow);
+    }
+    .highlight h3 {
+      font-family:'Oswald'; font-weight:600; font-size:15px;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:var(--coral); margin-bottom:16px;
+    }
+    .highlight ul { list-style:none; }
+    .highlight ul li {
+      font-size:13px; color:var(--muted); padding:5px 0;
+      border-bottom:1px solid var(--border); display:flex; gap:8px;
+    }
+    .highlight ul li:last-child { border-bottom:none; }
+    .highlight ul li::before { content:'·'; color:var(--coral); font-weight:700; flex-shrink:0; }
+    .highlight ul li strong { color:var(--navy); }
+    .highlight p { font-size:13px; color:var(--muted); margin-bottom:6px; }
+    .tips {
+      background:var(--white); border-radius:12px;
+      border-left:4px solid var(--sky);
+      padding:24px 28px; margin:24px 0; box-shadow:var(--shadow);
+    }
+    .tips h3 {
+      font-family:'Oswald'; font-weight:600; font-size:15px;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:var(--sky); margin-bottom:16px;
+    }
+    .tips ul { list-style:none; }
+    .tips ul li {
+      font-size:13px; color:var(--muted); padding:5px 0;
+      border-bottom:1px solid var(--border); display:flex; gap:8px;
+    }
+    .tips ul li:last-child { border-bottom:none; }
+    .tips ul li::before { content:'→'; color:var(--sky); flex-shrink:0; }
+    .tips ul li strong { color:var(--navy); }
+    .tips p { font-size:13px; color:var(--muted); margin-bottom:6px; }
+
+    /* ── Scroll Reveal ── */
+    .reveal { opacity:0; transform:translateY(16px); transition:opacity .5s, transform .5s; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      background:linear-gradient(135deg,var(--coral) 0%,#c73d17 100%);
+      padding:52px 64px;
+      display:flex; justify-content:space-between; align-items:center;
+      overflow:hidden; position:relative;
+    }
+    .cta-banner::before {
+      content:'부산'; position:absolute; right:40px; top:50%;
+      transform:translateY(-50%);
+      font-family:'Bebas Neue'; font-size:160px; letter-spacing:.05em;
+      color:rgba(255,255,255,.08); pointer-events:none; line-height:1;
+    }
+    .cta-text h2 { font-family:'Bebas Neue'; font-size:46px; letter-spacing:.05em; color:#fff; margin-bottom:5px; }
+    .cta-text p { font-family:'Oswald'; font-weight:300; font-size:13px; letter-spacing:.15em; color:rgba(255,255,255,.8); }
+    .cta-btn {
+      font-family:'Oswald'; font-weight:500; font-size:12px;
+      letter-spacing:.2em; text-transform:uppercase;
+      background:#fff; color:var(--coral); border:none;
+      padding:14px 30px; cursor:pointer; border-radius:2px;
+      transition:transform .2s, box-shadow .2s; white-space:nowrap;
+    }
+    .cta-btn:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(0,0,0,.2); }
+
+    /* ── Footer ── */
+    footer {
+      background:var(--navy); border-top:3px solid var(--coral);
+      padding:32px 56px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .footer-logo { font-family:'Bebas Neue'; font-size:20px; letter-spacing:.15em; color:#fff; }
+    .footer-logo span { color:var(--coral); }
+    footer p { font-family:'Oswald'; font-weight:300; font-size:11px; letter-spacing:.15em; color:rgba(255,255,255,.45); }
+
+    /* ── RWD ── */
+    @media (max-width: 768px) {
+      nav { padding:14px 20px; }
+      .nav-links { display:none; }
+      .hero-content { padding:0 24px; }
+      .hero-stats { gap:20px; }
+      .hero-cta { flex-direction:column; gap:10px; }
+      .hero-deco { display:none; }
+      .stats-bar { flex-wrap:wrap; gap:18px; padding:18px 24px; justify-content:center; }
+      .stat-divider { display:none; }
+      .main-content { padding:44px 20px; }
+      .overview-box { padding:22px 18px; }
+      .timeline { padding-left:28px; }
+      .tl-dot { left:-34px; top:20px; }
+      .day-header { padding:13px 16px; }
+      .day-title { font-size:16px; }
+      .cta-banner { flex-direction:column; gap:20px; text-align:center; padding:36px 24px; }
+      .cta-banner::before { font-size:80px; }
+      footer { flex-direction:column; gap:10px; text-align:center; padding:26px 20px; }
+    }
+    @media (max-width: 480px) {
+      .hero-title .line1 { font-size:clamp(56px,14vw,80px); }
+      .hero-title .line2 { font-size:clamp(40px,11vw,60px); }
+      .main-content { padding:32px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">DAEGU<span>·</span>BUSAN 2026</div>
+    <ul class="nav-links">
+      <li><a href="#itinerary">行程</a></li>
+      <li><a href="#busan">釜山</a></li>
+      <li><a href="#food">美食</a></li>
+      <li><a href="#tips">小訣竅</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">韓國大邱 × 釜山 · 夏日旅遊 · 2026</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="line1">大邱×釜山</span>
+        <span class="line2">夏日<span class="accent">之旅</span></span>
+      </h1>
+      <p class="hero-subtitle">六天五夜完整行程 · 2026年8月13日 — 8月18日</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">6D5N</span>
+          <span class="hero-stat-label">行程天數</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">大邱3夜</span>
+          <span class="hero-stat-label">UH FLAT DAEGU</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">釜山2夜</span>
+          <span class="hero-stat-label">膠囊列車 & 海灘</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">長榮</span>
+          <span class="hero-stat-label">BR164 / 163</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('toggle-anchor').scrollIntoView({behavior:'smooth'})">查看行程</button>
+        <button class="btn-secondary" onclick="setView('detail');document.getElementById('toggle-anchor').scrollIntoView({behavior:'smooth'})">詳細版</button>
+      </div>
+    </div>
+    <div class="hero-deco">대구부산</div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="width:100%;height:80px;display:block;">
+        <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#faf7f2"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Toggle Slider -->
+  <div class="toggle-section" id="toggle-anchor">
+    <span class="toggle-label active-label" id="label-simple">精簡版</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="viewToggle" onchange="onToggleChange(this)">
+      <span class="toggle-track"></span>
+    </label>
+    <span class="toggle-label inactive-label" id="label-detail">詳細版</span>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num">大邱 3夜</span>
+      <span class="stat-label">8/13 – 8/16</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">釜山 2夜</span>
+      <span class="stat-label">8/16 – 8/18</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">BR164</span>
+      <span class="stat-label">TPE 14:40 → PUS 18:00</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">BR163</span>
+      <span class="stat-label">PUS 19:10 → TPE 20:35</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">스카이캡슐</span>
+      <span class="stat-label">海雲台膠囊列車</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content content simple-view" id="mainContent">
+
+    <!-- Simple View -->
+    <div class="overview-box reveal">
+      <h3>行程總覽</h3>
+      <ul>
+        <li><strong>Day 1 (8/13 四)：</strong>台北 BR164 14:40 → 釜山金海 18:00 → KTX前往大邱 → UH FLAT入住 → 韓牛莊雪濃湯晚餐</li>
+        <li><strong>Day 2 (8/14 五)：</strong>近代胡同 + 達城公園 → 紅豆麵包 → 金光石街 → 마당곱창막창炭烤晚餐</li>
+        <li><strong>Day 3 (8/15 六 光復節)：</strong>西門市場早市 → 八公山纜車 + 갓바위石佛 → 巨松燉排骨晚餐</li>
+        <li><strong>Day 4 (8/16 日)：</strong>壽城池晨間散步 → 大邱午餐 → KTX移師釜山 → 廣安里海灘夜景</li>
+        <li><strong>Day 5 (8/17 一)：</strong>🚞 海雲台藍線公園膠囊列車 → 甘川文化村 → 廣安里大橋夜景</li>
+        <li><strong>Day 6 (8/18 二)：</strong>松島海上纜車 → 午餐 → BR163 PUS 19:10 → TPE 20:35</li>
+      </ul>
+    </div>
+    <div class="reminder-box reveal">
+      <p>重點提醒</p>
+      <ul>
+        <li>🚞 膠囊列車（海雲台藍線公園 스카이캡슐）熱門，需提前官網預約！</li>
+        <li>8/15 光復節公假，景點擁擠，建議早出發</li>
+        <li>8月大邱/釜山極熱（32-36°C），防曬 + 多補水</li>
+        <li>Day 6 最晚 16:30 出發前往釜山金海機場（BR163 19:10起飛）</li>
+      </ul>
+    </div>
+
+    <!-- ══════════════════ 詳細版 ══════════════════ -->
+    <div class="detail-only" id="itinerary">
+      <div class="collapse-controls" style="margin-top:40px;">
+        <button class="collapse-btn" onclick="expandAll()">全部展開</button>
+        <button class="collapse-btn" onclick="collapseAll()">全部折疊</button>
+      </div>
+
+      <div class="timeline">
+
+        <!-- ─── Day 1 ─── -->
+        <div class="tl-item day-section" id="day1">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day1')">
+            <div>
+              <span class="day-label">DAY 01 · 2026.08.13 (四)</span>
+              <span class="day-title">抵達大邱</span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body"><div class="day-body-inner">
+            <div class="activity">
+              <h3>出發航班 <span class="time-tag">14:40 出發</span></h3>
+              <p><strong>長榮航空 BR164</strong>（A321）</p>
+              <p>台北桃園 T2 14:40 → 釜山金海機場 國際線 18:00</p>
+              <a href="https://www.google.com/maps/place/Gimhae+International+Airport" class="map-link" target="_blank">釜山金海機場</a>
+            </div>
+            <div class="activity">
+              <h3>前往大邱 <span class="time-tag">18:30 出發</span></h3>
+              <p><strong>推薦：KTX（最快）</strong></p>
+              <ul>
+                <li>機場利木津巴士 → 釜山站（約40分）</li>
+                <li>釜山站 KTX → 東大邱站（約20分，₩1,400）</li>
+              </ul>
+              <p style="margin-top:6px"><strong>備選：機場直達巴士</strong></p>
+              <ul><li>金海機場 → 東大邱站（約1.5小時，₩5,000）</li></ul>
+              <a href="https://www.google.com/maps/dir/Gimhae+International+Airport/Dongdaegu+Station" class="route-link" target="_blank">查看路線</a>
+            </div>
+            <div class="activity">
+              <h3>入住 — UH FLAT Signature DAEGU <span class="time-tag">20:00 Check-in</span></h3>
+              <div class="poi-card">
+                <h4>UH FLAT Signature DAEGU</h4>
+                <p>大邱市中心精品公寓，此行大邱3夜住宿（8/13 → 8/16 退房）</p>
+                <a href="https://www.google.com/maps/search/UH+FLAT+Signature+Daegu" class="map-link" target="_blank">查看地圖</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>晚餐 — 韓牛莊 <span class="time-tag">21:00</span></h3>
+              <div class="poi-card">
+                <h4>韓牛莊（한우장）<span class="star-badge">⭐ 4.6 (371)</span></h4>
+                <p>24小時營業！深夜抵達也能吃到熱騰騰雪濃湯</p>
+                <p>₩10,000–20,000 · 大邱市中心</p>
+                <a href="https://www.google.com/maps/search/한우장+대구" class="map-link" target="_blank">查看地圖</a>
+              </div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- ─── Day 2 ─── -->
+        <div class="tl-item day-section" id="day2">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day2')">
+            <div>
+              <span class="day-label">DAY 02 · 2026.08.14 (五)</span>
+              <span class="day-title">近代文化 &amp; 達城公園 <span class="type-tag">文化</span></span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body"><div class="day-body-inner">
+            <div class="activity">
+              <h3>近代胡同文化街 <span class="time-tag">10:00 - 13:00</span></h3>
+              <p><strong>대구 근대골목 (大邱近代胡同)</strong></p>
+              <ul>
+                <li>계산성당（計山聖堂）— 大邱最古老天主教堂</li>
+                <li>이상화 고택（李相和故居）— 抗日詩人故居</li>
+                <li>3·1運動街 → 2.28紀念中央公園</li>
+              </ul>
+              <a href="https://www.google.com/maps/place/Daegu+Modern+History+Museum" class="map-link" target="_blank">近代歷史館</a>
+              <div class="poi-card" style="margin-top:10px;">
+                <h4>近代胡同紅豆麵包（근대골목 단팥빵）<span class="star-badge">⭐ 4.1 (525)</span></h4>
+                <p>近代胡同散步必嚐甜點，現烤紅豆麵包 ₩1,000起</p>
+                <a href="https://www.google.com/maps/search/근대골목+단팥빵+대구" class="map-link" target="_blank">查看地圖</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>午餐 <span class="time-tag">13:00</span></h3>
+              <div class="poi-card">
+                <h4>납작만두（扁餃子）</h4>
+                <p>大邱代表性街頭小吃，酥脆油炸扁餃子，必嚐！</p>
+                <a href="https://www.google.com/maps/search/납작만두+대구+동성로" class="map-link" target="_blank">查看地圖</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>達城公園 <span class="time-tag">14:00 - 16:00</span></h3>
+              <div class="poi-card">
+                <h4>達城公園（달성공원）<span class="star-badge">⭐ 4.2 (4,493)</span></h4>
+                <p>大邱市區歷史公園，內有小型動物園（有大象🐘），免費入場</p>
+                <p>歷史土城遺跡 + 市民休憩空間，避開午後高溫可傍晚前往</p>
+                <a href="https://www.google.com/maps/place/Dalseong+Park,+Daegu" class="map-link" target="_blank">達城公園</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>金光石街 <span class="time-tag">16:30 - 18:00</span></h3>
+              <p><strong>김광석 다시 그리기 길</strong></p>
+              <p>已故韓國傳奇歌手金光石壁畫紀念街，全長350公尺，傍晚最美</p>
+              <a href="https://www.google.com/maps/place/Kim+Gwang-seok+Street,+Daegu" class="map-link" target="_blank">金光石街</a>
+            </div>
+            <div class="activity">
+              <h3>晚餐 — 마당곱창막창 <span class="time-tag">19:00</span></h3>
+              <div class="poi-card">
+                <h4>마당곱창막창<span class="star-badge">⭐ 4.5 (52)</span></h4>
+                <p>곱창（牛腸）+ 막창（豬大腸）炭烤，₩10,000–20,000</p>
+                <p>評分高，必搭燒酒！</p>
+                <a href="https://www.google.com/maps/search/마당곱창막창+대구" class="map-link" target="_blank">查看地圖</a>
+              </div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- ─── Day 3 ─── -->
+        <div class="tl-item day-section" id="day3">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day3')">
+            <div>
+              <span class="day-label">DAY 03 · 2026.08.15 (六) 光復節</span>
+              <span class="day-title">西門市場 &amp; 八公山 <span class="type-tag">自然</span></span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body"><div class="day-body-inner">
+            <div class="warning">
+              <strong>⚠️ 8/15 光復節（公假）：</strong>景點可能擁擠，建議早出發。部分商店可能休息。
+            </div>
+            <div class="activity">
+              <h3>西門市場早市 <span class="time-tag">09:00 - 11:00</span></h3>
+              <div class="poi-card">
+                <h4>西門市場（서문시장）<span class="star-badge">⭐ 4.2 (18,525)</span></h4>
+                <p>韓國最大傳統市場之一，歷史超過400年！</p>
+                <ul style="margin-top:6px;">
+                  <li style="font-size:13px;color:var(--muted);">칼국수 골목 — 刀削麵胡同，早餐首選</li>
+                  <li style="font-size:13px;color:var(--muted);">야채호떡 — 蔬菜糯米餅（外酥內軟）</li>
+                  <li style="font-size:13px;color:var(--muted);">布料、乾貨、傳統食品採購</li>
+                </ul>
+                <a href="https://www.google.com/maps/place/Seomun+Market,+Daegu" class="map-link" target="_blank">西門市場</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>八公山纜車 <span class="time-tag">11:30 - 13:30</span></h3>
+              <p><strong>팔공산 케이블카（八公山纜車）</strong></p>
+              <p>海拔1,193公尺，纜車終點可俯瞰大邱市景，夏季綠意盎然</p>
+              <a href="https://www.google.com/maps/place/Palgongsan+Cable+Car,+Daegu" class="map-link" target="_blank">八公山纜車</a>
+            </div>
+            <div class="activity">
+              <h3>갓바위 冠巴彌石佛 <span class="time-tag">14:00 - 15:30</span></h3>
+              <p><strong>갓바위（冠巴彌石佛）</strong></p>
+              <p>韓國祈願聖地！誠心祈願可實現一個願望，需登山步行約40分鐘</p>
+              <p>⚠️ 8月炎熱，注意補水防曬</p>
+              <a href="https://www.google.com/maps/place/Gatbawi+Stone+Buddha,+Daegu" class="map-link" target="_blank">冠巴彌石佛</a>
+            </div>
+            <div class="activity">
+              <h3>晚餐 — 巨松燉排骨 <span class="time-tag">19:00</span></h3>
+              <div class="poi-card">
+                <h4>巨松燉排骨（거송찜갈비）<span class="star-badge">⭐ 4.3 (998)</span></h4>
+                <p>大邱代表性찜갈비（紅燒牛排骨），近千則評論高口碑</p>
+                <p>₩10,000–20,000 · 韓式肋排料理</p>
+                <a href="https://www.google.com/maps/search/거송찜갈비+대구" class="map-link" target="_blank">查看地圖</a>
+              </div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- ─── Day 4 ─── -->
+        <div class="tl-item day-section" id="day4">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day4')">
+            <div>
+              <span class="day-label">DAY 04 · 2026.08.16 (日)</span>
+              <span class="day-title">大邱 → 釜山 移師 <span class="type-tag">移動日</span></span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body"><div class="day-body-inner">
+            <div class="activity">
+              <h3>早上 — 壽城池晨間散步 <span class="time-tag">09:00 - 10:30</span></h3>
+              <p><strong>수성못（壽城池）</strong></p>
+              <p>大邱市民湖畔公園，早起散步氣溫較涼，湖畔咖啡廳喝杯拿鐵，輕鬆收尾大邱時光</p>
+              <a href="https://www.google.com/maps/place/Suseong+Lake,+Daegu" class="map-link" target="_blank">壽城池</a>
+            </div>
+            <div class="activity">
+              <h3>退房 UH FLAT <span class="time-tag">11:00</span></h3>
+              <p>整理行李，Check-out，寄放行李後可再逛一會</p>
+            </div>
+            <div class="activity">
+              <h3>午餐 — 西海生醃醬蟹 <span class="time-tag">11:30（注意開門時間）</span></h3>
+              <div class="poi-card">
+                <h4>西海生醃醬蟹家（서해생간장게장）<span class="star-badge">⭐ 4.5 (89)</span></h4>
+                <p>韓國「飯的小偷」！醬汁拌飯絕配，螃蟹鮮甜，離開大邱前必吃</p>
+                <p>₩20,000–30,000 · 營業時間請提前確認</p>
+                <a href="https://www.google.com/maps/search/서해생간장게장+대구" class="map-link" target="_blank">查看地圖</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>前往釜山 <span class="time-tag">13:00 出發</span></h3>
+              <p><strong>東大邱站 KTX → 釜山（부산）站</strong></p>
+              <ul>
+                <li>KTX約50分，₩1,400起，班次頻繁</li>
+                <li>抵達釜山約14:00，前往釜山住宿 Check-in</li>
+                <li>建議住海雲台（해운대）或廣安里（광안리）周邊，便於Day 5行程</li>
+              </ul>
+              <a href="https://www.google.com/maps/dir/Dongdaegu+Station/Busan+Station" class="route-link" target="_blank">查看路線</a>
+            </div>
+            <div class="activity">
+              <h3>抵達釜山 · 下午自由 <span class="time-tag">14:30</span></h3>
+              <p>安置行李後，前往海灘放鬆</p>
+              <div class="poi-card">
+                <h4>廣安里海水浴場（광안리해수욕장）</h4>
+                <p>釜山最美海灘之一，沙灘寬闊、海邊咖啡廳林立，夕陽很美</p>
+                <a href="https://www.google.com/maps/place/Gwangalli+Beach,+Busan" class="map-link" target="_blank">廣安里海灘</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>晚餐 + 廣安大橋夜景 <span class="time-tag">18:30</span></h3>
+              <div class="poi-card">
+                <h4>廣安大橋夜景（광안대교）</h4>
+                <p>韓國最大懸索橋，夜間燈光璀璨，在海灘旁拍照打卡</p>
+                <a href="https://www.google.com/maps/place/Gwangan+Bridge,+Busan" class="map-link" target="_blank">廣安大橋</a>
+              </div>
+              <div class="poi-card" style="margin-top:8px;">
+                <h4>돼지국밥 — 釜山豬肉湯飯</h4>
+                <p>釜山最具代表性的當地料理，濃郁湯底 + 豬肉片，₩9,000–12,000</p>
+                <a href="https://www.google.com/maps/search/돼지국밥+광안리+부산" class="map-link" target="_blank">查看附近</a>
+              </div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- ─── Day 5 ─── -->
+        <div class="tl-item day-section" id="day5">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day5')">
+            <div>
+              <span class="day-label" id="busan">DAY 05 · 2026.08.17 (一)</span>
+              <span class="day-title">釜山全日遊 🚞 膠囊列車 <span class="type-tag">釜山</span></span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body"><div class="day-body-inner">
+            <div class="warning">
+              <strong>⚠️ 膠囊列車需提前預約：</strong>海雲台藍線公園 스카이캡슐（Sky Capsule）非常熱門，請至少1–2週前在官網預約，現場當日票極難搶到！<br>
+              預約官網：<a href="https://www.bluelinepark.com" target="_blank" style="color:#dc2626;">bluelinepark.com</a>（車票 ₩30,000–35,000/人）
+            </div>
+            <div class="activity">
+              <h3>🚞 海雲台藍線公園 — 膠囊列車 <span class="time-tag">09:30 出發（提前抵達）</span></h3>
+              <div class="poi-card">
+                <h4>스카이캡슐（Sky Capsule）<span class="star-badge">⭐ 4.6 熱門</span></h4>
+                <p><strong>海雲台最夯體驗！</strong>透明膠囊形小火車沿懸崖海岸線行駛，全程約3.5公里，可俯瞰東海碧藍大海</p>
+                <p>起點：松亭站（송정역）→ 尾浦站（미포역），可選擇單趟或來回</p>
+                <p>⏰ 早場人較少，建議第一班次出發</p>
+                <a href="https://www.google.com/maps/place/Haeundae+Blue+Line+Park,+Busan" class="map-link" target="_blank">海雲台藍線公園</a>
+                <a href="https://www.bluelinepark.com" class="map-link" target="_blank">官方預約</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>海雲台海水浴場 <span class="time-tag">11:00 - 12:30</span></h3>
+              <div class="poi-card">
+                <h4>海雲台海水浴場（해운대해수욕장）<span class="star-badge">⭐ 4.4 (45,000+)</span></h4>
+                <p>韓國最著名海灘，白沙灘綿延1.5公里，夏季入海游泳，海邊咖啡廳、餐廳雲集</p>
+                <a href="https://www.google.com/maps/place/Haeundae+Beach,+Busan" class="map-link" target="_blank">海雲台海灘</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>午餐 — 海雲台市場 포장마차 <span class="time-tag">12:30</span></h3>
+              <div class="poi-card">
+                <h4>海雲台市場 해운대시장 街頭小吃</h4>
+                <p>海雲台傳統市場，떡볶이（辣炒年糕）、순대（血腸）、해물파전（海鮮煎餅）一次滿足</p>
+                <p>₩3,000–8,000 · 海鮮新鮮、氣氛熱鬧</p>
+                <a href="https://www.google.com/maps/place/Haeundae+Market,+Busan" class="map-link" target="_blank">海雲台市場</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>甘川文化村 <span class="time-tag">14:00 - 16:30</span></h3>
+              <div class="poi-card">
+                <h4>甘川文化村（감천문화마을）<span class="star-badge">⭐ 4.4 (35,000+)</span></h4>
+                <p>釜山最美彩色山坡村落！「韓國馬丘比丘」，迷宮式彩色房屋、街頭藝術裝置</p>
+                <p>⚠️ 從市區約30-40分車程，建議搭計程車或公車前往</p>
+                <p>夏季炎熱，建議帶遮陽帽、多補水；下午3–4點光線最美適合拍照</p>
+                <a href="https://www.google.com/maps/place/Gamcheon+Culture+Village,+Busan" class="map-link" target="_blank">甘川文化村</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>晚餐 + 廣安里夜景 <span class="time-tag">18:30</span></h3>
+              <div class="poi-card">
+                <h4>機張市場 기장시장 海鮮 <span class="star-badge">⭐ 新鮮推薦</span></h4>
+                <p>釜山知名海鮮市場，대게（帝王蟹）、랍스터（龍蝦）現買現煮，價格較市區實惠</p>
+                <a href="https://www.google.com/maps/place/Gijang+Jungang+Market" class="map-link" target="_blank">機張市場</a>
+              </div>
+              <div class="poi-card" style="margin-top:8px;">
+                <h4>廣安里 + 廣安大橋夜景再欣賞</h4>
+                <p>飯後在廣安里海灘散步，欣賞廣安大橋夜間燈光，是釜山最美夜景之一</p>
+                <a href="https://www.google.com/maps/place/Gwangalli+Beach,+Busan" class="map-link" target="_blank">廣安里</a>
+              </div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- ─── Day 6 ─── -->
+        <div class="tl-item day-section" id="day6">
+          <div class="tl-dot"></div>
+          <div class="day-header" onclick="toggleDay('day6')">
+            <div>
+              <span class="day-label">DAY 06 · 2026.08.18 (二)</span>
+              <span class="day-title">釜山返程日</span>
+            </div>
+            <span class="day-chevron">▼</span>
+          </div>
+          <div class="day-body"><div class="day-body-inner">
+            <div class="warning">
+              <strong>⚠️ 時間提醒：</strong>BR163 釜山金海機場 19:10 起飛，建議 18:10 前完成 check-in<br>
+              釜山市區 → 金海機場：地鐵或輕軌約40–60分鐘<br>
+              <strong>最晚 16:30 從釜山市區出發前往機場</strong>
+            </div>
+            <div class="activity">
+              <h3>退房 <span class="time-tag">10:00</span></h3>
+              <p>Check-out，行李寄存後輕裝出行</p>
+            </div>
+            <div class="activity">
+              <h3>松島海上纜車 <span class="time-tag">10:30 - 12:30</span></h3>
+              <div class="poi-card">
+                <h4>송도 해상 케이블카（松島海上纜車）<span class="star-badge">⭐ 4.3 (22,000+)</span></h4>
+                <p>釜山西區，纜車橫跨海面，可俯瞰松島海灣全景，夏日碧海藍天景色絕美</p>
+                <p>⏰ 約30–40分，建議早場人少，票價 ₩15,000–20,000</p>
+                <a href="https://www.google.com/maps/place/Songdo+Beach+Cable+Car,+Busan" class="map-link" target="_blank">松島海上纜車</a>
+              </div>
+            </div>
+            <div class="activity">
+              <h3>午餐 — 南浦洞 豬肉湯飯 <span class="time-tag">12:30</span></h3>
+              <div class="poi-card">
+                <h4>釜山 돼지국밥 — 豬肉湯飯（最後一餐）</h4>
+                <p>南浦洞一帶有多家老牌豬肉湯飯，₩9,000–12,000，簡單美味</p>
+                <p>南浦洞周邊可順便買個伴手禮、巧克力派等最後補購</p>
+                <a href="https://www.google.com/maps/search/돼지국밥+남포동+부산" class="map-link" target="_blank">查看附近</a>
+              </div>
+            </div>
+            <div class="optional-activity">
+              <h4>可選：龍頭山公園 + 釜山塔</h4>
+              <p>南浦洞旁，免費登山公園，釜山塔有釜山全景展望（視時間決定）</p>
+              <a href="https://www.google.com/maps/place/Yongdusan+Park,+Busan" class="map-link" target="_blank">龍頭山公園</a>
+            </div>
+            <div class="activity">
+              <h3>前往金海機場 <span class="time-tag">16:30 出發</span></h3>
+              <p>釜山地鐵 2號線 → 沙上站（사상역）轉乘釜山金海輕軌（BGL）→ 國際線航站</p>
+              <p>或直接搭計程車前往機場（約30–40分，₩25,000–35,000）</p>
+              <a href="https://www.google.com/maps/place/Gimhae+International+Airport" class="map-link" target="_blank">釜山金海機場</a>
+            </div>
+            <div class="activity">
+              <h3>返程航班 <span class="time-tag">19:10 起飛</span></h3>
+              <p><strong>長榮航空 BR163</strong>（A321）</p>
+              <p>釜山金海機場 國際線 19:10 → 台北桃園 T2 20:35</p>
+            </div>
+          </div></div>
+        </div>
+
+      </div><!-- end timeline -->
+
+      <!-- ── Food Guide ── -->
+      <div id="food">
+        <div class="highlight reveal">
+          <h3>🍖 大邱美食清單</h3>
+          <div class="poi-card"><h4>韓牛莊 한우장 — 雪濃湯<span class="star-badge">⭐ 4.6 (371)</span></h4><p>24小時，深夜抵達首選 · ₩10,000–20,000</p></div>
+          <div class="poi-card"><h4>마당곱창막창 — 곱창+막창炭烤<span class="star-badge">⭐ 4.5 (52)</span></h4><p>大邱大腸燒烤，必配燒酒 · ₩10,000–20,000</p></div>
+          <div class="poi-card"><h4>西海生醃醬蟹家 — 간장게장<span class="star-badge">⭐ 4.5 (89)</span></h4><p>「飯的小偷」醬蟹，離開大邱前吃 · ₩20,000–30,000</p></div>
+          <div class="poi-card"><h4>近代胡同紅豆麵包 — 단팥빵<span class="star-badge">⭐ 4.1 (525)</span></h4><p>近代胡同散步必嚐甜點 · ₩1,000起</p></div>
+          <div class="poi-card"><h4>巨松燉排骨 거송찜갈비 — 찜갈비<span class="star-badge">⭐ 4.3 (998)</span></h4><p>大邱代表찜갈비 · ₩10,000–20,000</p></div>
+          <div class="poi-card"><h4>납작만두 — 扁餃子</h4><p>大邱街頭代表小吃，東城路附近皆有</p></div>
+        </div>
+        <div class="highlight reveal">
+          <h3>🌊 釜山美食清單</h3>
+          <div class="poi-card"><h4>돼지국밥 — 豬肉湯飯<span class="star-badge">⭐ 釜山代表</span></h4><p>釜山最具代表性料理，濃郁骨湯+豬肉，₩9,000–12,000</p></div>
+          <div class="poi-card"><h4>海雲台市場 포장마차 街頭小吃</h4><p>떡볶이+순대+해물파전，₩3,000–8,000</p></div>
+          <div class="poi-card"><h4>機張市場 기장시장 — 帝王蟹/龍蝦</h4><p>現買現煮，釜山最新鮮海鮮市場，Day 5晚餐選項</p></div>
+          <div class="poi-card"><h4>廣安里海邊 포장마차 — 海邊夜宵攤</h4><p>廣安里沙灘旁的傳統夜宵攤，啤酒+炸物，夜景絕配</p></div>
+        </div>
+      </div>
+
+      <!-- ── Attractions ── -->
+      <div class="highlight reveal">
+        <h3>🏙️ 大邱景點清單</h3>
+        <ul>
+          <li><strong>近代胡同 근대골목</strong> ⭐ 免費 — 文化歷史散步路線，計山聖堂+詩人故居</li>
+          <li><strong>達城公園 달성공원</strong> ⭐ 4.2 — 歷史公園+小型動物園，免費入場</li>
+          <li><strong>金光石街 김광석 거리</strong> ⭐ 免費 — 壁畫藝術紀念街，全長350m</li>
+          <li><strong>西門市場 서문시장</strong> ⭐ 4.2 — 400年歷史市場，早市刀削麵必吃</li>
+          <li><strong>八公山纜車 팔공산 케이블카</strong> — 海拔1,193m俯瞰大邱，갓바위石佛祈願</li>
+          <li><strong>壽城池 수성못</strong> — 湖畔咖啡廳，早晨散步最佳</li>
+        </ul>
+      </div>
+      <div class="highlight reveal">
+        <h3>🌊 釜山景點清單</h3>
+        <ul>
+          <li><strong>海雲台藍線公園 膠囊列車 스카이캡슐</strong> ⭐ 4.6 — 必提前預約！海岸膠囊小火車</li>
+          <li><strong>海雲台海水浴場 해운대해수욕장</strong> ⭐ 4.4 — 韓國最著名海灘，1.5km白沙灘</li>
+          <li><strong>甘川文化村 감천문화마을</strong> ⭐ 4.4 — 彩色山坡村，「韓國馬丘比丘」</li>
+          <li><strong>廣安里海灘 + 廣안大橋夜景</strong> ⭐ 4.4 — 懸索橋夜間燈光，釜山最美夜景</li>
+          <li><strong>松島海上纜車 송도해상케이블카</strong> ⭐ 4.3 — 橫跨海面俯瞰松島海灣</li>
+          <li><strong>機張市場 기장시장</strong> — 現買現煮帝王蟹/龍蝦，比市區便宜</li>
+        </ul>
+      </div>
+
+      <!-- ── Tips ── -->
+      <div id="tips">
+        <div class="tips reveal">
+          <h3>實用旅遊建議</h3>
+          <ul>
+            <li><strong>🚞 膠囊列車：</strong>必須提前於 bluelinepark.com 官網預約，熱門時段1–2週前訂票</li>
+            <li><strong>大邱住宿：</strong>UH FLAT Signature DAEGU，8/13–8/16共3晚</li>
+            <li><strong>釜山住宿：</strong>建議海雲台或廣安里周邊，Day 5行程最方便</li>
+            <li><strong>天氣：</strong>8月32-36°C，注意防曬、多補水、備摺疊扇</li>
+            <li><strong>光復節(8/15)：</strong>公假日，景點人多，建議早出發</li>
+            <li><strong>退稅：</strong>單次消費達₩30,000可辦理退稅（TAX FREE店）</li>
+            <li><strong>翻譯：</strong>大邱觀光區英文少，備 Papago 韓文翻譯App</li>
+            <li><strong>甘川文化村：</strong>夏季炎熱，建議下午3點後較舒適，光線也美</li>
+          </ul>
+        </div>
+        <div class="tips reveal">
+          <h3>交通資訊</h3>
+          <p><strong>釜山金海機場 → 大邱（Day 1）</strong></p>
+          <ul>
+            <li><strong>KTX（推薦）：</strong>利木津→釜山站(40分) + KTX→東大邱(20分)，共約1.5小時</li>
+            <li><strong>直達巴士：</strong>金海機場→東大邱，約1.5-2小時，₩5,000</li>
+          </ul>
+          <p style="margin-top:10px"><strong>大邱 → 釜山（Day 4）</strong></p>
+          <ul>
+            <li>東大邱站 KTX → 釜山站，約50分，₩1,400起，班次頻繁</li>
+          </ul>
+          <p style="margin-top:10px"><strong>釜山市內</strong></p>
+          <ul>
+            <li>地鐵1/2/3/4號線，基本票價₩1,400起，T-money卡通用</li>
+            <li>海雲台藍線公園：地鐵2號線海雲台站或松亭站</li>
+            <li>甘川文化村：地鐵1號線土城洞站+搭마을버스</li>
+          </ul>
+          <p style="margin-top:10px"><strong>釜山市區 → 金海機場（Day 6）</strong></p>
+          <ul>
+            <li>地鐵2號線 → 沙上站（사상역）轉釜山金海輕軌（BGL），約40-60分</li>
+            <li>計程車：約30–40分，₩25,000–35,000（行李多時推薦）</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- end detail-only -->
+  </div><!-- end main-content -->
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <div class="cta-text">
+      <h2>大邱 × 釜山 準備好出發了嗎</h2>
+      <p>長榮航空 BR164 · 台北桃園 T2 → 釜山金海 · 2026/08/13 14:40</p>
+    </div>
+    <a href="https://www.google.com/maps/search/Haeundae+Blue+Line+Park+Sky+Capsule+Busan" class="cta-btn" target="_blank">預約膠囊列車</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">DAEGU<span>·</span>BUSAN 2026</div>
+    <p>大邱 × 釜山 六天五夜 · 2026年8月13日 — 18日 · 長榮航空 BR164 / BR163</p>
+  </footer>
+
+  <script>
+    function onToggleChange(cb) { setView(cb.checked ? 'detail' : 'simple'); }
+    function setView(view) {
+      const c  = document.getElementById('mainContent');
+      const tg = document.getElementById('viewToggle');
+      const ls = document.getElementById('label-simple');
+      const ld = document.getElementById('label-detail');
+      if (view === 'simple') {
+        c.className = 'main-content content simple-view';
+        tg.checked = false;
+        ls.classList.add('active-label');   ls.classList.remove('inactive-label');
+        ld.classList.add('inactive-label'); ld.classList.remove('active-label');
+      } else {
+        c.className = 'main-content content detail-view';
+        tg.checked = true;
+        ld.classList.add('active-label');   ld.classList.remove('inactive-label');
+        ls.classList.add('inactive-label'); ls.classList.remove('active-label');
+        setTimeout(initReveal, 100);
+      }
+    }
+    function toggleDay(id) { document.getElementById(id).classList.toggle('open'); }
+    function expandAll()   { document.querySelectorAll('.day-section').forEach(s => s.classList.add('open')); }
+    function collapseAll() { document.querySelectorAll('.day-section').forEach(s => s.classList.remove('open')); }
+
+    function initReveal() {
+      const items = document.querySelectorAll('.reveal');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const all = Array.from(document.querySelectorAll('.reveal'));
+            const idx = all.indexOf(e.target);
+            setTimeout(() => e.target.classList.add('visible'), (idx % 6) * 100);
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      items.forEach(el => obs.observe(el));
+    }
+    initReveal();
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.boxShadow =
+        window.scrollY > 60 ? '0 2px 20px rgba(28,28,46,0.1)' : 'none';
+    });
+  </script>
+</body>
+</html>
